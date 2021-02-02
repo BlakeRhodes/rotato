@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LocalStorageService} from '../local-storage.service';
+import {YeetService} from '../yeet.service';
 
 @Component({
   selector: 'app-dev-controls',
@@ -9,24 +10,27 @@ import {LocalStorageService} from '../local-storage.service';
 export class DevControlsComponent implements OnInit {
   devs: string[];
 
-  constructor(private localStorageService: LocalStorageService) {
+  constructor(
+    private localStorageService: LocalStorageService,
+    private yeetService: YeetService,
+    ) {
   }
 
   ngOnInit(): void {
     this.devs = this.localStorageService.getDevs();
   }
 
-  handleClick(value: string): void {
+  handleAdd(value: string): void {
     if (value !== '') {
       this.localStorageService.addDev(value);
     }
     this.devs = this.localStorageService.getDevs();
   }
 
-  deleteDev(i: number): void {
+  handleDelete(i: number): void {
     this.devs.splice(i, 1);
     this.localStorageService.setDevs(this.devs);
     this.devs = this.localStorageService.getDevs();
-
+    this.yeetService.play();
   }
 }
