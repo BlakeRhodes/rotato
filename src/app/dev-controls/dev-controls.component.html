@@ -1,0 +1,18 @@
+<form>
+  <mat-form-field class="example-full-width">
+    <mat-label>Devs Name</mat-label>
+    <input matInput #devName placeholder="Dev D. Developer">
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="handleClick(devName.value); devName.value = ''">Add Dev</button>
+</form>
+
+<div>
+  <mat-card *ngFor="let dev of devs; let i = index">
+    <div class="mat-title">{{dev}}</div>
+    <button mat-mini-fab color="warn" (click)="deleteDev(i)">
+      YEET
+    </button>
+  </mat-card>
+</div>
+
+

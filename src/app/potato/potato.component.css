@@ -1,0 +1,15 @@
+mat-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title{
+  margin: 1rem 5rem 1rem 1rem;
+}
+
+img {
+  height: 300px;
+}
+
+
