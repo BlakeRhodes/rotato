@@ -14,8 +14,8 @@ export class DisplayComponent implements OnInit {
 
   constructor(
     private localStorageService: LocalStorageService,
-    private clipboard: Clipboard,
   ) {
+    this.pairs = localStorageService.getPairs();
   }
 
   ngOnInit(): void {
@@ -38,6 +38,6 @@ export class DisplayComponent implements OnInit {
       }
       this.pairs.push(pair);
     }
-
+    this.localStorageService.setPairs(this.pairs);
   }
 }

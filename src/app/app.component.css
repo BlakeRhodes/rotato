@@ -15,11 +15,11 @@ app-potato{
 }
 
 app-dev-controls{
-  margin: 1rem;
-  min-width: 25%;
+  margin: 3rem;
+  min-width: 30%;
 }
 
 app-display {
-  margin: 1rem;
-  min-width: 25%;
+  margin: 3rem;
+  min-width: 30%;
 }

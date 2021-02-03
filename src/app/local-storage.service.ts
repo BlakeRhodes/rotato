@@ -5,29 +5,49 @@ import {Injectable} from '@angular/core';
 })
 export class LocalStorageService {
   private devs: string[] = [];
-  private key = 'devs';
+  private pairs: string[] = [];
+  private devKey = 'devs';
+  private pairsKey = 'pairs';
 
   constructor() {
-    const current = localStorage.getItem(this.key);
-    if (current) {
-      this.devs = JSON.parse(current);
+    const devs = localStorage.getItem(this.devKey);
+    if (devs) {
+      this.devs = JSON.parse(devs);
+    }
+    const pairs = localStorage.getItem(this.devKey);
+    if (pairs) {
+      this.devs = JSON.parse(pairs);
     }
   }
 
   addDev(name: string): void {
     this.devs.push(name);
-    localStorage.setItem(this.key, JSON.stringify(this.devs));
+    localStorage.setItem(this.devKey, JSON.stringify(this.devs));
   }
 
   getDevs(): string[] {
-    const current = localStorage.getItem(this.key);
+    const current = localStorage.getItem(this.devKey);
     if (current) {
       return JSON.parse(current);
     }
+    return [];
   }
 
   setDevs(devs: string[]): void {
-    localStorage.setItem(this.key, JSON.stringify(devs));
+    localStorage.setItem(this.devKey, JSON.stringify(devs));
     this.devs = devs;
+  }
+
+  setPairs(pairs: string[]): void {
+    localStorage.setItem(this.pairsKey, JSON.stringify(pairs));
+    this.pairs = pairs;
+  }
+
+  getPairs(): string[] {
+    const current = localStorage.getItem(this.pairsKey);
+    if (current) {
+      return JSON.parse(current);
+    }
+    return [];
   }
 }
