@@ -14,5 +14,4 @@ export class YeetService {
     this.sound.load();
     this.sound.play();
   }
-
 }

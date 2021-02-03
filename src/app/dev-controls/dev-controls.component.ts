@@ -9,11 +9,12 @@ import {YeetService} from '../yeet.service';
 })
 export class DevControlsComponent implements OnInit {
   devs: string[];
+  mute = true;
 
   constructor(
     private localStorageService: LocalStorageService,
     private yeetService: YeetService,
-    ) {
+  ) {
   }
 
   ngOnInit(): void {
@@ -31,6 +32,8 @@ export class DevControlsComponent implements OnInit {
     this.devs.splice(i, 1);
     this.localStorageService.setDevs(this.devs);
     this.devs = this.localStorageService.getDevs();
-    this.yeetService.play();
+    if (!this.mute) {
+      this.yeetService.play();
+    }
   }
 }
