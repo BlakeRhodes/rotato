@@ -13,5 +13,4 @@ export class PotatoComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

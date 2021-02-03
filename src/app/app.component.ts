@@ -12,14 +12,14 @@ export class AppComponent {
   handleTheSpinningPotato(): void {
     (async () => {
       this.spin = true;
-
       await this.delay(1000);
-
       this.spin = false;
     })();
   }
 
   private delay(ms: number): Promise<unknown> {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise(
+      resolve => setTimeout(resolve, ms)
+    );
   }
 }

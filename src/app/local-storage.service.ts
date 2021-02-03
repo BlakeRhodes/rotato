@@ -5,7 +5,6 @@ import {Injectable} from '@angular/core';
 })
 export class LocalStorageService {
   private devs: string[] = [];
-  private pairs: string[][] = [];
   private devKey = 'devs';
   private pairsKey = 'pairs';
 
@@ -26,7 +25,15 @@ export class LocalStorageService {
   }
 
   getDevs(): string[] {
-    const current = localStorage.getItem(this.devKey);
+    return this.get(this.devKey) as string[];
+  }
+
+  getPairs(): string[][] {
+   return this.get(this.pairsKey) as string[][];
+  }
+
+  get(field: string): string[] | string[][] {
+    const current = localStorage.getItem(field);
     if (current) {
       return JSON.parse(current);
     }
@@ -34,20 +41,15 @@ export class LocalStorageService {
   }
 
   setDevs(devs: string[]): void {
-    localStorage.setItem(this.devKey, JSON.stringify(devs));
-    this.devs = devs;
+    this.set(this.devKey, devs);
   }
 
   setPairs(pairs: string[][]): void {
-    localStorage.setItem(this.pairsKey, JSON.stringify(pairs));
-    this.pairs = pairs;
+    this.set(this.pairsKey, pairs);
   }
 
-  getPairs(): string[][] {
-    const current = localStorage.getItem(this.pairsKey);
-    if (current) {
-      return JSON.parse(current);
-    }
-    return [];
+  set(field: string, update: string[] | string[][]): void {
+    localStorage.setItem(field, JSON.stringify(update));
+    this[field] = update;
   }
 }

@@ -12,4 +12,5 @@ mat-card{
 
 .pair-card{
   display: flex;
+  min-height: 4rem;
 }

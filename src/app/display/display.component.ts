@@ -24,20 +24,8 @@ export class DisplayComponent implements OnInit {
   handleClick(): void {
     this.taterSpinningTime.emit();
     this.pairs = [];
-    let devs = this.localStorageService.getDevs();
-    devs = shuffle(devs);
-    if (devs.length % 2 !== 0) {
-      devs.push(null);
-    }
-    for (let i = 0; i < devs.length / 2; i++) {
-      const firstIndex = i * 2;
-      const secondIndex = firstIndex + 1;
-      const pair: string[] = [devs[firstIndex]];
-      if (devs[secondIndex]) {
-        pair.push(devs[secondIndex]);
-      }
-      this.pairs.push(pair);
-    }
+    const devs = this.localStorageService.getDevs();
+    this.makePairs(devs);
     this.localStorageService.setPairs(this.pairs);
   }
 
@@ -51,5 +39,21 @@ export class DisplayComponent implements OnInit {
         event.currentIndex);
     }
     this.localStorageService.setPairs(this.pairs);
+  }
+
+  private makePairs(devs: string[]): void {
+    devs = shuffle(devs);
+    if (devs.length % 2 !== 0) {
+      devs.push(null);
+    }
+    for (let i = 0; i < devs.length / 2; i++) {
+      const firstIndex = i * 2;
+      const secondIndex = firstIndex + 1;
+      const pair: string[] = [devs[firstIndex]];
+      if (devs[secondIndex]) {
+        pair.push(devs[secondIndex]);
+      }
+      this.pairs.push(pair);
+    }
   }
 }
