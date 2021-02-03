@@ -5,7 +5,7 @@ import {Injectable} from '@angular/core';
 })
 export class LocalStorageService {
   private devs: string[] = [];
-  private pairs: string[] = [];
+  private pairs: string[][] = [];
   private devKey = 'devs';
   private pairsKey = 'pairs';
 
@@ -38,12 +38,12 @@ export class LocalStorageService {
     this.devs = devs;
   }
 
-  setPairs(pairs: string[]): void {
+  setPairs(pairs: string[][]): void {
     localStorage.setItem(this.pairsKey, JSON.stringify(pairs));
     this.pairs = pairs;
   }
 
-  getPairs(): string[] {
+  getPairs(): string[][] {
     const current = localStorage.getItem(this.pairsKey);
     if (current) {
       return JSON.parse(current);

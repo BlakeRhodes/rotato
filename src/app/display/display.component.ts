@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {LocalStorageService} from '../local-storage.service';
 import {shuffle} from '../lulz';
-import {Clipboard} from '@angular/cdk/clipboard';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-display',
@@ -9,8 +9,8 @@ import {Clipboard} from '@angular/cdk/clipboard';
   styleUrls: ['./display.component.css']
 })
 export class DisplayComponent implements OnInit {
-  @Output() taterSpinningTime: EventEmitter<number> = new EventEmitter<number>();
-  pairs: string[] = [];
+  @Output() taterSpinningTime: EventEmitter<any> = new EventEmitter<any>();
+  pairs: string[][] = [];
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -22,7 +22,7 @@ export class DisplayComponent implements OnInit {
   }
 
   handleClick(): void {
-    this.taterSpinningTime.emit(2);
+    this.taterSpinningTime.emit();
     this.pairs = [];
     let devs = this.localStorageService.getDevs();
     devs = shuffle(devs);
@@ -32,11 +32,23 @@ export class DisplayComponent implements OnInit {
     for (let i = 0; i < devs.length / 2; i++) {
       const firstIndex = i * 2;
       const secondIndex = firstIndex + 1;
-      let pair = devs[firstIndex];
+      const pair: string[] = [devs[firstIndex]];
       if (devs[secondIndex]) {
-        pair += ` and ${devs[secondIndex]}`;
+        pair.push(devs[secondIndex]);
       }
       this.pairs.push(pair);
+    }
+    this.localStorageService.setPairs(this.pairs);
+  }
+
+  handleDrop(event: CdkDragDrop<string[]>): void {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
     }
     this.localStorageService.setPairs(this.pairs);
   }

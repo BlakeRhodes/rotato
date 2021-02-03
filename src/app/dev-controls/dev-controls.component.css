@@ -1,19 +1,19 @@
-button{
+button {
   margin: 1rem;
 }
 
-mat-card{
+mat-card {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 1rem;
 }
 
-mat-icon{
+mat-icon {
   cursor: pointer;
 }
 
-.mat-title{
+.mat-title {
   margin: 0;
 }
 

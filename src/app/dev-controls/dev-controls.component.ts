@@ -9,7 +9,7 @@ import {YeetService} from '../yeet.service';
 })
 export class DevControlsComponent implements OnInit {
   devs: string[];
-  mute = true;
+  enableSound = false;
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -32,7 +32,7 @@ export class DevControlsComponent implements OnInit {
     this.devs.splice(i, 1);
     this.localStorageService.setDevs(this.devs);
     this.devs = this.localStorageService.getDevs();
-    if (!this.mute) {
+    if (this.enableSound) {
       this.yeetService.play();
     }
   }

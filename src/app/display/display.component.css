@@ -1,6 +1,15 @@
 button{
   margin: 1rem;
 }
+
 mat-card{
   margin: 1rem;
+}
+
+.dev{
+  margin: 1rem !important;
+}
+
+.pair-card{
+  display: flex;
 }

@@ -9,11 +9,11 @@ export class AppComponent {
   title = 'rotato-ui';
   spin = false;
 
-  handleTheSpinningPotato(forThisLong: number): void {
+  handleTheSpinningPotato(): void {
     (async () => {
       this.spin = true;
 
-      await this.delay(forThisLong * 1000);
+      await this.delay(1000);
 
       this.spin = false;
     })();

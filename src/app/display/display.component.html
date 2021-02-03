@@ -1,7 +1,21 @@
-<button mat-mini-fab (click)="handleClick()">
+<button mat-fab (click)="handleClick()">
   <mat-icon>new_releases</mat-icon>
 </button>
+<div cdkDropListGroup>
+  <mat-card
+    cdkDropList
+    (cdkDropListDropped)="handleDrop($event)"
+    [cdkDropListData]="pair"
+    class="pair-card"
+    *ngFor="let pair of pairs"
+  >
+    <mat-card
+      cdkDrag
+      class="dev"
+      *ngFor="let dev of pair"
 
-<mat-card *ngFor="let pair of pairs">
-  <mat-card-title>{{pair}}</mat-card-title>
-</mat-card>
+    >
+      {{dev}}
+    </mat-card>
+  </mat-card>
+</div>
