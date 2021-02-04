@@ -1,5 +1,6 @@
 button {
   margin: 1rem;
+  padding: 0;
 }
 
 mat-card {
@@ -8,7 +9,7 @@ mat-card {
 
 .dev {
   margin: 1rem !important;
-  cursor: move;
+  cursor: grab;
 }
 
 .pair-card {
@@ -19,10 +20,10 @@ mat-card {
 
 .carrying {
   background: burlywood;
-  color: whitesmoke;
+  color: lemonchiffon;
 }
 
-.cdk-drag-preview{
+.cdk-drag-preview {
   @extend .mat-card;
   background: palegoldenrod;
   margin: 1rem !important;
@@ -30,4 +31,28 @@ mat-card {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+:active {
+  cursor: grab;
+}
+
+.pairing-controls {
+  display: flex;
+  align-items: center;
+}
+
+.spuddies-label {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 100%;
+  color: lemonchiffon;
+  background: goldenrod;
+  padding: .5rem;
+}
+
+.mat-fab {
+  padding: 0;
+  margin: .5rem 1rem !important;
 }
