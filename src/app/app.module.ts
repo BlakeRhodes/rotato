@@ -13,6 +13,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatCardModule,
     MatButtonModule,
     MatInputModule,
+    MatSnackBarModule,
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {LocalStorageService} from '../local-storage.service';
-import {YeetService} from '../yeet.service';
+import {SoundService} from '../sound.service';
+import {MatCheckboxChange} from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-dev-controls',
@@ -9,11 +10,10 @@ import {YeetService} from '../yeet.service';
 })
 export class DevControlsComponent implements OnInit {
   devs: string[];
-  enableSound = false;
 
   constructor(
     private localStorageService: LocalStorageService,
-    private yeetService: YeetService,
+    private soundService: SoundService,
   ) {
   }
 
@@ -32,8 +32,10 @@ export class DevControlsComponent implements OnInit {
     this.devs.splice(i, 1);
     this.localStorageService.setDevs(this.devs);
     this.devs = this.localStorageService.getDevs();
-    if (this.enableSound) {
-      this.yeetService.play();
-    }
+    this.soundService.doAYeet();
+  }
+
+  handleEnableSound(event: MatCheckboxChange): void {
+    this.soundService.enableSound = event.checked;
   }
 }

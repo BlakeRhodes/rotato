@@ -12,6 +12,8 @@
     <mat-card
       cdkDrag
       class="dev mat-title"
+      [class.carrying]="isCarrying(dev)"
+      (dblclick)="handleMarkAsCarry(dev)"
       *ngFor="let dev of pair"
     >
       {{dev}}

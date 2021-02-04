@@ -1,16 +1,21 @@
-button{
+button {
   margin: 1rem;
 }
 
-mat-card{
+mat-card {
   margin: 1rem;
 }
 
-.dev{
+.dev {
   margin: 1rem !important;
 }
 
-.pair-card{
+.pair-card {
   display: flex;
   min-height: 6rem;
+}
+
+.carrying {
+  background: burlywood;
+  color: whitesmoke;
 }
