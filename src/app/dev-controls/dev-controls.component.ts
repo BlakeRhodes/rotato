@@ -10,6 +10,7 @@ import {MatCheckboxChange} from '@angular/material/checkbox';
 })
 export class DevControlsComponent implements OnInit {
   devs: string[];
+  disabled: string[] = [];
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -19,6 +20,7 @@ export class DevControlsComponent implements OnInit {
 
   ngOnInit(): void {
     this.devs = this.localStorageService.getDevs();
+    this.disabled = this.localStorageService.getDisabled();
   }
 
   handleAdd(value: string): void {
@@ -37,5 +39,19 @@ export class DevControlsComponent implements OnInit {
 
   handleEnableSound(event: MatCheckboxChange): void {
     this.soundService.enableSound = event.checked;
+  }
+
+  handleDisable(i: number, dev: string): void {
+    const found = this.disabled.findIndex(name => name === dev);
+    if (found === -1) {
+      this.disabled.push(dev);
+    } else {
+      this.disabled.splice(found, 1);
+    }
+    this.localStorageService.setDisabled(this.disabled);
+  }
+
+  isDisabled(dev: string): boolean {
+    return !!this.disabled.find(name => name === dev);
   }
 }

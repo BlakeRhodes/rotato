@@ -4,12 +4,14 @@ import {Injectable} from '@angular/core';
   providedIn: 'root'
 })
 export class LocalStorageService {
-  private devs: string[] = [];
+  private readonly devs: string[] = [];
   private carriers: string[] = [];
   private pairs: string[][] = [];
+  private disabled: string[] = [];
   private devKey = 'devs';
   private pairsKey = 'pairs';
   private carriersKey = 'carriers';
+  private disabledKey = 'disabled';
 
   constructor() {
     const devs = localStorage.getItem(this.devKey);
@@ -24,6 +26,11 @@ export class LocalStorageService {
     const carriers = localStorage.getItem(this.carriersKey);
     if (carriers) {
       this.carriers = JSON.parse(pairs);
+    }
+
+    const disabled = localStorage.getItem(this.disabledKey);
+    if (disabled) {
+      this.carriers = JSON.parse(disabled);
     }
   }
 
@@ -44,6 +51,10 @@ export class LocalStorageService {
     return this.get(this.carriersKey) as string [];
   }
 
+  getDisabled(): string[] {
+    return this.get(this.disabledKey) as string [];
+  }
+
   get(field: string): string[] | string[][] {
     const current = localStorage.getItem(field);
     if (current) {
@@ -62,6 +73,10 @@ export class LocalStorageService {
 
   setCarriers(carriers: string[]): void {
     this.set(this.carriersKey, carriers);
+  }
+
+  setDisabled(disabled: string[]): void {
+    this.set(this.disabledKey, disabled);
   }
 
   set(field: string, update: string[] | string[][]): void {

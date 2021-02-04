@@ -30,7 +30,9 @@ export class DisplayComponent implements OnInit {
   handleClick(): void {
     this.taterSpinningTime.emit();
     this.pairs = [];
-    const devs = this.localStorageService.getDevs();
+    let devs = this.localStorageService.getDevs();
+    const disabled = this.localStorageService.getDisabled();
+    devs = devs.filter(dev => !disabled.includes(dev));
     this.makePairs(devs);
     this.localStorageService.setPairs(this.pairs);
   }
@@ -49,6 +51,7 @@ export class DisplayComponent implements OnInit {
 
   private makePairs(devs: string[]): void {
     this.pairs = [];
+
     if (this.carriers.length * 2 > devs.length + 1) {
       this.soundService.heyListen();
       this.snackBar.open(

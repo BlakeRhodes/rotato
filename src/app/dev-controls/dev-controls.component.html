@@ -11,11 +11,17 @@
   Enable Sound
 </mat-checkbox>
 <div>
-  <mat-card *ngFor="let dev of devs; let i = index">
+  <mat-card
+    matTooltip="Double Click to move to Back Burner"
+    *ngFor="let dev of devs; let i = index"
+    (dblclick)="handleDisable(i,dev)"
+    [class.disabled]="isDisabled(dev)"
+  >
     <div class="mat-title">
       {{dev}}
     </div>
     <button
+      class="peel-button"
       mat-mini-fab
       color="warn"
       (click)="handleDelete(i)"

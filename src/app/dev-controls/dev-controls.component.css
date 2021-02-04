@@ -18,3 +18,12 @@ mat-icon {
   margin: 0;
 }
 
+.peel-button{
+  padding: 0 !important;
+  margin: .5rem !important;
+}
+
+.disabled{
+  background: burlywood;
+  color: lemonchiffon;
+}
