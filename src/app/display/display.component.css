@@ -4,11 +4,11 @@ button {
 
 mat-card {
   margin: 1rem;
-
 }
 
 .dev {
   margin: 1rem !important;
+  cursor: move;
 }
 
 .pair-card {
@@ -20,4 +20,14 @@ mat-card {
 .carrying {
   background: burlywood;
   color: whitesmoke;
+}
+
+.cdk-drag-preview{
+  @extend .mat-card;
+  background: palegoldenrod;
+  margin: 1rem !important;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
