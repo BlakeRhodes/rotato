@@ -8,10 +8,12 @@ export class LocalStorageService {
   private carriers: string[] = [];
   private pairs: string[][] = [];
   private disabled: string[] = [];
+  private enableSound: boolean;
   private devKey = 'devs';
   private pairsKey = 'pairs';
   private carriersKey = 'carriers';
   private disabledKey = 'disabled';
+  private enableSoundKey = 'enableSound';
 
   constructor() {
     const devs = localStorage.getItem(this.devKey);
@@ -30,9 +32,19 @@ export class LocalStorageService {
 
     const disabled = localStorage.getItem(this.disabledKey);
     if (disabled) {
-      this.carriers = JSON.parse(disabled);
+      this.disabled = JSON.parse(disabled);
+    }
+
+    const enableSound = localStorage.getItem(this.enableSoundKey);
+    console.log(enableSound);
+    if (enableSound) {
+      this.enableSound = JSON.parse(enableSound);
+    } else {
+      this.enableSound = true;
+      localStorage.setItem(this.enableSoundKey, 'true');
     }
   }
+
 
   addDev(name: string): void {
     this.devs.push(name);
@@ -55,7 +67,11 @@ export class LocalStorageService {
     return this.get(this.disabledKey) as string [];
   }
 
-  get(field: string): string[] | string[][] {
+  getEnableSound(): boolean {
+    return this.get(this.enableSoundKey) as boolean;
+  }
+
+  get(field: string): any {
     const current = localStorage.getItem(field);
     if (current) {
       return JSON.parse(current);
@@ -79,7 +95,11 @@ export class LocalStorageService {
     this.set(this.disabledKey, disabled);
   }
 
-  set(field: string, update: string[] | string[][]): void {
+  setSoundEnabled(value: boolean): void {
+    this.set(this.enableSoundKey, value);
+  }
+
+  set(field: string, update: any): void {
     localStorage.setItem(field, JSON.stringify(update));
     this[field] = update;
   }

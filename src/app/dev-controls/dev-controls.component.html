@@ -6,6 +6,7 @@
   <button mat-raised-button color="primary" (click)="handleAdd(devName.value); devName.value = ''">Add Dev</button>
 </form>
 <mat-checkbox
+  [checked]="enableSound"
   (change)="handleEnableSound($event)"
 >
   Enable Sound

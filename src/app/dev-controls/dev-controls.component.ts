@@ -11,11 +11,13 @@ import {MatCheckboxChange} from '@angular/material/checkbox';
 export class DevControlsComponent implements OnInit {
   devs: string[];
   disabled: string[] = [];
+  enableSound: boolean;
 
   constructor(
     private localStorageService: LocalStorageService,
     private soundService: SoundService,
   ) {
+    this.enableSound = this.localStorageService.getEnableSound();
   }
 
   ngOnInit(): void {
@@ -38,6 +40,7 @@ export class DevControlsComponent implements OnInit {
   }
 
   handleEnableSound(event: MatCheckboxChange): void {
+    this.localStorageService.setSoundEnabled(event.checked);
     this.soundService.enableSound = event.checked;
   }
 
