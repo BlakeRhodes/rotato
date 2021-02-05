@@ -7,7 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class PotatoComponent implements OnInit {
   @Input() shouldISpinAPotato = true;
-
+  showToys = false;
   constructor() {
   }
 

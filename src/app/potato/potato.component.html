@@ -5,7 +5,59 @@
   <div>
     <img
       src="assets/potato.png"
+      (dblclick)="showToys=!showToys"
       [class.rotate]="shouldISpinAPotato"
+      class="potato"
     >
   </div>
+  <img
+    *ngIf="showToys"
+    src="assets/hat.png"
+    cdkDrag
+  >
+  <img
+    *ngIf="showToys"
+    src="assets/brows.png"
+    cdkDrag
+  >
+  <img
+    *ngIf="showToys"
+    src="assets/eye.png"
+    cdkDrag
+  >
+  <img
+    *ngIf="showToys"
+    src="assets/moustache.png"
+    cdkDrag
+  >
+  <img
+    *ngIf="showToys"
+    src="assets/nose.png"
+    cdkDrag
+  >
+  <img
+    *ngIf="showToys"
+    src="assets/small_nose.png"
+    cdkDrag
+  >
+  <img
+    *ngIf="showToys"
+    src="assets/small_nose_alt.png"
+    cdkDrag
+  >
+  <img
+    *ngIf="showToys"
+    src="assets/nose_alt.png"
+    cdkDrag
+  >
+  <img
+    *ngIf="showToys"
+    src="assets/mouth.png"
+    cdkDrag
+  >
+  <img
+    *ngIf="showToys"
+    src="assets/mouth_red.png"
+    cdkDrag
+  >
 </mat-card>
