@@ -26,8 +26,4 @@ export class AppComponent {
       resolve => setTimeout(resolve, ms)
     );
   }
-
-  fuckItUp() {
-    this.localStorageService.set('pairs',[['Blake','roger'],['Father Simon','Kitty']])
-  }
 }
