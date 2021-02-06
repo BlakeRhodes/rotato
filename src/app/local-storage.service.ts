@@ -5,12 +5,6 @@ import {Pair} from './pair';
   providedIn: 'root'
 })
 export class LocalStorageService {
-  private readonly devs: string[] = [];
-  private carriers: string[] = [];
-  private pairs: Pair[] = [];
-  private disabled: string[] = [];
-  private boards: string[] = [];
-  private disabledBoards: string[] = [];
   private enableSound: boolean;
   private devKey = 'devs';
   private pairsKey = 'pairs';
@@ -21,35 +15,6 @@ export class LocalStorageService {
   private enableSoundKey = 'enableSound';
 
   constructor() {
-    const devs = localStorage.getItem(this.devKey);
-    if (devs) {
-      this.devs = JSON.parse(devs);
-    }
-    const pairs = localStorage.getItem(this.pairsKey);
-    if (pairs) {
-      this.pairs = JSON.parse(pairs);
-    }
-
-    const carriers = localStorage.getItem(this.carriersKey);
-    if (carriers) {
-      this.carriers = JSON.parse(pairs);
-    }
-
-    const disabled = localStorage.getItem(this.disabledKey);
-    if (disabled) {
-      this.disabled = JSON.parse(disabled);
-    }
-
-    const boards = localStorage.getItem(this.boardsKey);
-    if (boards) {
-      this.boards = JSON.parse(boards);
-    }
-
-    const disabledBoards = localStorage.getItem(this.disabledBoardsKey);
-    if (disabledBoards) {
-      this.disabledBoards = JSON.parse(disabledBoards);
-    }
-
     const enableSound = localStorage.getItem(this.enableSoundKey);
     if (enableSound) {
       this.enableSound = JSON.parse(enableSound);
@@ -59,15 +24,18 @@ export class LocalStorageService {
     }
   }
 
-
   addDev(name: string): void {
-    this.devs.push(name);
-    localStorage.setItem(this.devKey, JSON.stringify(this.devs));
+    this.add(this.devKey, name);
   }
 
   addBoard(name: string): void {
-    this.boards.push(name);
-    localStorage.setItem(this.boardsKey, JSON.stringify(this.boards));
+    this.add(this.boardsKey, name);
+  }
+
+  add(key: string, value: any): void {
+    const values = this.get(key);
+    values.push(value);
+    localStorage.setItem(key, JSON.stringify(values));
   }
 
   getDevs(): string[] {
@@ -76,9 +44,10 @@ export class LocalStorageService {
 
   getPairs(): Pair[] {
     let pairs = this.get(this.pairsKey) as Pair[];
-    if(pairs[0]&&pairs[0]['board'] === undefined){
+    if (pairs[0] && pairs[0]['board'] === undefined) {
       return this.fixPairs();
     }
+    return pairs;
   }
 
   getCarriers(): string[] {
@@ -153,5 +122,12 @@ export class LocalStorageService {
       );
     });
     return fixedPairs;
+  }
+
+  private prepValue(key: string) {
+    const value = localStorage.getItem(key);
+    if (value) {
+      this[key] = JSON.parse(value);
+    }
   }
 }
