@@ -4,6 +4,7 @@ import {shuffle} from '../lulz';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {SoundService} from '../sound.service';
+import {Pair} from '../pair';
 
 @Component({
   selector: 'app-display',
@@ -12,8 +13,9 @@ import {SoundService} from '../sound.service';
 })
 export class DisplayComponent implements OnInit {
   @Output() taterSpinningTime: EventEmitter<any> = new EventEmitter<any>();
-  pairs: string[][] = [];
+  pairs: Pair[] = [];
   carriers: string[] = [];
+  boards: string[] = [];
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -22,6 +24,7 @@ export class DisplayComponent implements OnInit {
   ) {
     this.pairs = localStorageService.getPairs();
     this.carriers = localStorageService.getCarriers();
+    this.boards = localStorageService.getBoards();
   }
 
   ngOnInit(): void {
@@ -46,12 +49,15 @@ export class DisplayComponent implements OnInit {
         event.previousIndex,
         event.currentIndex);
     }
-    this.localStorageService.setPairs(this.pairs.filter(pair => pair.length > 0));
+    this.localStorageService.setPairs(this.pairs.filter(pair => pair.devs.length > 0));
   }
 
   private makePairs(devs: string[]): void {
     this.pairs = [];
-
+    let boards = this.localStorageService.getBoards().filter(
+      dev => !this.localStorageService.getDisabledBoards().includes(dev)
+    );
+    shuffle(boards);
     if (this.carriers.length * 2 > devs.length + 1) {
       this.soundService.heyListen();
       this.snackBar.open(
@@ -67,9 +73,21 @@ export class DisplayComponent implements OnInit {
     for (const carrier of this.carriers) {
       const partner = devs.splice(0, 1)[0];
       if (partner) {
-        this.pairs.push([carrier, partner]);
+        this.pairs.push(
+          {
+            board: boards.pop(),
+            devs:
+              [carrier, partner]
+          }
+        );
       } else {
-        this.pairs.push([carrier]);
+        this.pairs.push(
+          {
+            board: boards.pop(),
+            devs:
+              [carrier]
+          }
+        );
       }
     }
     if (devs.length % 2 !== 0) {
@@ -80,12 +98,15 @@ export class DisplayComponent implements OnInit {
       const secondIndex = firstIndex + 1;
       const pair: string[] = [devs[firstIndex]];
       const partner = devs[secondIndex];
-      console.log('About to check partner', partner);
       if (partner) {
         pair.push(partner);
-        console.log('just pushed', partner);
       }
-      this.pairs.push(pair);
+      this.pairs.push(
+        {
+          board: boards.pop(),
+          devs: pair
+        }
+      );
     }
   }
 

@@ -17,17 +17,18 @@
   <mat-card
     cdkDropList
     (cdkDropListDropped)="handleDrop($event)"
-    [cdkDropListData]="pair"
+    [cdkDropListData]="pair.devs"
     class="pair-card"
-    *ngFor="let pair of pairs"
+    *ngFor="let pair of pairs; index as i"
     matTooltip="Double Click to Carry"
   >
+    <mat-card-title>{{pair.board}}</mat-card-title>
     <mat-card
       cdkDrag
       class="dev mat-title"
       [class.carrying]="isCarrying(dev)"
       (dblclick)="handleMarkAsCarry(dev)"
-      *ngFor="let dev of pair"
+      *ngFor="let dev of pair.devs"
     >
       {{dev}}
     </mat-card>

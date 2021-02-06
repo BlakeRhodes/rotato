@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {Pair} from './pair';
 
 @Injectable({
   providedIn: 'root'
@@ -6,13 +7,17 @@ import {Injectable} from '@angular/core';
 export class LocalStorageService {
   private readonly devs: string[] = [];
   private carriers: string[] = [];
-  private pairs: string[][] = [];
+  private pairs: Pair[] = [];
   private disabled: string[] = [];
+  private boards: string[] = [];
+  private disabledBoards: string[] = [];
   private enableSound: boolean;
   private devKey = 'devs';
   private pairsKey = 'pairs';
   private carriersKey = 'carriers';
   private disabledKey = 'disabled';
+  private boardsKey = 'boards';
+  private disabledBoardsKey = 'disabledBoards';
   private enableSoundKey = 'enableSound';
 
   constructor() {
@@ -35,8 +40,17 @@ export class LocalStorageService {
       this.disabled = JSON.parse(disabled);
     }
 
+    const boards = localStorage.getItem(this.boardsKey);
+    if (boards) {
+      this.boards = JSON.parse(boards);
+    }
+
+    const disabledBoards = localStorage.getItem(this.disabledBoardsKey);
+    if (disabledBoards) {
+      this.disabledBoards = JSON.parse(disabledBoards);
+    }
+
     const enableSound = localStorage.getItem(this.enableSoundKey);
-    console.log(enableSound);
     if (enableSound) {
       this.enableSound = JSON.parse(enableSound);
     } else {
@@ -51,12 +65,21 @@ export class LocalStorageService {
     localStorage.setItem(this.devKey, JSON.stringify(this.devs));
   }
 
+  addBoard(name: string): void {
+    this.boards.push(name);
+    localStorage.setItem(this.boardsKey, JSON.stringify(this.boards));
+  }
+
   getDevs(): string[] {
     return this.get(this.devKey) as string[];
   }
 
-  getPairs(): string[][] {
-    return this.get(this.pairsKey) as string[][];
+  getPairs(): Pair[] {
+    let pairs = this.get(this.pairsKey);
+    if(pairs[0]['board'] === undefined){
+      return this.fixPairs(pairs);
+    }
+    return pairs;
   }
 
   getCarriers(): string[] {
@@ -65,6 +88,14 @@ export class LocalStorageService {
 
   getDisabled(): string[] {
     return this.get(this.disabledKey) as string [];
+  }
+
+  getBoards(): string[] {
+    return this.get(this.boardsKey) as string [];
+  }
+
+  getDisabledBoards(): string[] {
+    return this.get(this.disabledBoardsKey) as string [];
   }
 
   getEnableSound(): boolean {
@@ -83,7 +114,7 @@ export class LocalStorageService {
     this.set(this.devKey, devs);
   }
 
-  setPairs(pairs: string[][]): void {
+  setPairs(pairs: Pair[]): void {
     this.set(this.pairsKey, pairs);
   }
 
@@ -99,8 +130,29 @@ export class LocalStorageService {
     this.set(this.enableSoundKey, value);
   }
 
+  setBoards(value: string[]): void {
+    this.set(this.boardsKey, value);
+  }
+
+  setDisabledBoards(value: string[]): void {
+    this.set(this.disabledBoardsKey, value);
+  }
+
   set(field: string, update: any): void {
     localStorage.setItem(field, JSON.stringify(update));
     this[field] = update;
+  }
+
+  private fixPairs(pairs) {
+    let fixedPairs: Pair[] = [];
+    pairs.forEach(pair => {
+      fixedPairs.push(
+        {
+          board: '🥔 Hope you like Boards! 🥔',
+          devs: pair as string[],
+        }
+      );
+    });
+    return fixedPairs;
   }
 }

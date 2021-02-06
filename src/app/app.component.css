@@ -5,8 +5,9 @@
   align-items: center;
 }
 
-.two-columns{
+.three-columns{
   display: flex;
+  align-items: flex-start;
   width: 100%;
 }
 
@@ -15,11 +16,16 @@ app-potato{
 }
 
 app-dev-controls{
-  margin: 3rem;
-  min-width: 30%;
+  margin: 3rem 1.5rem 3rem 3rem;
+  min-width: 25%;
+}
+
+app-boards{
+  margin: 3rem 1.5rem;
+  min-width: 20%;
 }
 
 app-display {
-  margin: 3rem;
-  min-width: 30%;
+  margin: 3rem 3rem 3rem 1.5rem;
+  min-width: 40%;
 }

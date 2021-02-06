@@ -1,9 +1,12 @@
 <div class="wrapper">
+  <button (click)="fuckItUp()">Fuck it Up!</button>
   <app-potato [shouldISpinAPotato]="spin"></app-potato>
-  <div class="two-columns">
+  <div class="three-columns">
     <app-dev-controls></app-dev-controls>
+
     <app-display
       (taterSpinningTime)="handleTheSpinningPotato()"
     ></app-display>
+    <app-boards></app-boards>
   </div>
 </div>

@@ -15,13 +15,15 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { BoardsComponent } from './boards/boards.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PotatoComponent,
     DevControlsComponent,
-    DisplayComponent
+    DisplayComponent,
+    BoardsComponent
   ],
   imports: [
     BrowserModule,

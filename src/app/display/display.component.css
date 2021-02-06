@@ -4,7 +4,15 @@ button {
 }
 
 mat-card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   margin: 1rem;
+}
+
+mat-card-title {
+  margin: 1rem !important;
+  width: 100%;
 }
 
 .dev {
@@ -16,6 +24,7 @@ mat-card {
   display: flex;
   min-height: 6rem;
   padding: 0 0 0 1rem;
+  background: cornsilk;
 }
 
 .carrying {
