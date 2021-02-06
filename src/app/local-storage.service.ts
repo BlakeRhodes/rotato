@@ -75,7 +75,10 @@ export class LocalStorageService {
   }
 
   getPairs(): Pair[] {
-    return this.get(this.pairsKey) as Pair[];
+    let pairs = this.get(this.pairsKey) as Pair[];
+    if(pairs[0]['board'] === undefined){
+      return this.fixPairs();
+    }
   }
 
   getCarriers(): string[] {
@@ -139,9 +142,9 @@ export class LocalStorageService {
     this[field] = update;
   }
 
-  private fixPairs(pairs) {
+  private fixPairs() {
     let fixedPairs: Pair[] = [];
-    pairs.forEach(pair => {
+    this.get(this.pairsKey).forEach(pair => {
       fixedPairs.push(
         {
           board: '🥔 Hope you like Boards! 🥔',
