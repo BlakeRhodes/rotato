@@ -13,8 +13,17 @@ export class LocalStorageService {
   private boardsKey = 'boards';
   private disabledBoardsKey = 'disabledBoards';
   private enableSoundKey = 'enableSound';
+  private versionKey = 'version';
+  private currentVersion = "1.0.0.0";
 
   constructor() {
+    const version = localStorage.getItem(this.versionKey);
+    console.log(version);
+    if(version!=='1.0.0.0'){
+      this.fixPairs()
+      localStorage.setItem(this.versionKey, this.currentVersion);
+    }
+
     const enableSound = localStorage.getItem(this.enableSoundKey);
     if (enableSound) {
       this.enableSound = JSON.parse(enableSound);
@@ -43,11 +52,7 @@ export class LocalStorageService {
   }
 
   getPairs(): Pair[] {
-    let pairs = this.get(this.pairsKey) as Pair[];
-    // if (pairs[0] && pairs[0]['board'] === undefined) {
-    //   return this.fixPairs();
-    // }
-    return pairs;
+    return this.get(this.pairsKey) as Pair[];
   }
 
   getCarriers(): string[] {
@@ -112,6 +117,7 @@ export class LocalStorageService {
   }
 
   private fixPairs() {
+    console.log("Fixing Pairs");
     let fixedPairs: Pair[] = [];
     this.get(this.pairsKey).forEach(pair => {
       fixedPairs.push(
@@ -121,7 +127,7 @@ export class LocalStorageService {
         }
       );
     });
-    return fixedPairs;
+    localStorage.setItem(this.pairsKey, JSON.stringify(fixedPairs));
   }
 
   private prepValue(key: string) {
