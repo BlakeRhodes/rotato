@@ -76,7 +76,7 @@ export class LocalStorageService {
 
   getPairs(): Pair[] {
     let pairs = this.get(this.pairsKey) as Pair[];
-    if(pairs[0]['board'] === undefined){
+    if(pairs[0]&&pairs[0]['board'] === undefined){
       return this.fixPairs();
     }
   }
