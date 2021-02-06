@@ -15,6 +15,12 @@ mat-card-title {
   width: 100%;
 }
 
+.title{
+  @extend .mat-card-title;
+  font-size: 48px;
+  margin-left: 4rem;
+}
+
 .dev {
   margin: 1rem !important;
   cursor: grab;
