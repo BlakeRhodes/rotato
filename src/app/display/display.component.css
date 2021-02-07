@@ -21,8 +21,16 @@ mat-card-title {
 }
 
 .dev {
-  margin: 1rem !important;
+  margin: 1rem 0 1rem 1rem !important;
+  padding-right: .5rem;
   cursor: grab;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.drag-indicator{
+  margin: 0 0 0 2rem;
 }
 
 .pair-card {
@@ -44,6 +52,13 @@ mat-card-title {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.cdk-drag-placeholder{
+  opacity: 0;
+  width: 0;
+  margin: 0;
+  padding: 0;
 }
 
 :active {

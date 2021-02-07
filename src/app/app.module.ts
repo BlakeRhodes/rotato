@@ -16,6 +16,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { BoardsComponent } from './boards/boards.component';
+import { FooterComponent } from './footer/footer.component';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { BoardsComponent } from './boards/boards.component';
     PotatoComponent,
     DevControlsComponent,
     DisplayComponent,
-    BoardsComponent
+    BoardsComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
