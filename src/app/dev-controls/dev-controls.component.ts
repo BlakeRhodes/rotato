@@ -33,6 +33,7 @@ export class DevControlsComponent implements OnInit {
   handleAdd(value: string): void {
     if (value !== '') {
       this.localStorageService.addDev(value);
+      this.soundService.dropPop();
     }
     this.devs = this.localStorageService.getDevs();
   }

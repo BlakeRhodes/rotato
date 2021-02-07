@@ -30,6 +30,7 @@ export class BoardsComponent implements OnInit {
   handleAdd(board: string) {
     if (board !== '') {
       this.localStorageService.addBoard(board);
+      this.soundService.dropPop();
     }
     this.boards = this.localStorageService.getBoards();
   }
