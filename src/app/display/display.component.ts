@@ -31,6 +31,7 @@ export class DisplayComponent {
   }
 
   handleClick(): void {
+    this.soundService.spinning()
     this.taterSpinningTime.emit();
     const disabled = this.localStorageService.getDisabled();
     let devs = this.localStorageService.getDevs()
@@ -39,6 +40,7 @@ export class DisplayComponent {
   }
 
   handleDrop(event: CdkDragDrop<string[]>): void {
+    this.soundService.dropPop();
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
