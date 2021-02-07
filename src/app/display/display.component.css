@@ -1,5 +1,5 @@
 button {
-  margin: 1rem;
+  margin: .5rem;
   padding: 0;
 }
 
@@ -7,21 +7,21 @@ mat-card {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: 1rem;
+  margin: .5rem;
 }
 
 mat-card-title {
-  margin: 1rem !important;
+  margin: .5rem !important;
   width: 100%;
 }
 
 .title{
   font-size: 48px;
-  margin-left: 4rem;
+  margin-left: 1rem;
 }
 
 .dev {
-  margin: 1rem 0 1rem 1rem !important;
+  margin: .5rem 0 1rem .5rem !important;
   padding-right: .5rem;
   cursor: grab;
   display: flex;
@@ -30,13 +30,13 @@ mat-card-title {
 }
 
 .drag-indicator{
-  margin: 0 0 0 2rem;
+  margin: 0 0 0 1rem;
 }
 
 .pair-card {
   display: flex;
   min-height: 6rem;
-  padding: 0 0 0 1rem;
+  padding: 0 0 0 .5rem;
   background: cornsilk;
 }
 
@@ -47,7 +47,7 @@ mat-card-title {
 
 .cdk-drag-preview {
   background: palegoldenrod;
-  margin: 1rem !important;
+  margin: .5rem !important;
   padding: 0;
   display: flex;
   justify-content: center;
@@ -76,6 +76,7 @@ mat-card-title {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  font-weight: 500;
   color: lemonchiffon;
   background: goldenrod;
   padding: .5rem;

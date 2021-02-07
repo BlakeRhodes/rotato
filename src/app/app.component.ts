@@ -13,7 +13,7 @@ export class AppComponent {
   handleTheSpinningPotato(): void {
     (async () => {
       this.spin = true;
-      await delay(1000);
+      await delay(250);
       this.spin = false;
     })();
   }

@@ -6,7 +6,7 @@ import {APP_NAME} from '../constants';
   templateUrl: './potato.component.html',
   styleUrls: ['./potato.component.css']
 })
-export class PotatoComponent{
+export class PotatoComponent {
   @Input() shouldISpinAPotato = true;
   showToys = false;
   appName = APP_NAME;
@@ -22,6 +22,27 @@ export class PotatoComponent{
     'mouth',
     'mouth_red'
   ];
+  flipped = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ];
+
   constructor() {
+  }
+
+  isFlipped(i: number) {
+    return this.flipped[i];
+  }
+
+  flip(i: number) {
+    this.flipped[i] = !this.flipped[i];
   }
 }

@@ -1,18 +1,19 @@
 button {
-  margin: 1rem !important;
+  margin: .5rem !important;
 }
 
 mat-card.added-list-item{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: .5rem 0;
+  margin: .25rem 0;
   padding: 0 0 0 1rem;
   user-select: none;
 }
 
 .mat-title {
   margin: 0;
+  font-size: 16px;
 }
 
 .peel-button{
@@ -26,7 +27,7 @@ mat-card.added-list-item{
 }
 
 .rotate {
-  animation: rotation .5s infinite linear;
+  animation: rotation 250ms infinite linear;
 }
 
 .rotate-slowly {
