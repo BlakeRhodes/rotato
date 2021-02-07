@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {LocalStorageService} from './local-storage.service';
+import {delay} from './lulz';
 
 @Component({
   selector: 'app-root',
@@ -7,23 +8,13 @@ import {LocalStorageService} from './local-storage.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'rotato-ui';
   spin = false;
-
-  constructor(private localStorageService: LocalStorageService) {
-  }
 
   handleTheSpinningPotato(): void {
     (async () => {
       this.spin = true;
-      await this.delay(1000);
+      await delay(1000);
       this.spin = false;
     })();
-  }
-
-  private delay(ms: number): Promise<unknown> {
-    return new Promise(
-      resolve => setTimeout(resolve, ms)
-    );
   }
 }

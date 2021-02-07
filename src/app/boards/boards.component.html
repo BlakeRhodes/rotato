@@ -1,30 +1,41 @@
-<div class="wrapper">
-  <form>
-    <mat-form-field>
-      <mat-label>Board Name</mat-label>
-      <input matInput #boardName placeholder="Frank's House of Refactors">
-    </mat-form-field>
-    <button mat-raised-button color="accent" (click)="handleAdd(boardName.value); boardName.value = ''">Add</button>
-  </form>
-
-  <div>
-    <mat-card
-      matTooltip="Double Click to move to Back Burner"
-      *ngFor="let board of boards; let i = index"
-      (dblclick)="handleDisable(i,board)"
-      [class.disabled]="isDisabled(board)"
+<form>
+  <mat-form-field>
+    <mat-label>{{inputLabel}}</mat-label>
+    <input
+      matInput
+      #boardName
+      [placeholder]="boardPlaceHolder"
     >
-      <div class="mat-title">
-        {{board}}
-      </div>
-      <button
-        class="peel-button"
-        mat-mini-fab
-        color="warn"
-        (click)="handleDelete(i)"
-      >
-        PEEL
-      </button>
-    </mat-card>
-  </div>
+  </mat-form-field>
+  <button
+    mat-mini-fab
+    color="accent"
+    (click)="handleAdd(boardName.value); boardName.value = ''"
+  >
+    <mat-icon>
+      add
+    </mat-icon>
+  </button>
+</form>
+
+<div>
+  <mat-card
+    class="added-list-item"
+    matTooltip="Double Click to move to Back Burner"
+    *ngFor="let board of boards; let i = index"
+    (dblclick)="handleDisable(i,board)"
+    [class.disabled]="isDisabled(board)"
+  >
+    <div class="mat-title">
+      {{board}}
+    </div>
+    <button
+      class="peel-button"
+      mat-mini-fab
+      color="warn"
+      (click)="handleDelete(i)"
+    >
+      {{deleteText}}
+    </button>
+  </mat-card>
 </div>

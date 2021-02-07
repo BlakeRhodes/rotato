@@ -16,7 +16,6 @@ mat-card-title {
 }
 
 .title{
-  @extend .mat-card-title;
   font-size: 48px;
   margin-left: 4rem;
 }
@@ -39,7 +38,6 @@ mat-card-title {
 }
 
 .cdk-drag-preview {
-  @extend .mat-card;
   background: palegoldenrod;
   margin: 1rem !important;
   padding: 0;
@@ -55,11 +53,12 @@ mat-card-title {
 .pairing-controls {
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
 .spuddies-label {
   display: flex;
-  justify-content: left;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   color: lemonchiffon;

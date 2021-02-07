@@ -1,16 +1,20 @@
 <div class="pairing-controls">
   <mat-card class="spuddies-label">
-      <button
-        mat-fab
-        class="rotate-button"
-        (click)="handleClick()"
-        matTooltip="SPIN THE POTATO! MAKE IT ROTATO!"
+    <div class="title">
+      {{displayTitleText}}
+    </div>
+    <button
+      mat-fab
+      class="rotate-button"
+      (click)="handleClick()"
+      [matTooltip]="toolTip"
+    >
+      <mat-icon
+        class="rotate-slowly"
       >
-        <mat-icon class="rotate-slowly">rotate_left</mat-icon>
-      </button>
-      <div class="title">
-        Spuddies
-      </div>
+        rotate_left
+      </mat-icon>
+    </button>
   </mat-card>
 </div>
 <div cdkDropListGroup>

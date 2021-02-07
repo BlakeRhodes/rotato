@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LocalStorageService} from '../local-storage.service';
-import {createWebpackLoggingCallback} from '@angular-devkit/build-angular/src/webpack/utils/stats';
 import {SoundService} from '../sound.service';
+import {notFound} from '../lulz';
+import {DELETE_BUTTON_TEXT} from '../constants';
 
 @Component({
   selector: 'app-boards',
@@ -11,10 +12,15 @@ import {SoundService} from '../sound.service';
 export class BoardsComponent implements OnInit {
   boards: string[];
   disabledBoards: string[];
+  boardPlaceHolder = 'Frank\'s House of Refactors';
+  inputLabel = "Board Name";
+  deleteText = DELETE_BUTTON_TEXT;
+
   constructor(
     private localStorageService: LocalStorageService,
     private soundService: SoundService,
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.boards = this.localStorageService.getBoards();
@@ -31,21 +37,20 @@ export class BoardsComponent implements OnInit {
   handleDelete(i: number) {
     this.boards.splice(i, 1);
     this.localStorageService.setBoards(this.boards);
-    this.boards = this.localStorageService.getBoards();
     this.soundService.doAYeet();
   }
 
   handleDisable(i: number, board: any) {
-    const found = this.disabledBoards.findIndex(name => name === board);
-    if (found === -1) {
+    const index = this.disabledBoards.findIndex(name => name === board);
+    if (notFound(index)) {
       this.disabledBoards.push(board);
     } else {
-      this.disabledBoards.splice(found, 1);
+      this.disabledBoards.splice(index, 1);
     }
     this.localStorageService.setDisabledBoards(this.disabledBoards);
   }
 
-  isDisabled(board: any) {
-    return !!this.disabledBoards.find(name => name === board);
+  isDisabled(board: string) {
+    return this.disabledBoards.find(name => name === board);
   }
 }

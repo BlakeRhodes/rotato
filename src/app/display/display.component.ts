@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {LocalStorageService} from '../local-storage.service';
 import {shuffle} from '../lulz';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
@@ -11,11 +11,14 @@ import {Pair} from '../pair';
   templateUrl: './display.component.html',
   styleUrls: ['./display.component.css']
 })
-export class DisplayComponent implements OnInit {
+export class DisplayComponent {
   @Output() taterSpinningTime: EventEmitter<any> = new EventEmitter<any>();
+
   pairs: Pair[] = [];
   carriers: string[] = [];
   boards: string[] = [];
+  displayTitleText = 'Spuddies';
+  toolTip = 'SPIN THE POTATO! MAKE IT ROTATO!';
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -27,17 +30,12 @@ export class DisplayComponent implements OnInit {
     this.boards = localStorageService.getBoards();
   }
 
-  ngOnInit(): void {
-  }
-
   handleClick(): void {
     this.taterSpinningTime.emit();
-    this.pairs = [];
-    let devs = this.localStorageService.getDevs();
     const disabled = this.localStorageService.getDisabled();
-    devs = devs.filter(dev => !disabled.includes(dev));
+    let devs = this.localStorageService.getDevs()
+      .filter(dev => !disabled.includes(dev));
     this.makePairs(devs);
-    this.localStorageService.setPairs(this.pairs);
   }
 
   handleDrop(event: CdkDragDrop<string[]>): void {
@@ -49,27 +47,64 @@ export class DisplayComponent implements OnInit {
         event.previousIndex,
         event.currentIndex);
     }
-    this.localStorageService.setPairs(this.pairs.filter(pair => pair.devs.length > 0));
+    this.localStorageService.setPairs(this.pairs);
+  }
+
+  handleMarkAsCarry(dev: string): void {
+    const found = this.carriers.findIndex(name => name === dev);
+    if (found === -1) {
+      this.carriers.push(dev);
+    } else {
+      this.carriers.splice(found, 1);
+    }
+    this.localStorageService.setCarriers(this.carriers);
+  }
+
+  isCarrying(dev: string): string {
+    return this.carriers.find(name => name === dev);
   }
 
   private makePairs(devs: string[]): void {
     this.pairs = [];
     let boards = this.localStorageService.getBoards().filter(
-      dev => !this.localStorageService.getDisabledBoards().includes(dev)
+      board => !this.localStorageService.getDisabledBoards().includes(board)
     );
     shuffle(boards);
-    if (this.carriers.length * 2 > devs.length + 1) {
-      this.soundService.heyListen();
-      this.snackBar.open(
-        'Hey Pal, that is too many stories in flight',
-        'SORRY',
+    this.checkForToManyStoriesInflight(devs);
+    devs = this.pairCarriers(devs, boards);
+    DisplayComponent.evenTheNumberOfDevs(devs);
+    this.pairRemainingDevs(devs, boards);
+    this.localStorageService.setPairs(this.pairs);
+  }
+
+  private pairRemainingDevs(devs: string[], boards: string[]) {
+    for (let i = 0; i < devs.length / 2; i++) {
+      const firstIndex = i * 2;
+      const secondIndex = firstIndex + 1;
+      const pair: string[] = [devs[firstIndex]];
+      const partner = devs[secondIndex];
+      if (partner) {
+        pair.push(partner);
+      }
+      this.pairs.push(
         {
-          duration: 4000
+          board: boards.pop(),
+          devs: pair
         }
       );
     }
-    devs = devs.filter(dev => this.carriers.indexOf(dev) === -1);
-    devs = shuffle(devs);
+  }
+
+  private static evenTheNumberOfDevs(devs: string[]) {
+    if (devs.length % 2 !== 0) {
+      devs.push(null);
+    }
+  }
+
+  private pairCarriers(devs: string[], boards: string[]) {
+    devs = shuffle(
+      devs.filter(dev => !this.carriers.includes(dev))
+    );
     for (const carrier of this.carriers) {
       const partner = devs.splice(0, 1)[0];
       if (partner) {
@@ -90,37 +125,19 @@ export class DisplayComponent implements OnInit {
         );
       }
     }
-    if (devs.length % 2 !== 0) {
-      devs.push(null);
-    }
-    for (let i = 0; i < devs.length / 2; i++) {
-      const firstIndex = i * 2;
-      const secondIndex = firstIndex + 1;
-      const pair: string[] = [devs[firstIndex]];
-      const partner = devs[secondIndex];
-      if (partner) {
-        pair.push(partner);
-      }
-      this.pairs.push(
+    return devs;
+  }
+
+  private checkForToManyStoriesInflight(devs: string[]) {
+    if (this.carriers.length * 2 > devs.length + 1) {
+      this.soundService.heyListen();
+      this.snackBar.open(
+        'Hey Pal, that is too many stories in flight',
+        'SORRY',
         {
-          board: boards.pop(),
-          devs: pair
+          duration: 4000
         }
       );
     }
-  }
-
-  handleMarkAsCarry(dev: string): void {
-    const found = this.carriers.findIndex(name => name === dev);
-    if (found === -1) {
-      this.carriers.push(dev);
-    } else {
-      this.carriers.splice(found, 1);
-    }
-    this.localStorageService.setCarriers(this.carriers);
-  }
-
-  isCarrying(dev: string): string {
-    return this.carriers.find(name => name === dev);
   }
 }

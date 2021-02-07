@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {APP_NAME} from '../constants';
 
 @Component({
   selector: 'app-potato',
@@ -8,6 +9,19 @@ import {Component, Input} from '@angular/core';
 export class PotatoComponent{
   @Input() shouldISpinAPotato = true;
   showToys = false;
+  appName = APP_NAME;
+  toys = [
+    'hat',
+    'brows',
+    'eye',
+    'moustache',
+    'nose',
+    'small_nose',
+    'small_nose_alt',
+    'nose_alt',
+    'mouth',
+    'mouth_red'
+  ];
   constructor() {
   }
 }

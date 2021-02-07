@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {LocalStorageService} from '../local-storage.service';
 import {SoundService} from '../sound.service';
 import {MatCheckboxChange} from '@angular/material/checkbox';
+import {DELETE_BUTTON_TEXT} from '../constants';
 
 @Component({
   selector: 'app-dev-controls',
@@ -12,6 +13,10 @@ export class DevControlsComponent implements OnInit {
   devs: string[];
   disabled: string[] = [];
   enableSound: boolean;
+  DevPlaceHolder = 'Dev D. Developer';
+  inputLabel = 'Devs Name';
+  enableSoundText = 'Enable Sound';
+  deleteButtonText = DELETE_BUTTON_TEXT;
 
   constructor(
     private localStorageService: LocalStorageService,
