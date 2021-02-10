@@ -13,7 +13,7 @@ export class BoardsComponent implements OnInit {
   boards: string[];
   disabledBoards: string[];
   boardPlaceHolder = 'Frank\'s House of Refactors';
-  inputLabel = "Board Name";
+  inputLabel = "Cutting Board Name";
   deleteText = DELETE_BUTTON_TEXT;
 
   constructor(
