@@ -1,5 +1,9 @@
 button {
-  margin: .5rem !important;
+  margin: auto;
+}
+
+.wide-value-input{
+  width: 85% !important;
 }
 
 mat-card.added-list-item{

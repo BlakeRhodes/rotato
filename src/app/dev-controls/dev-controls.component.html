@@ -1,49 +1,52 @@
-  <form>
-    <mat-form-field>
-      <mat-label>
-        {{inputLabel}}
-      </mat-label>
-      <input
-        matInput
-        #devName
-        [placeholder]="DevPlaceHolder"
-      >
-    </mat-form-field>
-    <button
-      mat-mini-fab
-      color="accent"
-      (click)="handleAdd(devName.value); devName.value = ''"
-    >
-      <mat-icon>
-        add
-      </mat-icon>
-    </button>
-  </form>
-  <div>
-    <mat-card
-      class="added-list-item"
-      matTooltip="Double Click to move to Back Burner"
-      *ngFor="let dev of devs; let i = index"
-      (dblclick)="handleDisable(i,dev)"
-      [class.disabled]="isDisabled(dev)"
-    >
-      <div class="mat-title">
-        {{dev}}
-      </div>
-      <button
-        class="peel-button"
-        mat-mini-fab
-        color="warn"
-        (click)="handleDelete(i)"
-      >
-        {{deleteButtonText}}
-      </button>
-    </mat-card>
-  </div>
-  <mat-checkbox
-    [checked]="enableSound"
-    (change)="handleEnableSound($event)"
+<form>
+  <mat-form-field
+    class="wide-value-input"
   >
-    {{enableSoundText}}
-  </mat-checkbox>
+    <mat-label>
+      {{inputLabel}}
+    </mat-label>
+    <input
+      matInput
+      #devName
+      [placeholder]="DevPlaceHolder"
+    >
+  </mat-form-field>
+  <button
+    class="peel-button"
+    mat-mini-fab
+    color="accent"
+    (click)="handleAdd(devName.value); devName.value = ''"
+  >
+    <mat-icon>
+      add
+    </mat-icon>
+  </button>
+</form>
+<div>
+  <mat-card
+    class="added-list-item"
+    matTooltip="Double Click to move to Back Burner"
+    *ngFor="let dev of devs; let i = index"
+    (dblclick)="handleDisable(i,dev)"
+    [class.disabled]="isDisabled(dev)"
+  >
+    <div class="mat-title">
+      {{dev}}
+    </div>
+    <button
+      class="peel-button"
+      mat-mini-fab
+      color="warn"
+      (click)="handleDelete(i)"
+    >
+      {{deleteButtonText}}
+    </button>
+  </mat-card>
+</div>
+<mat-checkbox
+  [checked]="enableSound"
+  (change)="handleEnableSound($event)"
+>
+  {{enableSoundText}}
+</mat-checkbox>
 

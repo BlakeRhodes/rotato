@@ -1,6 +1,10 @@
 <form>
-  <mat-form-field>
-    <mat-label>{{inputLabel}}</mat-label>
+  <mat-form-field
+    class="wide-value-input"
+  >
+    <mat-label>
+      {{inputLabel}}
+    </mat-label>
     <input
       matInput
       #boardName
@@ -8,6 +12,7 @@
     >
   </mat-form-field>
   <button
+    class="peel-button"
     mat-mini-fab
     color="accent"
     (click)="handleAdd(boardName.value); boardName.value = ''"
