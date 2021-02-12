@@ -3,6 +3,8 @@ mat-card {
   align-items: center;
   justify-content: center;
   padding: 0 !important;
+  background: #2d1104;
+  color: tan;
 }
 
 .title {
