@@ -31,6 +31,7 @@ export class RotationService {
     boards = boards.filter(board => !stickingBoards.includes(board));
     carriers = carriers.filter(carrier => !stickingDevs.includes(carrier));
 
+    shuffle(carriers);
     shuffle(boards);
     shuffle(devs);
 
