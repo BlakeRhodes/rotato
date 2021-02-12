@@ -20,31 +20,39 @@
 <div cdkDropListGroup>
   <mat-card
     cdkDropList
-    (cdkDropListDropped)="handleDrop($event)"
+    (cdkDropListDropped)="handleDrop($event, pair)"
+    (cdkDropListExited)="handleExit(pair)"
     [class.carrying]="isSticking(pair)"
     [cdkDropListData]="pair.devs"
     class="pair-card"
     *ngFor="let pair of pairs; index as i"
-    matTooltip="Double Click to Carry"
   >
-    <mat-card-title-group>
+    <mat-card-title
+      class="title-with-button"
+    >
       <div>
         {{pair.board}}
       </div>
-      <button>
-      <mat-icon
+      <button
+        mat-mini-fab
         (click)="handleSticking(pair)"
+        matTooltip="Stay Paired"
       >
-        add
-      </mat-icon>
+        <mat-icon>
+          {{isSticking(pair)? 'turned_in':'turned_in_not'}}
+        </mat-icon>
+
+
       </button>
-    </mat-card-title-group>
+
+    </mat-card-title>
     <mat-card
       cdkDrag
       class="dev mat-title"
       [class.carrying]="isCarrying(dev)"
       (dblclick)="handleMarkAsCarry(dev)"
       *ngFor="let dev of pair.devs"
+      matTooltip="Double Click to Carry"
     >
       <div>{{dev}}</div>
       <mat-icon class="drag-indicator">

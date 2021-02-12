@@ -15,7 +15,7 @@ export class LocalStorageService {
   private enableSoundKey = 'enableSound';
   private versionKey = 'version';
   private currentVersion = "1.0.0.0";
-  private stickingKey: 'sticking';
+  private stickingKey = 'sticking';
 
   constructor() {
     const version = localStorage.getItem(this.versionKey);

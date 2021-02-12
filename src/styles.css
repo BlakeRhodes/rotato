@@ -3,7 +3,8 @@ button {
 }
 
 .wide-value-input{
-  width: 85% !important;
+  /*width: 85% !important;*/
+  width: auto;
 }
 
 mat-card.added-list-item{

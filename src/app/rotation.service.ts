@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {LocalStorageService} from './local-storage.service';
 import {Pair} from './pair';
 import {shuffle} from './lulz';
@@ -10,14 +10,15 @@ export class RotationService {
 
   constructor(
     private localStorageService: LocalStorageService,
-  ) { }
+  ) {
+  }
 
-  makeItRotato(): Pair[]{
-    const carriers = this.localStorageService.getCarriers();
+  makeItRotato(): Pair[] {
+    let carriers = this.localStorageService.getCarriers();
     let devs = this.localStorageService.getDevs();
     let boards = this.localStorageService.getBoards();
     const disabled = this.localStorageService.getDisabled();
-    const disabledBoards = this.localStorageService.getDisabledBoards()
+    const disabledBoards = this.localStorageService.getDisabledBoards();
     const sticking = this.localStorageService.getSticking();
     const stickingBoards = sticking.map(pair => pair.board);
     const stickingDevs = sticking.flatMap(pair => pair.devs);
@@ -28,7 +29,7 @@ export class RotationService {
     devs = devs.filter(dev => !carriers.includes(dev));
     boards = boards.filter(board => !disabledBoards.includes(board));
     boards = boards.filter(board => !stickingBoards.includes(board));
-
+    carriers = carriers.filter(carrier => !stickingDevs.includes(carrier));
 
     shuffle(boards);
     shuffle(devs);

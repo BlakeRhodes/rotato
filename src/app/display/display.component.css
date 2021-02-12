@@ -86,3 +86,9 @@ mat-card-title {
   padding: 0;
   margin: .5rem 1rem !important;
 }
+
+.title-with-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
