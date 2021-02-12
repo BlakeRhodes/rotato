@@ -1,10 +1,11 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {LocalStorageService} from '../local-storage.service';
-import {shuffle} from '../lulz';
+import {arraysAreEqual, shuffle} from '../lulz';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {SoundService} from '../sound.service';
 import {Pair} from '../pair';
+import {RotationService} from '../rotation.service';
 
 @Component({
   selector: 'app-display',
@@ -15,6 +16,7 @@ export class DisplayComponent {
   @Output() taterSpinningTime: EventEmitter<any> = new EventEmitter<any>();
 
   pairs: Pair[] = [];
+  sticking: Pair[];
   carriers: string[] = [];
   boards: string[] = [];
   displayTitleText = 'Spuddies';
@@ -24,19 +26,23 @@ export class DisplayComponent {
     private localStorageService: LocalStorageService,
     private soundService: SoundService,
     private snackBar: MatSnackBar,
+    private rotationService: RotationService,
   ) {
     this.pairs = localStorageService.getPairs();
     this.carriers = localStorageService.getCarriers();
     this.boards = localStorageService.getBoards();
+    this.sticking = localStorageService.getSticking();
   }
 
   handleClick(): void {
     this.soundService.spinning()
     this.taterSpinningTime.emit();
-    const disabled = this.localStorageService.getDisabled();
-    let devs = this.localStorageService.getDevs()
-      .filter(dev => !disabled.includes(dev));
-    this.makePairs(devs);
+    // const disabled = this.localStorageService.getDisabled();
+    // let devs = this.localStorageService.getDevs()
+    //   .filter(dev => !disabled.includes(dev));
+    // this.makePairs(devs);
+    this.pairs = this.rotationService.makeItRotato();
+    this.localStorageService.setPairs(this.pairs);
   }
 
   handleDrop(event: CdkDragDrop<string[]>): void {
@@ -64,6 +70,25 @@ export class DisplayComponent {
 
   isCarrying(dev: string): string {
     return this.carriers.find(name => name === dev);
+  }
+
+  handleSticking(pair: Pair) {
+    const found = this.sticking.findIndex(
+      stickingPair => arraysAreEqual(stickingPair.devs, pair.devs)
+    );
+    if (found === -1) {
+      this.sticking.push(pair);
+    } else {
+      this.sticking.splice(found, 1);
+    }
+    this.localStorageService.setSticking(this.sticking);
+  }
+
+  isSticking(pair: Pair){
+    this.sticking.find(
+      stickingPair => stickingPair.board === pair.board
+        && arraysAreEqual(stickingPair.devs, pair.devs)
+    );
   }
 
   private makePairs(devs: string[]): void {

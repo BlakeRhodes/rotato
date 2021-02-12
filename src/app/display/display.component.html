@@ -21,12 +21,24 @@
   <mat-card
     cdkDropList
     (cdkDropListDropped)="handleDrop($event)"
+    [class.carrying]="isSticking(pair)"
     [cdkDropListData]="pair.devs"
     class="pair-card"
     *ngFor="let pair of pairs; index as i"
     matTooltip="Double Click to Carry"
   >
-    <mat-card-title>{{pair.board}}</mat-card-title>
+    <mat-card-title-group>
+      <div>
+        {{pair.board}}
+      </div>
+      <button>
+      <mat-icon
+        (click)="handleSticking(pair)"
+      >
+        add
+      </mat-icon>
+      </button>
+    </mat-card-title-group>
     <mat-card
       cdkDrag
       class="dev mat-title"

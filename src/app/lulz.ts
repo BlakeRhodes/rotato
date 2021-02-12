@@ -20,3 +20,16 @@ export function delay(ms: number): Promise<unknown> {
     resolve => setTimeout(resolve, ms)
   );
 }
+
+export function arraysAreEqual(a:any[], b:any[] ): boolean
+{
+  if(a.length!=b.length)
+    return false;
+  else
+  {
+    for(let i=0;i<a.length;i++)
+      if(b.includes(a[i]))
+        return false;
+    return true;
+  }
+}

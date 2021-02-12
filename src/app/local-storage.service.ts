@@ -15,6 +15,7 @@ export class LocalStorageService {
   private enableSoundKey = 'enableSound';
   private versionKey = 'version';
   private currentVersion = "1.0.0.0";
+  private stickingKey: 'sticking';
 
   constructor() {
     const version = localStorage.getItem(this.versionKey);
@@ -71,6 +72,10 @@ export class LocalStorageService {
     return this.get(this.disabledBoardsKey) as string [];
   }
 
+  getSticking(): Pair[] {
+    return this.get(this.stickingKey) as Pair [];
+  }
+
   getEnableSound(): boolean {
     return this.get(this.enableSoundKey) as boolean;
   }
@@ -111,9 +116,13 @@ export class LocalStorageService {
     this.set(this.disabledBoardsKey, value);
   }
 
+  setSticking(value: Pair[]) {
+    this.set(this.stickingKey, value);
+  }
+
   set(field: string, update: any): void {
     localStorage.setItem(field, JSON.stringify(update));
-    this[field] = update;
+    // this[field] = update;
   }
 
   private fixPairs() {
@@ -128,12 +137,5 @@ export class LocalStorageService {
       );
     });
     localStorage.setItem(this.pairsKey, JSON.stringify(fixedPairs));
-  }
-
-  private prepValue(key: string) {
-    const value = localStorage.getItem(key);
-    if (value) {
-      this[key] = JSON.parse(value);
-    }
   }
 }
