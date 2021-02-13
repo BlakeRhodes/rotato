@@ -1,4 +1,6 @@
-<mat-card>
+<mat-card
+  [ngClass]="[getColor(),getBackground()]"
+>
   <div class="mat-display-4 title">
     {{appName}}
   </div>

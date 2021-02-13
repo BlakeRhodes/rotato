@@ -1,11 +1,8 @@
-@use "src/colors";
 mat-card {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0 !important;
-  background: colors.$dark-chocolate;
-  color: tan;
   border-radius: 0;
 }
 

@@ -1,0 +1,34 @@
+@use 'colors';
+.classic-color-1 {
+  color: lemonchiffon;
+}
+
+.classic-color-2 {
+  color: tan;
+}
+
+.classic-selected{
+  color: lemonchiffon;
+  background: burlywood !important;
+}
+
+.classic-background-1{
+  background: blanchedalmond;
+}
+
+.classic-background-2{
+  background: blanchedalmond;
+}
+
+.classic-background-3{
+  background: colors.$dark-chocolate;
+}
+
+.classic-background-4{
+  background: goldenrod;
+}
+
+.classic-background-5{
+  background: white !important;
+}
+

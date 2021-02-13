@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {APP_NAME} from '../constants';
+import {ThemeService} from '../theme.service';
 
 @Component({
   selector: 'app-potato',
@@ -35,7 +36,9 @@ export class PotatoComponent {
     false,
   ];
 
-  constructor() {
+  constructor(
+      private themeService: ThemeService,
+  ) {
   }
 
   isFlipped(i: number) {
@@ -44,5 +47,13 @@ export class PotatoComponent {
 
   flip(i: number) {
     this.flipped[i] = !this.flipped[i];
+  }
+
+  getColor() {
+    return this.themeService.getColor(2);
+  }
+
+  getBackground() {
+    return this.themeService.getBackground(3);
   }
 }

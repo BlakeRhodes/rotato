@@ -1,5 +1,8 @@
 <div class="pairing-controls">
-  <mat-card class="spuddies-label">
+  <mat-card
+    class="spuddies-label"
+    [ngClass]="[getLabelColor(), getBackground()]"
+  >
     <div class="title">
       {{displayTitleText}}
     </div>
@@ -22,7 +25,7 @@
     cdkDropList
     (cdkDropListDropped)="handleDrop($event, pair)"
     (cdkDropListExited)="handleExit(pair)"
-    [class.carrying]="isSticking(pair)"
+    [ngClass]="isSticking(pair)"
     [cdkDropListData]="pair.devs"
     class="pair-card"
     *ngFor="let pair of pairs; index as i"
@@ -39,17 +42,15 @@
         matTooltip="Stay Paired"
       >
         <mat-icon>
-          {{isSticking(pair)? 'turned_in':'turned_in_not'}}
+          {{isTurnedIn(pair)? 'turned_in':'turned_in_not'}}
         </mat-icon>
-
-
       </button>
 
     </mat-card-title>
     <mat-card
       cdkDrag
       class="dev mat-title"
-      [class.carrying]="isCarrying(dev)"
+      [ngClass]="getColor(dev)"
       (dblclick)="handleMarkAsCarry(dev)"
       *ngFor="let dev of pair.devs"
       matTooltip="Double Click to Carry"

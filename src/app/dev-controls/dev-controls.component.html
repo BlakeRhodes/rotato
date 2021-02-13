@@ -1,14 +1,18 @@
 <form>
   <mat-form-field
     class="wide-value-input"
+    [ngClass]="getFormColor()"
   >
-    <mat-label>
+    <mat-label
+    [ngClass]="getColor()"
+    >
       {{inputLabel}}
     </mat-label>
     <input
       matInput
       #devName
       [placeholder]="DevPlaceHolder"
+      [ngClass]="getInputColor()"
     >
   </mat-form-field>
   <button
@@ -28,7 +32,7 @@
     matTooltip="Double Click to move to Back Burner"
     *ngFor="let dev of devs; let i = index"
     (dblclick)="handleDisable(i,dev)"
-    [class.disabled]="isDisabled(dev)"
+    [ngClass]="getCurrentClass(dev)"
   >
     <div class="mat-title">
       {{dev}}
@@ -46,6 +50,7 @@
 <mat-checkbox
   [checked]="enableSound"
   (change)="handleEnableSound($event)"
+  [ngClass]="getColor()"
 >
   {{enableSoundText}}
 </mat-checkbox>

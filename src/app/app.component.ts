@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {LocalStorageService} from './local-storage.service';
 import {delay} from './lulz';
+import {ThemeService} from './theme.service';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +9,10 @@ import {delay} from './lulz';
 })
 export class AppComponent {
   spin = false;
+  constructor(
+    private themeService: ThemeService,
+  ) {
+  }
 
   handleTheSpinningPotato(): void {
     (async () => {
@@ -16,5 +20,9 @@ export class AppComponent {
       await delay(250);
       this.spin = false;
     })();
+  }
+
+  getBackground(): string {
+    return this.themeService.getBackground(1);
   }
 }

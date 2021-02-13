@@ -3,6 +3,7 @@ import {LocalStorageService} from '../local-storage.service';
 import {SoundService} from '../sound.service';
 import {notFound} from '../lulz';
 import {DELETE_BUTTON_TEXT} from '../constants';
+import {ThemeService} from '../theme.service';
 
 @Component({
   selector: 'app-boards',
@@ -19,6 +20,7 @@ export class BoardsComponent implements OnInit {
   constructor(
     private localStorageService: LocalStorageService,
     private soundService: SoundService,
+    private themeService: ThemeService,
   ) {
   }
 
@@ -53,5 +55,21 @@ export class BoardsComponent implements OnInit {
 
   isDisabled(board: string) {
     return this.disabledBoards.find(name => name === board);
+  }
+
+  getCurrentClass(board: string) {
+    return this.isDisabled(board)? this.themeService.getSelected(): this.themeService.getBackground(5);
+  }
+
+  getFormColor(): string {
+    return this.themeService.getFormColor();
+  }
+
+  getColor(): string {
+    return this.themeService.getLabel();
+  }
+
+  getInputColor(): string {
+    return this.themeService.getInput();
   }
 }

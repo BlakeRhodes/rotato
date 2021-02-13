@@ -6,6 +6,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {SoundService} from '../sound.service';
 import {Pair} from '../pair';
 import {RotationService} from '../rotation.service';
+import {ThemeService} from '../theme.service';
 
 @Component({
   selector: 'app-display',
@@ -27,6 +28,7 @@ export class DisplayComponent {
     private soundService: SoundService,
     private snackBar: MatSnackBar,
     private rotationService: RotationService,
+    private themeService: ThemeService,
   ) {
     this.pairs = localStorageService.getPairs();
     this.carriers = localStorageService.getCarriers();
@@ -83,15 +85,40 @@ export class DisplayComponent {
     this.localStorageService.setSticking(this.sticking);
   }
 
-  isSticking(pair: Pair): Pair {
+  isSticking(pair: Pair): string {
+    const found = this.sticking.find(
+      stickingPair => arraysAreEqual(stickingPair.devs, pair.devs)
+    );
+    if(found){
+      return this.themeService.getSelected();
+    }
+    return this.themeService.getBackground(2);
+  }
+
+  handleExit(pair: Pair) {
+    const found = this.sticking.find(
+      stickingPair => arraysAreEqual(stickingPair.devs, pair.devs)
+    );
+    if(found){
+      this.handleSticking(pair);
+    }
+  }
+
+  getColor(dev: string) {
+    return this.isCarrying(dev) ? this.themeService.getSelected() : this.themeService.getBackground(5);
+  }
+
+  getLabelColor() {
+    return this.themeService.getColor(1);
+  }
+
+  isTurnedIn(pair: Pair) {
     return this.sticking.find(
       stickingPair => arraysAreEqual(stickingPair.devs, pair.devs)
     );
   }
 
-  handleExit(pair: Pair) {
-    if(this.isSticking(pair)){
-      this.handleSticking(pair);
-    }
+  getBackground() {
+    return this.themeService.getBackground(4);
   }
 }

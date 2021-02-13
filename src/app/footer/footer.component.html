@@ -1,9 +1,11 @@
-<div class="wrapper">
+<div class="wrapper"
+  [ngClass]="getBackground()"
+>
   <mat-card class="footer-item">
-    <a href="https://github.com/BlakeRhodes/rotato">
-      <mat-icon>
-        code
+      <mat-icon
+        (click)="handleClick()"
+      >
+        {{darkMode? 'brightness_low':'dark_mode'}}
       </mat-icon>
-    </a>
   </mat-card>
 </div>

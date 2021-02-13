@@ -1,5 +1,5 @@
 button {
-  margin: .5rem;
+  margin: 0.5rem;
   padding: 0;
 }
 
@@ -7,47 +7,47 @@ mat-card {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: .5rem;
+  margin: 0.5rem;
 }
 
 mat-card-title {
-  margin: .5rem !important;
+  margin: 0.5rem !important;
   width: 100%;
 }
 
-.title{
+.title {
   font-size: 48px;
   margin-left: 1rem;
 }
 
 .dev {
-  margin: .5rem 0 1rem .5rem !important;
-  padding-right: .5rem;
+  margin: 0.5rem 0 1rem 0.5rem !important;
+  padding-right: 0.5rem;
   cursor: grab;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.drag-indicator{
+.drag-indicator {
   margin: 0 0 0 1rem;
 }
 
 .pair-card {
   display: flex;
   min-height: 6rem;
-  padding: 0 0 0 .5rem;
+  padding: 0 0 0 0.5rem;
 }
 
 .cdk-drag-preview {
-  margin: .5rem !important;
+  margin: 0.5rem !important;
   padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.cdk-drag-placeholder{
+.cdk-drag-placeholder {
   opacity: 0;
   width: 0;
   margin: 0;
@@ -70,12 +70,12 @@ mat-card-title {
   align-items: center;
   width: 100%;
   font-weight: 500;
-  padding: .5rem;
+  padding: 0.5rem;
 }
 
 .mat-fab {
   padding: 0;
-  margin: .5rem 1rem !important;
+  margin: 0.5rem 1rem !important;
 }
 
 .title-with-button {
@@ -83,3 +83,5 @@ mat-card-title {
   justify-content: space-between;
   align-items: center;
 }
+
+/*# sourceMappingURL=display.component.css.map */

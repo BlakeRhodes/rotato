@@ -1,0 +1,30 @@
+.dark-color-1 {
+  color: lemonchiffon;
+}
+
+.dark-color-2 {
+  color: tan;
+}
+
+.dark-selected {
+  color: lemonchiffon;
+  background: burlywood !important;
+}
+
+.dark-background-1 {
+  background: blanchedalmond;
+}
+
+.dark-background-2 {
+  background: blanchedalmond;
+}
+
+.dark-background-3 {
+  background: #2d1104;
+}
+
+.dark-background-4 {
+  background: goldenrod;
+}
+
+/*# sourceMappingURL=dark.css.map */

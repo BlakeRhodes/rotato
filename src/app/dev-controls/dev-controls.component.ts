@@ -3,6 +3,7 @@ import {LocalStorageService} from '../local-storage.service';
 import {SoundService} from '../sound.service';
 import {MatCheckboxChange} from '@angular/material/checkbox';
 import {DELETE_BUTTON_TEXT} from '../constants';
+import {ThemeService} from '../theme.service';
 
 @Component({
   selector: 'app-dev-controls',
@@ -21,6 +22,7 @@ export class DevControlsComponent implements OnInit {
   constructor(
     private localStorageService: LocalStorageService,
     private soundService: SoundService,
+    private themeService: ThemeService,
   ) {
     this.enableSound = this.localStorageService.getEnableSound();
   }
@@ -62,5 +64,21 @@ export class DevControlsComponent implements OnInit {
 
   isDisabled(dev: string): boolean {
     return !!this.disabled.find(name => name === dev);
+  }
+
+  getCurrentClass(board: string) {
+    return this.isDisabled(board)? this.themeService.getSelected():this.themeService.getBackground(5);
+  }
+
+  getColor(): string {
+    return this.themeService.getLabel();
+  }
+
+  getInputColor(): string {
+    return this.themeService.getInput();
+  }
+
+  getFormColor(): string {
+    return this.themeService.getFormColor();
   }
 }

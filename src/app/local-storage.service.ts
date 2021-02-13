@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Pair} from './pair';
+import {THEME_KEY} from './constants';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,10 @@ export class LocalStorageService {
 
   constructor() {
     const version = localStorage.getItem(this.versionKey);
+    const theme = localStorage.getItem(THEME_KEY);
+    if(!theme){
+      localStorage.setItem(THEME_KEY, 'classic');
+    }
     console.log(version);
     if(version!=='1.0.0.0'){
       this.fixPairs()

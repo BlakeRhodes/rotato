@@ -1,0 +1,50 @@
+@use 'colors';
+.dark-color-1 {
+  color: lemonchiffon;
+}
+
+.dark-color-2 {
+  color: lemonchiffon;
+}
+
+.dark-selected{
+  color: lemonchiffon;
+  background: brown !important;
+}
+
+.dark-background-1{
+  background: black;
+}
+
+.dark-background-2{
+  background: sienna;
+}
+
+.dark-background-3{
+  background: colors.$dark-chocolate;
+}
+
+.dark-background-4{
+  background: colors.$dark-chocolate;
+}
+
+.dark-background-5{
+  background: chocolate !important;
+}
+
+.dark-label{
+  color: lemonchiffon;
+  background: black;
+}
+
+.dark-input{
+  background-color: black !important;
+  color: lemonchiffon !important;
+}
+
+.dark-form{
+  .mat-form-field-underline{
+    background: lemonchiffon !important;
+  }
+}
+

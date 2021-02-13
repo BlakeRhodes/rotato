@@ -1,9 +1,12 @@
+@import "classic";
+@import "dark";
 button {
   margin: auto;
 }
 
 .wide-value-input{
   width: 85% !important;
+
 }
 
 mat-card.added-list-item{
@@ -23,11 +26,6 @@ mat-card.added-list-item{
 .peel-button{
   padding: 0 !important;
   margin: .5rem !important;
-}
-
-.disabled{
-  background: burlywood;
-  color: lemonchiffon;
 }
 
 .rotate {
@@ -54,5 +52,8 @@ html, body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background: blanchedalmond;
+}
+
+.highlight{
+  color: red;
 }

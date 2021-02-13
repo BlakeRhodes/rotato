@@ -1,0 +1,39 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+
+.three-columns {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+}
+
+app-potato {
+  width: 100%;
+}
+
+app-dev-controls {
+  margin: 2rem 1rem 2rem 2rem;
+  min-width: 25%;
+}
+
+app-boards {
+  margin: 2rem 1rem;
+  min-width: 25%;
+}
+
+app-display {
+  margin-top: 1rem;
+  width: 45%;
+}
+
+app-footer {
+  margin-top: auto;
+  width: 100%;
+}
+
+/*# sourceMappingURL=app.component.css.map */

@@ -1,0 +1,137 @@
+.classic-color-1 {
+  color: lemonchiffon;
+}
+
+.classic-color-2 {
+  color: tan;
+}
+
+.classic-selected {
+  color: lemonchiffon;
+  background: burlywood !important;
+}
+
+.classic-background-1 {
+  background: blanchedalmond;
+}
+
+.classic-background-2 {
+  background: blanchedalmond;
+}
+
+.classic-background-3 {
+  background: #2d1104;
+}
+
+.classic-background-4 {
+  background: goldenrod;
+}
+
+.classic-background-5 {
+  background: white !important;
+}
+
+.dark-color-1 {
+  color: lemonchiffon;
+}
+
+.dark-color-2 {
+  color: lemonchiffon;
+}
+
+.dark-selected {
+  color: lemonchiffon;
+  background: brown !important;
+}
+
+.dark-background-1 {
+  background: black;
+}
+
+.dark-background-2 {
+  background: sienna;
+}
+
+.dark-background-3 {
+  background: #2d1104;
+}
+
+.dark-background-4 {
+  background: #2d1104;
+}
+
+.dark-background-5 {
+  background: chocolate !important;
+}
+
+.dark-label {
+  color: lemonchiffon;
+  background: black;
+}
+
+.dark-input {
+  background-color: black !important;
+  color: lemonchiffon !important;
+}
+
+.dark-form .mat-form-field-underline {
+  background: lemonchiffon !important;
+}
+
+button {
+  margin: auto;
+}
+
+.wide-value-input {
+  width: 85% !important;
+}
+
+mat-card.added-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.25rem 0;
+  padding: 0 0 0 1rem;
+  user-select: none;
+}
+
+.mat-title {
+  margin: 0;
+  font-size: 16px;
+}
+
+.peel-button {
+  padding: 0 !important;
+  margin: 0.5rem !important;
+}
+
+.rotate {
+  animation: rotation 250ms infinite linear;
+}
+
+.rotate-slowly {
+  animation: rotation 50s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(359deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.highlight {
+  color: red;
+}
+
+/*# sourceMappingURL=styles.css.map */
