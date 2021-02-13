@@ -1,11 +1,17 @@
 <div class="wrapper"
-  [ngClass]="getBackground()"
+     [ngClass]="getBackground()"
 >
-  <mat-card class="footer-item">
-      <mat-icon
-        (click)="handleClick()"
-      >
-        {{darkMode? 'brightness_low':'dark_mode'}}
-      </mat-icon>
-  </mat-card>
+  <button
+    mat-button
+    class="footer-item"
+    [matMenuTriggerFor]="menu"
+  >
+    Theme
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="setTheme('light')">Mashed</button>
+    <button mat-menu-item (click)="setTheme('classic')">Fried</button>
+    <button mat-menu-item (click)="setTheme('dark')">Burnt</button>
+    <button mat-menu-item (click)="setTheme('black')">Charred</button>
+  </mat-menu>
 </div>

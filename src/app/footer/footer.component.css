@@ -1,15 +1,17 @@
-.wrapper{
+.wrapper {
   display: flex;
   flex-direction: row;
   width: 100%;
   justify-content: flex-end;
 }
 
-.footer-item{
+.footer-item {
   margin: 1rem;
   background: white;
 }
 
-a{
+a {
   color: black;
 }
+
+/*# sourceMappingURL=footer.component.css.map */

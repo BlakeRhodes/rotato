@@ -1,0 +1,57 @@
+@use 'colors';
+
+.light-color-1 {
+  color: darkkhaki;
+}
+
+.light-color-2 {
+  color: darkkhaki;
+}
+
+.light-selected{
+  color: darkkhaki;
+  background: white !important;
+  border: darkkhaki 1px solid;
+}
+
+.light-background-1{
+  background: white;
+}
+
+.light-background-2{
+  background: white;
+  color: darkkhaki;
+}
+
+.light-background-3{
+  background: white;
+  border: lemonchiffon 1px solid;
+}
+
+.light-background-4{
+  background: white;
+  border: lemonchiffon 1px solid;
+}
+
+.light-background-5{
+  background: white !important;
+  color: darkkhaki;
+  border: lemonchiffon 1px solid;
+}
+
+.light-label{
+  color: darkkhaki;
+  background: white;
+}
+
+.light-input{
+  background-color: white !important;
+  color: darkkhaki !important;
+}
+
+.light-form{
+  .mat-form-field-underline{
+    background: white !important;
+  }
+}
+

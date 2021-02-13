@@ -8,11 +8,9 @@ import {THEME_KEY} from '../constants';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
-  darkMode: boolean;
   constructor(
     private themeService: ThemeService,
   ) {
-    this.darkMode = localStorage.getItem(THEME_KEY) === 'dark';
   }
 
   ngOnInit(): void {
@@ -22,12 +20,7 @@ export class FooterComponent implements OnInit {
     return this.themeService.getBackground(1);
   }
 
-  handleClick() {
-    localStorage.setItem(THEME_KEY, this.darkMode? 'classic':'dark');
-    this.darkMode = !this.darkMode;
-  }
-
-  handleDoubleClick() {
-
+  setTheme(theme: string) {
+    localStorage.setItem(THEME_KEY, theme);
   }
 }

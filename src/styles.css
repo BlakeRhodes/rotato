@@ -80,6 +80,112 @@
   background: lemonchiffon !important;
 }
 
+.black-color-1 {
+  color: gray;
+}
+
+.black-color-2 {
+  color: grey;
+}
+
+.black-selected {
+  color: black;
+  background: darkgrey !important;
+}
+
+.black-background-1 {
+  background: black;
+}
+
+.black-background-2 {
+  background: black;
+  color: grey;
+  border: darkgrey 1px solid;
+}
+
+.black-background-3 {
+  background: black;
+  border: darkgrey 1px solid;
+}
+
+.black-background-4 {
+  background: black;
+  border: darkgrey 1px solid;
+}
+
+.black-background-5 {
+  background: black !important;
+  color: grey;
+  border: darkgrey 1px solid;
+}
+
+.black-label {
+  color: grey;
+  background: black;
+}
+
+.black-input {
+  background-color: black !important;
+  color: grey !important;
+}
+
+.black-form .mat-form-field-underline {
+  background: grey !important;
+}
+
+.light-color-1 {
+  color: darkkhaki;
+}
+
+.light-color-2 {
+  color: darkkhaki;
+}
+
+.light-selected {
+  color: darkkhaki;
+  background: white !important;
+  border: darkkhaki 1px solid;
+}
+
+.light-background-1 {
+  background: white;
+}
+
+.light-background-2 {
+  background: white;
+  color: darkkhaki;
+}
+
+.light-background-3 {
+  background: white;
+  border: lemonchiffon 1px solid;
+}
+
+.light-background-4 {
+  background: white;
+  border: lemonchiffon 1px solid;
+}
+
+.light-background-5 {
+  background: white !important;
+  color: darkkhaki;
+  border: lemonchiffon 1px solid;
+}
+
+.light-label {
+  color: darkkhaki;
+  background: white;
+}
+
+.light-input {
+  background-color: white !important;
+  color: darkkhaki !important;
+}
+
+.light-form .mat-form-field-underline {
+  background: white !important;
+}
+
 button {
   margin: auto;
 }

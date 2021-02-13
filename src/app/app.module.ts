@@ -17,6 +17,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {BoardsComponent} from './boards/boards.component';
 import {FooterComponent} from './footer/footer.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {FooterComponent} from './footer/footer.component';
     MatCardModule,
     MatButtonModule,
     MatInputModule,
+    MatMenuModule,
     MatSnackBarModule,
     MatTooltipModule,
     FormsModule,
