@@ -6,7 +6,7 @@
   </div>
   <div>
     <img
-      src="assets/potato.png"
+      src="assets/potato.webp"
       (dblclick)="showToys=!showToys"
       [class.rotate]="shouldISpinAPotato"
       class="potato"
@@ -17,7 +17,7 @@
       (dblclick)="flip(i)"
       [class.flip]="isFlipped(i)"
       *ngIf="showToys"
-      src="assets/{{toy}}.png"
+      src="assets/{{toy}}.webp"
       cdkDrag
      alt="{{toy}}"
     >
