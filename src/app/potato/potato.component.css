@@ -1,26 +1,17 @@
-mat-card {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 !important;
-  background: #2d1104;
-  color: tan;
+/* Error: Can't find stylesheet to import.
+ *   ,
+ * 1 | @use "src/colors";
+ *   | ^^^^^^^^^^^^^^^^^
+ *   '
+ *   potato.component.scss 1:1  root stylesheet */
+
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Can't find stylesheet to import.\a   \2577 \a 1 \2502  @use \"src/colors\";\a   \2502  ^^^^^^^^^^^^^^^^^\a   \2575 \a   potato.component.scss 1:1  root stylesheet";
 }
-
-.title {
-  margin: 4rem 2rem 0 0 !important;
-  padding: 0;
-  font-family: 'Luckiest Guy', cursive !important;
-  font-size: 160px;
-
-}
-
-.potato {
-  height: 200px;
-}
-
-.flip{
-  transform: scaleX(-1);
-}
-
-

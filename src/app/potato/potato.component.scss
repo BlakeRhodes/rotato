@@ -1,0 +1,28 @@
+@use "src/colors";
+mat-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important;
+  background: colors.$dark-chocolate;
+  color: tan;
+  border-radius: 0;
+}
+
+.title {
+  margin: 4rem 2rem 0 0 !important;
+  padding: 0;
+  font-family: 'Luckiest Guy', cursive !important;
+  font-size: 160px;
+
+}
+
+.potato {
+  height: 200px;
+}
+
+.flip{
+  transform: scaleX(-1);
+}
+
+

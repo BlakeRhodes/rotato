@@ -7,7 +7,7 @@ import {DELETE_BUTTON_TEXT} from '../constants';
 @Component({
   selector: 'app-dev-controls',
   templateUrl: './dev-controls.component.html',
-  styleUrls: ['./dev-controls.component.css']
+  styleUrls: ['./dev-controls.component.scss']
 })
 export class DevControlsComponent implements OnInit {
   devs: string[];

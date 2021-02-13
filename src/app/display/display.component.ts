@@ -10,7 +10,7 @@ import {RotationService} from '../rotation.service';
 @Component({
   selector: 'app-display',
   templateUrl: './display.component.html',
-  styleUrls: ['./display.component.css']
+  styleUrls: ['./display.component.scss']
 })
 export class DisplayComponent {
   @Output() taterSpinningTime: EventEmitter<any> = new EventEmitter<any>();

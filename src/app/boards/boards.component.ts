@@ -7,7 +7,7 @@ import {DELETE_BUTTON_TEXT} from '../constants';
 @Component({
   selector: 'app-boards',
   templateUrl: './boards.component.html',
-  styleUrls: ['./boards.component.css']
+  styleUrls: ['./boards.component.scss']
 })
 export class BoardsComponent implements OnInit {
   boards: string[];

@@ -4,7 +4,7 @@ import {APP_NAME} from '../constants';
 @Component({
   selector: 'app-potato',
   templateUrl: './potato.component.html',
-  styleUrls: ['./potato.component.css']
+  styleUrls: ['./potato.component.scss']
 })
 export class PotatoComponent {
   @Input() shouldISpinAPotato = true;
