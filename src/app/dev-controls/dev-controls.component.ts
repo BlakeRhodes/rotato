@@ -16,7 +16,6 @@ export class DevControlsComponent implements OnInit {
   enableSound: boolean;
   DevPlaceHolder = 'Dev D. Developer';
   inputLabel = 'Devs Name';
-  enableSoundText = 'Enable Sound';
   deleteButtonText = DELETE_BUTTON_TEXT;
 
   constructor(

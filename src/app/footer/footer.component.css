@@ -14,4 +14,9 @@ a {
   color: black;
 }
 
+mat-checkbox {
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+}
+
 /*# sourceMappingURL=footer.component.css.map */

@@ -4,14 +4,32 @@
   <button
     mat-button
     class="footer-item"
-    [matMenuTriggerFor]="menu"
+    [matMenuTriggerFor]="settings"
   >
-    Theme
+    Settings
   </button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="setTheme('light')">Mashed</button>
-    <button mat-menu-item (click)="setTheme('classic')">Fried</button>
-    <button mat-menu-item (click)="setTheme('dark')">Baked</button>
-    <button mat-menu-item (click)="setTheme('black')">Burnt</button>
+
+  <mat-menu #settings="matMenu">
+    <button
+      mat-menu-item
+      [matMenuTriggerFor]="style"
+    >
+      Theme
+    </button>
+    <mat-checkbox
+      [checked]="enableSound"
+      (change)="handleEnableSound($event)"
+    >
+      {{enableSoundText}}
+    </mat-checkbox>
+  </mat-menu>
+  <mat-menu #style="matMenu">
+    <button
+      mat-menu-item
+      *ngFor="let theme of themes"
+      (click)="setTheme(theme.sheet)"
+    >
+      {{theme.name}}
+    </button>
   </mat-menu>
 </div>

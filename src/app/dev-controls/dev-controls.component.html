@@ -11,7 +11,6 @@
     <input
       matInput
       #devName
-      [placeholder]="DevPlaceHolder"
       [ngClass]="getInputColor()"
     >
   </mat-form-field>
@@ -47,11 +46,4 @@
     </button>
   </mat-card>
 </div>
-<mat-checkbox
-  [checked]="enableSound"
-  (change)="handleEnableSound($event)"
-  [ngClass]="getColor()"
->
-  {{enableSoundText}}
-</mat-checkbox>
 
