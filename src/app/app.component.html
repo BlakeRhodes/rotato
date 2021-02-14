@@ -1,10 +1,10 @@
 <div class="wrapper"
      *ngIf="isDesktop()"
-  [ngClass]="getBackground()"
+     [ngClass]="getBackground()"
 >
   <app-potato [shouldISpinAPotato]="spin"></app-potato>
   <div class="three-columns"
-    [ngClass]="getBackground()"
+       [ngClass]="getBackground()"
   >
     <app-dev-controls></app-dev-controls>
     <app-display
@@ -13,5 +13,14 @@
     <app-boards></app-boards>
   </div>
   <app-footer></app-footer>
+</div>
+<div
+  *ngIf="!isDesktop()"
+>
+  <app-mobile-potato
+    [shouldISpinAPotato]="spin"
+  >
+  </app-mobile-potato>
+  <app-mobile-stepper (taterSpinningTime)="handleTheSpinningPotato()"></app-mobile-stepper>
 </div>
 

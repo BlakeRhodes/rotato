@@ -54,6 +54,7 @@
       class="dev mat-title"
       [ngClass]="getColor(dev)"
       (dblclick)="handleMarkAsCarry(dev)"
+      (press)="handleMarkAsCarry(dev)"
       *ngFor="let dev of pair.devs"
       matTooltip="Double Click to Carry"
     >

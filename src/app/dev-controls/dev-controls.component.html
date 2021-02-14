@@ -32,6 +32,7 @@
     matTooltip="Double Click to move to Back Burner"
     *ngFor="let dev of devs; let i = index"
     (dblclick)="handleDisable(i,dev)"
+    (press)="handleDisable(i,dev)"
     [ngClass]="getCurrentClass(dev)"
   >
     <div class="mat-title">

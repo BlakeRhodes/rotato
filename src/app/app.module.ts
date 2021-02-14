@@ -1,5 +1,5 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import {Injectable, NgModule} from '@angular/core';
+import {BrowserModule, HAMMER_GESTURE_CONFIG, HammerGestureConfig, HammerModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
 import {PotatoComponent} from './potato/potato.component';
@@ -20,6 +20,17 @@ import {FooterComponent} from './footer/footer.component';
 import {MatMenuModule} from '@angular/material/menu';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { MobilePotatoComponent } from './mobile-potato/mobile-potato.component';
+import { MobileStepperComponent } from './mobile-stepper/mobile-stepper.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import * as Hammer from 'hammerjs';
+
+@Injectable()
+export class MyHammerConfig extends HammerGestureConfig {
+  overrides = <any> {
+    swipe: {direction: Hammer.DIRECTION_ALL},
+  };
+}
 
 @NgModule({
   declarations: [
@@ -28,17 +39,21 @@ import { environment } from '../environments/environment';
     DevControlsComponent,
     DisplayComponent,
     BoardsComponent,
-    FooterComponent
+    FooterComponent,
+    MobilePotatoComponent,
+    MobileStepperComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     DragDropModule,
+    HammerModule,
     MatCardModule,
     MatButtonModule,
     MatInputModule,
     MatMenuModule,
     MatSnackBarModule,
+    MatTabsModule,
     MatTooltipModule,
     FormsModule,
     ReactiveFormsModule,
@@ -46,7 +61,7 @@ import { environment } from '../environments/environment';
     MatCheckboxModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' }),
   ],
-  providers: [],
+  providers: [{ provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
