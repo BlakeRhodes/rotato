@@ -25,8 +25,7 @@ jobs:
       uses: azure/CLI@v1
       with:
         azcliversion: 2.0.72
-        inlineScript: |
-        az cdn endpoint purge --content-paths  "/*" --profile-name "rotatoCDN" --name "rotato" --resource-group "rotato-prod"
+        inlineScript: az cdn endpoint purge --content-paths  "/*" --profile-name "rotatoCDN" --name "rotato" --resource-group "rotato-prod"
 
   # Azure logout 
     - name: logout
