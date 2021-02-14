@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {delay} from './lulz';
 import {ThemeService} from './theme.service';
 import {MediaQueryService} from './media-query.service';
@@ -9,13 +9,16 @@ import {ScreenType} from './enums';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   spin = false;
   screenType: ScreenType;
   constructor(
     private themeService: ThemeService,
     private mediaQueryService: MediaQueryService,
   ) {
+  }
+
+  ngOnInit(): void {
     this.mediaQueryService.screenType.subscribe(screenType => this.screenType = screenType);
   }
 
