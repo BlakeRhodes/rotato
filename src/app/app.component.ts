@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {delay} from './lulz';
 import {ThemeService} from './theme.service';
+import {MediaQueryService} from './media-query.service';
+import {ScreenType} from './enums';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +11,12 @@ import {ThemeService} from './theme.service';
 })
 export class AppComponent {
   spin = false;
+  screenType: ScreenType;
   constructor(
     private themeService: ThemeService,
+    private mediaQueryService: MediaQueryService,
   ) {
+    this.mediaQueryService.screenType.subscribe(screenType => this.screenType = screenType);
   }
 
   handleTheSpinningPotato(): void {
@@ -24,5 +29,9 @@ export class AppComponent {
 
   getBackground(): string {
     return this.themeService.getBackground(1);
+  }
+
+  isDesktop() {
+    return this.screenType === ScreenType.Desktop;
   }
 }
