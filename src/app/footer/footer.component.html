@@ -5,6 +5,7 @@
     mat-button
     class="footer-item"
     [matMenuTriggerFor]="settings"
+    aria-label="Settings"
   >
     Settings
   </button>
@@ -12,6 +13,7 @@
   <mat-menu #settings="matMenu">
     <button
       mat-menu-item
+      aria-label="Styles"
       [matMenuTriggerFor]="style"
     >
       Theme
@@ -35,6 +37,7 @@
   <mat-menu #style="matMenu">
     <button
       mat-menu-item
+      [attr.aria-label]="theme.name"
       *ngFor="let theme of themes"
       (click)="setTheme(theme.sheet)"
     >

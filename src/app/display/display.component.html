@@ -9,6 +9,7 @@
     <button
       mat-fab
       class="rotate-button"
+      aria-label="Rotate Pairs"
       (click)="handleClick()"
       [matTooltip]="toolTip"
     >
@@ -37,6 +38,7 @@
         {{pair.board}}
       </div>
       <button
+        aria-label="Stay Paired"
         mat-mini-fab
         (click)="handleSticking(pair)"
         matTooltip="Stay Paired"

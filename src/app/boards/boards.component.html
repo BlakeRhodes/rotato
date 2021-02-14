@@ -18,6 +18,7 @@
     class="peel-button"
     mat-mini-fab
     color="accent"
+    aria-label="Peel Board"
     (click)="handleAdd(boardName.value); boardName.value = ''"
   >
     <mat-icon>
@@ -39,6 +40,7 @@
     </div>
     <button
       class="peel-button"
+      aria-label="Peel Board"
       mat-mini-fab
       color="warn"
       (click)="handleDelete(i)"
