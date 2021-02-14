@@ -1,9 +1,9 @@
 {
-  "name": "Rotato",
-  "short_name": "Rotato",
+  "name": "rotato-ui",
+  "short_name": "rotato-ui",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
-  "display": "standalone",
+  "display": "browser",
   "scope": "./",
   "start_url": "./",
   "icons": [
