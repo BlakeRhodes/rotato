@@ -20,9 +20,7 @@ export class MediaQueryService {
       console.log(result.breakpoints);
       if (result.breakpoints['(min-width: 1280px) and (orientation: landscape)']) {
         this.screenType.next(ScreenType.Desktop);
-      } else if (result.breakpoints['(min-width: 600px) and (max-width: 839.98px) and (orientation: portrait)']){
-        this.screenType.next(ScreenType.Tablet);
-      } else if (result.breakpoints['(max-width: 599.98px) and (orientation: portrait)']) {
+      } else {
         this.screenType.next(ScreenType.Mobile);
       }
     });
