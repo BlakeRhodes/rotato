@@ -18,6 +18,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {BoardsComponent} from './boards/boards.component';
 import {FooterComponent} from './footer/footer.component';
 import {MatMenuModule} from '@angular/material/menu';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import {MatMenuModule} from '@angular/material/menu';
     ReactiveFormsModule,
     MatIconModule,
     MatCheckboxModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent]
