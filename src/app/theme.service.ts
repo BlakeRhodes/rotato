@@ -38,4 +38,9 @@ export class ThemeService {
     const theme = localStorage.getItem(THEME_KEY);
     return `${theme}-form`;
   }
+
+  getTab(): string {
+    const theme = localStorage.getItem(THEME_KEY);
+    return `${theme}-tab`;
+  }
 }

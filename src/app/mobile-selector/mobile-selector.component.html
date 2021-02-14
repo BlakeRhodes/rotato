@@ -1,0 +1,21 @@
+<div>
+<mat-tab-group
+  [ngClass]="getBackground()"
+>
+  <mat-tab
+    label="Developers"
+  >
+    <app-dev-controls [isMobile]="true"></app-dev-controls>
+  </mat-tab>
+  <mat-tab label="Boards">
+    <app-boards [isMobile]="true"></app-boards>
+  </mat-tab>
+  <mat-tab label="Spuddies">
+    <app-display
+      (taterSpinningTime)="handleSpin($event)"
+      [isMobile]="true"
+    >
+    </app-display>
+  </mat-tab>
+</mat-tab-group>
+</div>

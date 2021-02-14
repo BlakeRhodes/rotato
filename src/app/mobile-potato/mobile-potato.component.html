@@ -1,16 +1,20 @@
-<mat-card
-  [ngClass]="[getColor(),getBackground()]"
->
-  <div class="wrapper">
-    <div class="title-mobile">
-      {{appName}}
+<div>
+  <mat-card
+    [ngClass]="[getColor(),getBackground()]"
+  >
+
+    <div class="wrapper">
+      <app-menu></app-menu>
+      <div class="title-mobile">
+        {{appName}}
+      </div>
+      <div>
+        <img
+          src="assets/mobile-potato.webp"
+          class="mobile-potato"
+          [class.rotate]="shouldISpinAPotato"
+          alt="a standard looking potato">
+      </div>
     </div>
-    <div>
-      <img
-        src="assets/mobile-potato.webp"
-        class="mobile-potato"
-        [class.rotate]="shouldISpinAPotato"
-        alt="a standard looking potato">
-    </div>
-  </div>
-</mat-card>
+  </mat-card>
+</div>

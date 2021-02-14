@@ -21,9 +21,10 @@ import {MatMenuModule} from '@angular/material/menu';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { MobilePotatoComponent } from './mobile-potato/mobile-potato.component';
-import { MobileStepperComponent } from './mobile-stepper/mobile-stepper.component';
+import { MobileSelectorComponent } from './mobile-selector/mobile-selector.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import * as Hammer from 'hammerjs';
+import { MenuComponent } from './menu/menu.component';
 
 @Injectable()
 export class MyHammerConfig extends HammerGestureConfig {
@@ -41,7 +42,8 @@ export class MyHammerConfig extends HammerGestureConfig {
     BoardsComponent,
     FooterComponent,
     MobilePotatoComponent,
-    MobileStepperComponent,
+    MobileSelectorComponent,
+    MenuComponent,
   ],
   imports: [
     BrowserModule,

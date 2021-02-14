@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {LocalStorageService} from '../local-storage.service';
 import {arraysAreEqual} from '../lulz';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
@@ -15,6 +15,8 @@ import {ThemeService} from '../theme.service';
 })
 export class DisplayComponent {
   @Output() taterSpinningTime: EventEmitter<any> = new EventEmitter<any>();
+  @Input()
+  isMobile = false;
 
   pairs: Pair[] = [];
   sticking: Pair[];

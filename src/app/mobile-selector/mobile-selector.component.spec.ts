@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MobileStepperComponent } from './mobile-stepper.component';
+import { MobileSelectorComponent } from './mobile-selector.component';
 
 describe('MobileStepperComponent', () => {
-  let component: MobileStepperComponent;
-  let fixture: ComponentFixture<MobileStepperComponent>;
+  let component: MobileSelectorComponent;
+  let fixture: ComponentFixture<MobileSelectorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MobileStepperComponent ]
+      declarations: [ MobileSelectorComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MobileStepperComponent);
+    fixture = TestBed.createComponent(MobileSelectorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {LocalStorageService} from '../local-storage.service';
 import {SoundService} from '../sound.service';
 import {MatCheckboxChange} from '@angular/material/checkbox';
@@ -11,6 +11,9 @@ import {ThemeService} from '../theme.service';
   styleUrls: ['./dev-controls.component.scss']
 })
 export class DevControlsComponent implements OnInit {
+  @Input()
+  isMobile = false;
+
   devs: string[];
   disabled: string[] = [];
   enableSound: boolean;

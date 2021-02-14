@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {LocalStorageService} from '../local-storage.service';
 import {SoundService} from '../sound.service';
 import {notFound} from '../lulz';
@@ -11,6 +11,9 @@ import {ThemeService} from '../theme.service';
   styleUrls: ['./boards.component.scss']
 })
 export class BoardsComponent implements OnInit {
+  @Input()
+  isMobile = false;
+
   boards: string[];
   disabledBoards: string[];
   boardPlaceHolder = 'Frank\'s House of Refactors';

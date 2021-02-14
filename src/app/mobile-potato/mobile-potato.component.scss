@@ -1,4 +1,5 @@
 .title-mobile{
+  padding-top: 1rem;
   font-size: 3rem;
   margin-right: 1.5rem;
   font-family: 'Luckiest Guy', cursive !important;
@@ -8,5 +9,13 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+}
+
+.mobile-potato{
+  margin-right: 1rem;
+}
+
+mat-card{
+  border-radius: 0;
 }

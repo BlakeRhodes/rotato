@@ -1,0 +1,46 @@
+<button
+  mat-button
+  class="footer-item"
+  [matMenuTriggerFor]="settings"
+  aria-label="Settings"
+>
+   {{isMobile?'':'Settings'}}
+  <mat-icon *ngIf="isMobile">
+    menu
+  </mat-icon>
+</button>
+
+<mat-menu #settings="matMenu">
+  <button
+    mat-menu-item
+    aria-label="Styles"
+    [matMenuTriggerFor]="style"
+  >
+    Theme
+  </button>
+  <a
+    href="https://github.com/BlakeRhodes/rotato"
+    mat-menu-item
+    target="_blank"
+  >
+    <mat-icon>
+      code
+    </mat-icon>
+  </a>
+  <mat-checkbox
+    [checked]="enableSound"
+    (change)="handleEnableSound($event)"
+  >
+    {{enableSoundText}}
+  </mat-checkbox>
+</mat-menu>
+<mat-menu #style="matMenu">
+  <button
+    mat-menu-item
+    [attr.aria-label]="theme.name"
+    *ngFor="let theme of themes"
+    (click)="setTheme(theme.sheet)"
+  >
+    {{theme.name}}
+  </button>
+</mat-menu>

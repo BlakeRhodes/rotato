@@ -1,11 +1,11 @@
 @use 'colors';
 
 .black-color-1 {
-  color: gray;
+  color: darkgrey;
 }
 
 .black-color-2 {
-  color: grey;
+  color: darkgrey;
 }
 
 .black-selected{
@@ -15,11 +15,14 @@
 
 .black-background-1{
   background: black;
+  .mat-tab-label-content{
+    color: darkgrey;
+  }
 }
 
 .black-background-2{
   background: black;
-  color: grey;
+  color: darkgrey;
   border: darkgrey 1px solid;
 }
 
@@ -35,12 +38,12 @@
 
 .black-background-5{
   background: black !important;
-  color: grey;
+  color: darkgrey;
   border: darkgrey 1px solid;
 }
 
 .black-label{
-  color: grey;
+  color: darkgrey;
   background: black;
 }
 
@@ -54,4 +57,3 @@
     background: grey !important;
   }
 }
-
