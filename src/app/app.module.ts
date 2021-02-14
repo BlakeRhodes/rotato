@@ -44,7 +44,7 @@ import { environment } from '../environments/environment';
     ReactiveFormsModule,
     MatIconModule,
     MatCheckboxModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' }),
   ],
   providers: [],
   bootstrap: [AppComponent]
