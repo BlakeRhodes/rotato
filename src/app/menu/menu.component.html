@@ -4,7 +4,7 @@
   [matMenuTriggerFor]="settings"
   aria-label="Settings"
 >
-   {{!isMobile?'':'Settings'}}
+   {{isMobile?'':'Settings'}}
   <mat-icon *ngIf="isMobile">
     menu
   </mat-icon>
