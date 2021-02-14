@@ -12,14 +12,14 @@
       class="potato"
       alt="a standard looking potato">
   </div>
-  <div *ngFor="let toy of toys; index as i">
-    <img
-      (dblclick)="flip(i)"
-      [class.flip]="isFlipped(i)"
-      *ngIf="showToys"
-      src="assets/{{toy}}.webp"
-      cdkDrag
-     alt="{{toy}}"
-    >
-  </div>
+<!--  <div *ngFor="let toy of toys; index as i">-->
+<!--    <img-->
+<!--      (dblclick)="flip(i)"-->
+<!--      [class.flip]="isFlipped(i)"-->
+<!--      *ngIf="showToys"-->
+<!--      src="assets/{{toy}}.webp"-->
+<!--      cdkDrag-->
+<!--     alt="{{toy}}"-->
+<!--    >-->
+<!--  </div>-->
 </mat-card>
