@@ -8,10 +8,12 @@ import {ThemeService} from '../theme.service';
 })
 export class MobileSelectorComponent implements OnInit {
   @Output() taterSpinningTime: EventEmitter<any> = new EventEmitter<any>();
-  selectedIndex = 0;
+  currentIndex = 0;
+
   constructor(
     private themeService: ThemeService,
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
   }
@@ -20,15 +22,19 @@ export class MobileSelectorComponent implements OnInit {
     this.taterSpinningTime.emit($event);
   }
 
-  getBackground(): string{
-    return this.themeService.getBackground(1)
-  }
-
-  handleLeft() {
-    this.selectedIndex--;
+  getBackground(): string {
+    return this.themeService.getBackground(1);
   }
 
   handleRight() {
-    this.selectedIndex++;
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+    }
+  }
+
+  handleLeft() {
+    if(this.currentIndex < 2) {
+      this.currentIndex++;
+    }
   }
 }

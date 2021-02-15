@@ -4,8 +4,9 @@
   (swiperight)="handleRight()"
 >
 <mat-tab-group
-  selectedIndex="selectedIndex"
+  [(selectedIndex)]="currentIndex"
   [ngClass]="getBackground()"
+  animationDuration="200ms"
 >
   <mat-tab
     label="Developers"
