@@ -17,7 +17,7 @@ export class BoardsComponent implements OnInit {
   boards: string[];
   disabledBoards: string[];
   boardPlaceHolder = 'Frank\'s House of Refactors';
-  inputLabel = "Cutting Board Name";
+  inputLabel = 'Cutting Board Name';
   deleteText = DELETE_BUTTON_TEXT;
 
   constructor(
@@ -32,7 +32,7 @@ export class BoardsComponent implements OnInit {
     this.disabledBoards = this.localStorageService.getDisabledBoards();
   }
 
-  handleAdd(board: string) {
+  handleAdd(board: string): void {
     if (board !== '') {
       this.localStorageService.addBoard(board);
       this.soundService.dropPop();
@@ -40,13 +40,13 @@ export class BoardsComponent implements OnInit {
     this.boards = this.localStorageService.getBoards();
   }
 
-  handleDelete(i: number) {
+  handleDelete(i: number): void {
     this.boards.splice(i, 1);
     this.localStorageService.setBoards(this.boards);
     this.soundService.doAYeet();
   }
 
-  handleDisable(i: number, board: any) {
+  handleDisable(i: number, board: any): void {
     const index = this.disabledBoards.findIndex(name => name === board);
     if (notFound(index)) {
       this.disabledBoards.push(board);
@@ -56,12 +56,12 @@ export class BoardsComponent implements OnInit {
     this.localStorageService.setDisabledBoards(this.disabledBoards);
   }
 
-  isDisabled(board: string) {
+  isDisabled(board: string): string {
     return this.disabledBoards.find(name => name === board);
   }
 
-  getCurrentClass(board: string) {
-    return this.isDisabled(board)? this.themeService.getSelected(): this.themeService.getBackground(5);
+  getCurrentClass(board: string): string {
+    return this.isDisabled(board) ? this.themeService.getSelected() : this.themeService.getBackground(5);
   }
 
   getFormColor(): string {

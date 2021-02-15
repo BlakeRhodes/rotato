@@ -3,18 +3,21 @@ import {delay} from './utillity/lulz';
 import {ThemeService} from './services/theme.service';
 import {MediaQueryService} from './services/media-query.service';
 import {ScreenType} from './utillity/enums';
+import {LocalStorageService} from './services/local-storage.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   spin = false;
   screenType: ScreenType;
+
   constructor(
     private themeService: ThemeService,
     private mediaQueryService: MediaQueryService,
+    private localStorageService: LocalStorageService,
   ) {
   }
 
@@ -34,7 +37,15 @@ export class AppComponent implements OnInit{
     return this.themeService.getBackground(1);
   }
 
-  isDesktop() {
+  isDesktop(): boolean {
     return this.screenType === ScreenType.Desktop;
+  }
+
+  save(): void {
+    this.localStorageService.saveState('whodat');
+  }
+
+  load(): void {
+    this.localStorageService.loadState('whodat').add(() => location.reload()).unsubscribe();
   }
 }

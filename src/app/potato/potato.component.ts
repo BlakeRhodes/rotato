@@ -41,19 +41,19 @@ export class PotatoComponent {
   ) {
   }
 
-  isFlipped(i: number) {
+  isFlipped(i: number): boolean {
     return this.flipped[i];
   }
 
-  flip(i: number) {
+  flip(i: number): void {
     this.flipped[i] = !this.flipped[i];
   }
 
-  getColor() {
+  getColor(): string {
     return this.themeService.getColor(2);
   }
 
-  getBackground() {
+  getBackground(): string {
     return this.themeService.getBackground(3);
   }
 }

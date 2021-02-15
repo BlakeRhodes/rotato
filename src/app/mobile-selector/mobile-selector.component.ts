@@ -18,7 +18,7 @@ export class MobileSelectorComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  handleSpin($event: any) {
+  handleSpin($event: any): void {
     this.taterSpinningTime.emit($event);
   }
 
@@ -26,14 +26,14 @@ export class MobileSelectorComponent implements OnInit {
     return this.themeService.getBackground(1);
   }
 
-  handleRight() {
+  handleRight(): void {
     if (this.currentIndex > 0) {
       this.currentIndex--;
     }
   }
 
-  handleLeft() {
-    if(this.currentIndex < 2) {
+  handleLeft(): void {
+    if (this.currentIndex < 2) {
       this.currentIndex++;
     }
   }

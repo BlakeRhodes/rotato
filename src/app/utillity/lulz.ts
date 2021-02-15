@@ -21,15 +21,18 @@ export function delay(ms: number): Promise<unknown> {
   );
 }
 
-export function arraysAreEqual(a:any[], b:any[] ): boolean
+export function arraysAreEqual(a: any[], b: any[] ): boolean
 {
-  if(a.length!=b.length)
+  if (a.length !== b.length) {
     return false;
+  }
   else
   {
-    for(let i=0;i<a.length;i++)
-      if(!b.includes(a[i]))
+    for (const value of a) {
+      if (!b.includes(value)) {
         return false;
+      }
+    }
     return true;
   }
 }

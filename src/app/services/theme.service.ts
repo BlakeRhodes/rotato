@@ -13,9 +13,9 @@ export class ThemeService {
     return localStorage.getItem(THEME_KEY);
   }
 
-  getColor(number: number): string {
+  getColor(value: number): string {
     const theme = localStorage.getItem(THEME_KEY);
-    return `${theme}-color-${number}`;
+    return `${theme}-color-${value}`;
   }
 
   getSelected(): string{
@@ -23,19 +23,19 @@ export class ThemeService {
     return `${theme}-selected`;
   }
 
-  getBackground(number: number): string {
+  getBackground(value: number): string {
     const theme = localStorage.getItem(THEME_KEY);
-    return `${theme}-background-${number}`;
+    return `${theme}-background-${value}`;
   }
 
   getLabel(): string {
     const theme = localStorage.getItem(THEME_KEY);
-    return `${theme}-label`
+    return `${theme}-label`;
   }
 
   getInput(): string {
     const theme = localStorage.getItem(THEME_KEY);
-    return `${theme}-input`
+    return `${theme}-input`;
   }
 
   getFormColor(): string {

@@ -17,7 +17,6 @@ export class MediaQueryService {
       Breakpoints.Tablet,
       Breakpoints.Handset,
     ]).subscribe(result => {
-      console.log(result.breakpoints);
       if (result.breakpoints['(min-width: 1280px) and (orientation: landscape)']) {
         this.screenType.next(ScreenType.Desktop);
       } else {

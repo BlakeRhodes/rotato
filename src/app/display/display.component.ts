@@ -75,7 +75,7 @@ export class DisplayComponent {
     return this.carriers.find(name => name === dev);
   }
 
-  handleSticking(pair: Pair) {
+  handleSticking(pair: Pair): void {
     const found = this.sticking.findIndex(
       stickingPair => arraysAreEqual(stickingPair.devs, pair.devs)
     );
@@ -91,36 +91,36 @@ export class DisplayComponent {
     const found = this.sticking.find(
       stickingPair => arraysAreEqual(stickingPair.devs, pair.devs)
     );
-    if(found){
+    if (found){
       return this.themeService.getSelected();
     }
     return this.themeService.getBackground(2);
   }
 
-  handleExit(pair: Pair) {
+  handleExit(pair: Pair): void {
     const found = this.sticking.find(
       stickingPair => arraysAreEqual(stickingPair.devs, pair.devs)
     );
-    if(found){
+    if (found){
       this.handleSticking(pair);
     }
   }
 
-  getColor(dev: string) {
+  getColor(dev: string): string {
     return this.isCarrying(dev) ? this.themeService.getSelected() : this.themeService.getBackground(5);
   }
 
-  getLabelColor() {
+  getLabelColor(): string {
     return this.themeService.getColor(1);
   }
 
-  isTurnedIn(pair: Pair) {
+  isTurnedIn(pair: Pair): Pair {
     return this.sticking.find(
       stickingPair => arraysAreEqual(stickingPair.devs, pair.devs)
     );
   }
 
-  getBackground() {
+  getBackground(): string {
     return this.themeService.getBackground(4);
   }
 }

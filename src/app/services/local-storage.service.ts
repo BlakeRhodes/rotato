@@ -1,6 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Pair} from '../utillity/pair';
-import {THEME_KEY} from '../utillity/constants';
+import {CURRENT_DATA_VERSION, TEAM_BOARDS_KEY, THEME_KEY} from '../utillity/constants';
+import {NgxIndexedDBService} from 'ngx-indexed-db';
+import {TeamBoard} from '../utillity/team-board';
+import {Subscription} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,19 +18,19 @@ export class LocalStorageService {
   private disabledBoardsKey = 'disabledBoards';
   private enableSoundKey = 'enableSound';
   private versionKey = 'version';
-  private currentVersion = "1.0.0.0";
   private stickingKey = 'sticking';
 
-  constructor() {
+  constructor(
+    private databaseService: NgxIndexedDBService,
+  ) {
     const version = localStorage.getItem(this.versionKey);
     const theme = localStorage.getItem(THEME_KEY);
-    if(!theme){
+    if (!theme) {
       localStorage.setItem(THEME_KEY, 'classic');
     }
     console.log(version);
-    if(version!=='1.0.0.0'){
-      this.fixPairs()
-      localStorage.setItem(this.versionKey, this.currentVersion);
+    if (version !== CURRENT_DATA_VERSION) {
+      localStorage.setItem(this.versionKey, CURRENT_DATA_VERSION);
     }
 
     const enableSound = localStorage.getItem(this.enableSoundKey);
@@ -37,6 +40,58 @@ export class LocalStorageService {
       this.enableSound = true;
       localStorage.setItem(this.enableSoundKey, 'true');
     }
+  }
+
+  saveState(name: string): Subscription {
+    const teamBoard: TeamBoard = {
+      name,
+      version: CURRENT_DATA_VERSION,
+      devs: this.getDevs(),
+      pairs: this.getPairs(),
+      carriers: this.getCarriers(),
+      disabled: this.getDisabled(),
+      boards: this.getBoards(),
+      disabledBoards: this.getDisabledBoards(),
+      sticking: this.getSticking(),
+    };
+
+    const value = JSON.stringify(teamBoard);
+
+    return this.databaseService.getByIndex(TEAM_BOARDS_KEY, 'name', name)
+      .subscribe(next => {
+        if (next) {
+          return this.databaseService.update(
+            TEAM_BOARDS_KEY,
+            {
+              id: next.id,
+              name: next.name,
+              value,
+            }
+          ).subscribe();
+        } else {
+          return this.databaseService.add(
+            TEAM_BOARDS_KEY,
+            {
+              name: teamBoard.name,
+              value,
+            }
+          ).subscribe();
+        }
+      });
+  }
+
+  loadState(name: string): Subscription {
+    return this.databaseService.getByIndex(TEAM_BOARDS_KEY, 'name', name)
+      .subscribe(result => {
+        const teamBoard: TeamBoard = JSON.parse(result.value) as TeamBoard;
+        this.setDevs(teamBoard.devs);
+        this.setPairs(teamBoard.pairs);
+        this.setCarriers(teamBoard.carriers);
+        this.setDisabled(teamBoard.disabled);
+        this.setBoards(teamBoard.boards);
+        this.setDisabledBoards(teamBoard.disabledBoards);
+        this.setSticking(teamBoard.sticking);
+      });
   }
 
   addDev(name: string): void {
@@ -121,26 +176,11 @@ export class LocalStorageService {
     this.set(this.disabledBoardsKey, value);
   }
 
-  setSticking(value: Pair[]) {
+  setSticking(value: Pair[]): void {
     this.set(this.stickingKey, value);
   }
 
   set(field: string, update: any): void {
     localStorage.setItem(field, JSON.stringify(update));
-    // this[field] = update;
-  }
-
-  private fixPairs() {
-    console.log("Fixing Pairs");
-    let fixedPairs: Pair[] = [];
-    this.get(this.pairsKey).forEach(pair => {
-      fixedPairs.push(
-        {
-          board: '🥔 Hope you like Boards! 🥔',
-          devs: pair as string[],
-        }
-      );
-    });
-    localStorage.setItem(this.pairsKey, JSON.stringify(fixedPairs));
   }
 }

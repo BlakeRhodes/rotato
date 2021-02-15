@@ -10,7 +10,7 @@ import {Theme} from '../utillity/theme';
 })
 export class FooterComponent implements OnInit {
   themes: Theme[] = [
-    { sheet:'light', name: 'Mashed'},
+    { sheet: 'light', name: 'Mashed'},
     { sheet: 'classic', name: 'Fried'},
     { sheet: 'dark', name: 'Baked'},
     { sheet: 'black', name: 'Burnt'},
@@ -27,7 +27,7 @@ export class FooterComponent implements OnInit {
     return this.themeService.getBackground(1);
   }
 
-  setTheme(theme: string) {
+  setTheme(theme: string): void {
     localStorage.setItem(THEME_KEY, theme);
   }
 }

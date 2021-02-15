@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {LocalStorageService} from '../services/local-storage.service';
 import {SoundService} from '../services/sound.service';
-import {MatCheckboxChange} from '@angular/material/checkbox';
 import {DELETE_BUTTON_TEXT} from '../utillity/constants';
 import {ThemeService} from '../services/theme.service';
 
@@ -61,8 +60,8 @@ export class DevControlsComponent implements OnInit {
     return !!this.disabled.find(name => name === dev);
   }
 
-  getCurrentClass(board: string) {
-    return this.isDisabled(board)? this.themeService.getSelected():this.themeService.getBackground(5);
+  getCurrentClass(board: string): string {
+    return this.isDisabled(board) ? this.themeService.getSelected() : this.themeService.getBackground(5);
   }
 
   getColor(): string {

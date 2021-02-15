@@ -25,7 +25,9 @@ import {MobileSelectorComponent} from './mobile-selector/mobile-selector.compone
 
 import {MenuComponent} from './menu/menu.component';
 import {MatTabsModule} from '@angular/material/tabs';
-import {HammerConfiguration} from './configs/my-hammer-config';
+import {HammerConfiguration} from './configs/hammer-configuration';
+import {dbConfig} from './configs/db-config';
+import {NgxIndexedDBModule} from 'ngx-indexed-db';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,7 @@ import {HammerConfiguration} from './configs/my-hammer-config';
     MatIconModule,
     MatCheckboxModule,
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production, registrationStrategy: 'registerImmediately'}),
+    NgxIndexedDBModule.forRoot(dbConfig),
   ],
   providers: [{provide: HAMMER_GESTURE_CONFIG, useClass: HammerConfiguration}],
   bootstrap: [AppComponent]

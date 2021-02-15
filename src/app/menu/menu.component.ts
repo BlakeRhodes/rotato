@@ -16,7 +16,7 @@ export class MenuComponent implements OnInit {
   @Input()
   isMobile = false;
   themes: Theme[] = [
-    { sheet:'light', name: 'Mashed'},
+    { sheet: 'light', name: 'Mashed'},
     { sheet: 'classic', name: 'Fried'},
     { sheet: 'dark', name: 'Baked'},
     { sheet: 'black', name: 'Burnt'},
@@ -38,7 +38,7 @@ export class MenuComponent implements OnInit {
     return this.themeService.getBackground(1);
   }
 
-  setTheme(theme: string) {
+  setTheme(theme: string): void {
     localStorage.setItem(THEME_KEY, theme);
   }
 
