@@ -1,4 +1,4 @@
-<form>
+<form class="form-container">
   <mat-form-field
     class="wide-value-input"
     [ngClass]="getFormColor()"
@@ -15,14 +15,14 @@
     >
   </mat-form-field>
   <button
-    class="peel-button"
-    mat-mini-fab
+    class="icon-button"
+    mat-icon-button
     color="accent"
     aria-label="Add Dev"
     (click)="handleAdd(devName.value); devName.value = ''"
   >
     <mat-icon>
-      add
+      add_circle
     </mat-icon>
   </button>
 </form>
@@ -39,13 +39,14 @@
       {{dev}}
     </div>
     <button
-      class="peel-button"
-      mat-mini-fab
-      color="warn"
+      class="icon-button"
+      mat-icon-button
       aria-label="Peel Dev"
       (click)="handleDelete(i)"
     >
-      {{deleteButtonText}}
+      <mat-icon>
+        remove_circle
+      </mat-icon>
     </button>
   </mat-card>
 </div>
