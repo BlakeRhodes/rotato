@@ -29,7 +29,7 @@
 <div>
   <mat-card
     class="added-list-item"
-    [matTooltip]="isMobile?'Long Press to move to Back Burner':'Double Click to move to Back Burner'"
+    [matTooltip]="isMobile?'':'Double Click to move to Back Burner'"
     *ngFor="let dev of devs; let i = index"
     (dblclick)="handleDisable(i,dev)"
     (press)="handleDisable(i,dev)"

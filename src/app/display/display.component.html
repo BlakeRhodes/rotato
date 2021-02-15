@@ -45,7 +45,7 @@
           (dblclick)="handleMarkAsCarry(dev)"
           (press)="handleMarkAsCarry(dev)"
           *ngFor="let dev of pair.devs"
-          [matTooltip]="isMobile?'Long Press to Carry':'Double Click to Carry'"
+          [matTooltip]="isMobile?'':'Double Click to Carry'"
         >
           <div>{{dev}}</div>
           <mat-icon class="drag-indicator">
