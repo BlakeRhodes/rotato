@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {LocalStorageService} from './local-storage.service';
-import {Pair} from './pair';
-import {shuffle} from './lulz';
+import {Pair} from '../utillity/pair';
+import {shuffle} from '../utillity/lulz';
 
 @Injectable({
   providedIn: 'root'

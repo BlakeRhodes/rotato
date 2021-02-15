@@ -1,5 +1,5 @@
-import {Injectable, NgModule} from '@angular/core';
-import {BrowserModule, HAMMER_GESTURE_CONFIG, HammerGestureConfig, HammerModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule, HAMMER_GESTURE_CONFIG, HammerModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
 import {PotatoComponent} from './potato/potato.component';
@@ -18,20 +18,14 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {BoardsComponent} from './boards/boards.component';
 import {FooterComponent} from './footer/footer.component';
 import {MatMenuModule} from '@angular/material/menu';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
-import { MobilePotatoComponent } from './mobile-potato/mobile-potato.component';
-import { MobileSelectorComponent } from './mobile-selector/mobile-selector.component';
-import {MatTabsModule} from '@angular/material/tabs';
-import * as Hammer from 'hammerjs';
-import { MenuComponent } from './menu/menu.component';
+import {ServiceWorkerModule} from '@angular/service-worker';
+import {environment} from '../environments/environment';
+import {MobilePotatoComponent} from './mobile-potato/mobile-potato.component';
+import {MobileSelectorComponent} from './mobile-selector/mobile-selector.component';
 
-@Injectable()
-export class MyHammerConfig extends HammerGestureConfig {
-  overrides = <any> {
-    swipe: {direction: Hammer.DIRECTION_ALL},
-  };
-}
+import {MenuComponent} from './menu/menu.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import {HammerConfiguration} from './configs/my-hammer-config';
 
 @NgModule({
   declarations: [
@@ -61,9 +55,9 @@ export class MyHammerConfig extends HammerGestureConfig {
     ReactiveFormsModule,
     MatIconModule,
     MatCheckboxModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' }),
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production, registrationStrategy: 'registerImmediately'}),
   ],
-  providers: [{ provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig }],
+  providers: [{provide: HAMMER_GESTURE_CONFIG, useClass: HammerConfiguration}],
   bootstrap: [AppComponent]
 })
 export class AppModule {

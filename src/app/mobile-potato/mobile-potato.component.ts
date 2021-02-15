@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {APP_NAME} from '../constants';
-import {ThemeService} from '../theme.service';
+import {APP_NAME} from '../utillity/constants';
+import {ThemeService} from '../services/theme.service';
 
 @Component({
   selector: 'app-mobile-potato',

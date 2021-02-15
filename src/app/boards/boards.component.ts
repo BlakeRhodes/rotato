@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {LocalStorageService} from '../local-storage.service';
-import {SoundService} from '../sound.service';
-import {notFound} from '../lulz';
-import {DELETE_BUTTON_TEXT} from '../constants';
-import {ThemeService} from '../theme.service';
+import {LocalStorageService} from '../services/local-storage.service';
+import {SoundService} from '../services/sound.service';
+import {notFound} from '../utillity/lulz';
+import {DELETE_BUTTON_TEXT} from '../utillity/constants';
+import {ThemeService} from '../services/theme.service';
 
 @Component({
   selector: 'app-boards',

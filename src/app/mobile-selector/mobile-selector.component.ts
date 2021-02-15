@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {ThemeService} from '../theme.service';
+import {ThemeService} from '../services/theme.service';
 
 @Component({
   selector: 'app-mobile-stepper',

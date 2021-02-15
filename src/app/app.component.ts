@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {delay} from './lulz';
-import {ThemeService} from './theme.service';
-import {MediaQueryService} from './media-query.service';
-import {ScreenType} from './enums';
+import {delay} from './utillity/lulz';
+import {ThemeService} from './services/theme.service';
+import {MediaQueryService} from './services/media-query.service';
+import {ScreenType} from './utillity/enums';
 
 @Component({
   selector: 'app-root',

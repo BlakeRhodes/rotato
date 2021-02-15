@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Theme} from '../theme';
-import {ThemeService} from '../theme.service';
-import {LocalStorageService} from '../local-storage.service';
-import {SoundService} from '../sound.service';
-import {THEME_KEY} from '../constants';
+import {Theme} from '../utillity/theme';
+import {ThemeService} from '../services/theme.service';
+import {LocalStorageService} from '../services/local-storage.service';
+import {SoundService} from '../services/sound.service';
+import {THEME_KEY} from '../utillity/constants';
 import {MatCheckboxChange} from '@angular/material/checkbox';
 
 @Component({

@@ -1,12 +1,12 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {LocalStorageService} from '../local-storage.service';
-import {arraysAreEqual} from '../lulz';
+import {LocalStorageService} from '../services/local-storage.service';
+import {arraysAreEqual} from '../utillity/lulz';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {SoundService} from '../sound.service';
-import {Pair} from '../pair';
-import {RotationService} from '../rotation.service';
-import {ThemeService} from '../theme.service';
+import {SoundService} from '../services/sound.service';
+import {Pair} from '../utillity/pair';
+import {RotationService} from '../services/rotation.service';
+import {ThemeService} from '../services/theme.service';
 
 @Component({
   selector: 'app-display',

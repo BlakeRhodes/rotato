@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {THEME_KEY} from './constants';
+import {THEME_KEY} from '../utillity/constants';
 
 @Injectable({
   providedIn: 'root'

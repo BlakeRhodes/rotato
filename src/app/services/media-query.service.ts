@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {BehaviorSubject} from 'rxjs';
-import {ScreenType} from './enums';
+import {ScreenType} from '../utillity/enums';
 
 @Injectable({
   providedIn: 'root'
