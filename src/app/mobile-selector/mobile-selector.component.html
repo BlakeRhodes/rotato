@@ -1,5 +1,10 @@
-<div>
+<div
+  class="swipe-area"
+  (swipeleft)="handleLeft()"
+  (swiperight)="handleRight()"
+>
 <mat-tab-group
+  selectedIndex="selectedIndex"
   [ngClass]="getBackground()"
 >
   <mat-tab

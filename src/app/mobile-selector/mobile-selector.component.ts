@@ -8,6 +8,7 @@ import {ThemeService} from '../theme.service';
 })
 export class MobileSelectorComponent implements OnInit {
   @Output() taterSpinningTime: EventEmitter<any> = new EventEmitter<any>();
+  selectedIndex = 0;
   constructor(
     private themeService: ThemeService,
   ) { }
@@ -21,5 +22,13 @@ export class MobileSelectorComponent implements OnInit {
 
   getBackground(): string{
     return this.themeService.getBackground(1)
+  }
+
+  handleLeft() {
+    this.selectedIndex--;
+  }
+
+  handleRight() {
+    this.selectedIndex++;
   }
 }
