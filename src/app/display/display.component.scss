@@ -70,7 +70,7 @@ mat-card-title {
   align-items: center;
   width: 100%;
   font-weight: 500;
-  padding: .5rem;
+  padding: .5rem 0;
 }
 
 .mat-fab {
@@ -87,4 +87,5 @@ mat-card-title {
 
 .dev-cards{
   display: flex;
+  justify-content: center;
 }

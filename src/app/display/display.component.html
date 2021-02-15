@@ -31,9 +31,7 @@
     class="pair-card"
     *ngFor="let pair of pairs; index as i"
   >
-    <mat-card-title
-      class="cards-with-button"
-    >
+    <mat-card-title>
       <div>
         {{pair.board}}
       </div>
@@ -57,7 +55,7 @@
       </div>
       <button
         aria-label="Stay Paired"
-        mat-mini-fab
+        mat-fab
         (click)="handleSticking(pair)"
         matTooltip="Stay Paired"
       >
