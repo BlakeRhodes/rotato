@@ -1,6 +1,6 @@
 <button
   mat-button
-  class="footer-item"
+  [class.footer-item]="!isMobile"
   [matMenuTriggerFor]="settings"
   aria-label="Settings"
 >
