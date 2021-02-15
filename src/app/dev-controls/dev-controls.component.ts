@@ -16,7 +16,6 @@ export class DevControlsComponent implements OnInit {
 
   devs: string[];
   disabled: string[] = [];
-  enableSound: boolean;
   DevPlaceHolder = 'Dev D. Developer';
   inputLabel = 'Devs Name';
   deleteButtonText = DELETE_BUTTON_TEXT;
@@ -26,7 +25,6 @@ export class DevControlsComponent implements OnInit {
     private soundService: SoundService,
     private themeService: ThemeService,
   ) {
-    this.enableSound = this.localStorageService.getEnableSound();
   }
 
   ngOnInit(): void {
@@ -47,11 +45,6 @@ export class DevControlsComponent implements OnInit {
     this.localStorageService.setDevs(this.devs);
     this.devs = this.localStorageService.getDevs();
     this.soundService.doAYeet();
-  }
-
-  handleEnableSound(event: MatCheckboxChange): void {
-    this.localStorageService.setSoundEnabled(event.checked);
-    this.soundService.enableSound = event.checked;
   }
 
   handleDisable(i: number, dev: string): void {

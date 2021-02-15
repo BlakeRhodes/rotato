@@ -9,7 +9,7 @@ export class SoundService {
   private hey = new Audio();
   private spin = new Audio();
   private pop = new Audio();
-  private soundEnabled = false;
+  soundEnabled = false;
 
   constructor(private localStorageService: LocalStorageService) {
     this.hey.src = 'assets/hey-listen.mp3';
@@ -46,9 +46,5 @@ export class SoundService {
       this.pop.load();
       this.pop.play();
     }
-  }
-
-  set enableSound(checked: boolean) {
-    this.soundEnabled = checked;
   }
 }

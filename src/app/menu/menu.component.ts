@@ -31,6 +31,7 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.enableSound = this.soundService.soundEnabled;
   }
 
   getBackground(): string {
@@ -43,7 +44,7 @@ export class MenuComponent implements OnInit {
 
   handleEnableSound(event: MatCheckboxChange): void {
     this.localStorageService.setSoundEnabled(event.checked);
-    this.soundService.enableSound = event.checked;
+    this.soundService.soundEnabled = event.checked;
   }
 
   isSelected(sheet: string): boolean {

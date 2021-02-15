@@ -1,10 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ThemeService} from '../theme.service';
 import {THEME_KEY} from '../constants';
 import {Theme} from '../theme';
-import {MatCheckboxChange} from '@angular/material/checkbox';
-import {LocalStorageService} from '../local-storage.service';
-import {SoundService} from '../sound.service';
 
 @Component({
   selector: 'app-footer',
@@ -18,12 +15,8 @@ export class FooterComponent implements OnInit {
     { sheet: 'dark', name: 'Baked'},
     { sheet: 'black', name: 'Burnt'},
   ];
-  enableSound: boolean;
-  enableSoundText = 'Enable Sound';
   constructor(
     private themeService: ThemeService,
-    private localStorageService: LocalStorageService,
-    private soundService: SoundService,
   ) {
   }
 
@@ -36,10 +29,5 @@ export class FooterComponent implements OnInit {
 
   setTheme(theme: string) {
     localStorage.setItem(THEME_KEY, theme);
-  }
-
-  handleEnableSound(event: MatCheckboxChange): void {
-    this.localStorageService.setSoundEnabled(event.checked);
-    this.soundService.enableSound = event.checked;
   }
 }
