@@ -42,5 +42,11 @@
     (click)="setTheme(theme.sheet)"
   >
     {{theme.name}}
+    <mat-icon
+      class="checkmark"
+      *ngIf="isSelected(theme.sheet)"
+    >
+      done
+    </mat-icon>
   </button>
 </mat-menu>

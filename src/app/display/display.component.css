@@ -78,7 +78,7 @@ mat-card-title {
   margin: 0.5rem 1rem !important;
 }
 
-.title-with-button {
+.cards-with-button {
   display: flex;
   justify-content: space-between;
   align-items: center;

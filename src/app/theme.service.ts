@@ -9,6 +9,10 @@ export class ThemeService {
   constructor() {
   }
 
+  getTheme(): string {
+    return localStorage.getItem(THEME_KEY);
+  }
+
   getColor(number: number): string {
     const theme = localStorage.getItem(THEME_KEY);
     return `${theme}-color-${number}`;

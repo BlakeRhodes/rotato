@@ -46,4 +46,7 @@ export class MenuComponent implements OnInit {
     this.soundService.enableSound = event.checked;
   }
 
+  isSelected(sheet: string): boolean {
+    return sheet === this.themeService.getTheme();
+  }
 }

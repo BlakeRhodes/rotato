@@ -32,10 +32,28 @@
     *ngFor="let pair of pairs; index as i"
   >
     <mat-card-title
-      class="title-with-button"
+      class="cards-with-button"
     >
       <div>
         {{pair.board}}
+      </div>
+    </mat-card-title>
+    <div class="cards-with-button">
+      <div class="dev-cards">
+        <mat-card
+          cdkDrag
+          class="dev mat-title"
+          [ngClass]="getColor(dev)"
+          (dblclick)="handleMarkAsCarry(dev)"
+          (press)="handleMarkAsCarry(dev)"
+          *ngFor="let dev of pair.devs"
+          [matTooltip]="isMobile?'Long Press to Carry':'Double Click to Carry'"
+        >
+          <div>{{dev}}</div>
+          <mat-icon class="drag-indicator">
+            drag_indicator
+          </mat-icon>
+        </mat-card>
       </div>
       <button
         aria-label="Stay Paired"
@@ -44,24 +62,9 @@
         matTooltip="Stay Paired"
       >
         <mat-icon>
-          {{isTurnedIn(pair)? 'turned_in':'turned_in_not'}}
+          {{isTurnedIn(pair) ? 'turned_in' : 'turned_in_not'}}
         </mat-icon>
       </button>
-
-    </mat-card-title>
-    <mat-card
-      cdkDrag
-      class="dev mat-title"
-      [ngClass]="getColor(dev)"
-      (dblclick)="handleMarkAsCarry(dev)"
-      (press)="handleMarkAsCarry(dev)"
-      *ngFor="let dev of pair.devs"
-      [matTooltip]="isMobile?'Long Press to Carry':'Double Click to Carry'"
-    >
-      <div>{{dev}}</div>
-      <mat-icon class="drag-indicator">
-        drag_indicator
-      </mat-icon>
-    </mat-card>
+    </div>
   </mat-card>
 </div>
