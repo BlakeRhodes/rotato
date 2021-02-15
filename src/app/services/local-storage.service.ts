@@ -3,7 +3,9 @@ import {Pair} from '../utillity/pair';
 import {CURRENT_DATA_VERSION, TEAM_BOARDS_KEY, THEME_KEY} from '../utillity/constants';
 import {NgxIndexedDBService} from 'ngx-indexed-db';
 import {TeamBoard} from '../utillity/team-board';
-import {Subscription} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +24,7 @@ export class LocalStorageService {
 
   constructor(
     private databaseService: NgxIndexedDBService,
+    private snackbar: MatSnackBar,
   ) {
     const version = localStorage.getItem(this.versionKey);
     const theme = localStorage.getItem(THEME_KEY);
@@ -40,6 +43,13 @@ export class LocalStorageService {
       this.enableSound = true;
       localStorage.setItem(this.enableSoundKey, 'true');
     }
+  }
+
+  getTeamBoards(): Observable<any> {
+    return this.databaseService.getAll(TEAM_BOARDS_KEY)
+      .pipe(
+        map(project => project.map(value => value.name))
+      );
   }
 
   saveState(name: string): Subscription {
@@ -91,6 +101,14 @@ export class LocalStorageService {
         this.setBoards(teamBoard.boards);
         this.setDisabledBoards(teamBoard.disabledBoards);
         this.setSticking(teamBoard.sticking);
+      });
+  }
+
+  deleteState(name: string): Subscription {
+    return this.databaseService.getByIndex(TEAM_BOARDS_KEY, 'name', name)
+      .subscribe(next => {
+        this.openSnackBar(`${next.name} was deleted.`, 'Good');
+        this.databaseService.delete(TEAM_BOARDS_KEY, next.id).subscribe();
       });
   }
 
@@ -182,5 +200,11 @@ export class LocalStorageService {
 
   set(field: string, update: any): void {
     localStorage.setItem(field, JSON.stringify(update));
+  }
+
+  private openSnackBar(message: string, action: string) {
+    this.snackbar.open(message, action, {
+      duration: 2000,
+    });
   }
 }

@@ -17,7 +17,6 @@ export class AppComponent implements OnInit {
   constructor(
     private themeService: ThemeService,
     private mediaQueryService: MediaQueryService,
-    private localStorageService: LocalStorageService,
   ) {
   }
 
@@ -39,13 +38,5 @@ export class AppComponent implements OnInit {
 
   isDesktop(): boolean {
     return this.screenType === ScreenType.Desktop;
-  }
-
-  save(): void {
-    this.localStorageService.saveState('whodat');
-  }
-
-  load(): void {
-    this.localStorageService.loadState('whodat').add(() => location.reload()).unsubscribe();
   }
 }

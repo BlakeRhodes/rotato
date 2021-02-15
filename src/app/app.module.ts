@@ -28,6 +28,8 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {HammerConfiguration} from './configs/hammer-configuration';
 import {dbConfig} from './configs/db-config';
 import {NgxIndexedDBModule} from 'ngx-indexed-db';
+import { SaveDialogComponent } from './save-dialog/save-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -40,14 +42,16 @@ import {NgxIndexedDBModule} from 'ngx-indexed-db';
     MobilePotatoComponent,
     MobileSelectorComponent,
     MenuComponent,
+    SaveDialogComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     DragDropModule,
     HammerModule,
-    MatCardModule,
     MatButtonModule,
+    MatCardModule,
+    MatDialogModule,
     MatInputModule,
     MatMenuModule,
     MatSnackBarModule,

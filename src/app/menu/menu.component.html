@@ -4,13 +4,36 @@
   [matMenuTriggerFor]="settings"
   aria-label="Settings"
 >
-   {{isMobile?'':'Settings'}}
+  {{isMobile ? '' : 'Settings'}}
   <mat-icon *ngIf="isMobile">
     menu
   </mat-icon>
 </button>
 
 <mat-menu #settings="matMenu">
+  <button
+    mat-menu-item
+    aria-label="Load"
+    *ngIf="teamBoards.length>0"
+    [matMenuTriggerFor]="load"
+  >
+    Load
+  </button>
+  <button
+    mat-menu-item
+    aria-label="Save"
+    (click)="openDialog()"
+  >
+    Save
+  </button>
+  <button
+    mat-menu-item
+    aria-label="Delete"
+    [matMenuTriggerFor]="delete"
+    *ngIf="teamBoards.length>0"
+  >
+    Delete
+  </button>
   <button
     mat-menu-item
     aria-label="Styles"
@@ -34,6 +57,29 @@
     {{enableSoundText}}
   </mat-checkbox>
 </mat-menu>
+
+<mat-menu #load="matMenu">
+  <button
+    mat-menu-item
+    *ngFor="let board of teamBoards"
+    [attr.aria-label]="board"
+    (click)="loadBoard(board)"
+  >
+    {{board}}
+  </button>
+</mat-menu>
+
+<mat-menu #delete="matMenu">
+  <button
+    mat-menu-item
+    *ngFor="let board of teamBoards"
+    [attr.aria-label]="board"
+    (click)="deleteBoard(board)"
+  >
+    {{board}}
+  </button>
+</mat-menu>
+
 <mat-menu #style="matMenu">
   <button
     mat-menu-item

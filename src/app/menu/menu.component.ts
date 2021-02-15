@@ -5,6 +5,8 @@ import {LocalStorageService} from '../services/local-storage.service';
 import {SoundService} from '../services/sound.service';
 import {THEME_KEY} from '../utillity/constants';
 import {MatCheckboxChange} from '@angular/material/checkbox';
+import {SaveDialogComponent} from '../save-dialog/save-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-menu',
@@ -16,22 +18,28 @@ export class MenuComponent implements OnInit {
   @Input()
   isMobile = false;
   themes: Theme[] = [
-    { sheet: 'light', name: 'Mashed'},
-    { sheet: 'classic', name: 'Fried'},
-    { sheet: 'dark', name: 'Baked'},
-    { sheet: 'black', name: 'Burnt'},
+    {sheet: 'light', name: 'Mashed'},
+    {sheet: 'classic', name: 'Fried'},
+    {sheet: 'dark', name: 'Baked'},
+    {sheet: 'black', name: 'Burnt'},
   ];
   enableSound: boolean;
   enableSoundText = 'Enable Sound';
+  teamBoards: string [] = [];
+  private boardName: string;
+
   constructor(
     private themeService: ThemeService,
     private localStorageService: LocalStorageService,
     private soundService: SoundService,
+    public dialog: MatDialog,
   ) {
   }
 
   ngOnInit(): void {
     this.enableSound = this.soundService.soundEnabled;
+    this.localStorageService.getTeamBoards()
+      .subscribe(boards => this.teamBoards = boards);
   }
 
   getBackground(): string {
@@ -49,5 +57,36 @@ export class MenuComponent implements OnInit {
 
   isSelected(sheet: string): boolean {
     return sheet === this.themeService.getTheme();
+  }
+
+  loadBoard(board: string): void {
+    this.localStorageService.loadState(board)
+      .add(() => location.reload());
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(SaveDialogComponent, {
+      width: '250px',
+      data: this.boardName
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.boardName = result;
+      this.localStorageService.saveState(this.boardName)
+        .add(() => this.localStorageService.getTeamBoards()
+          .subscribe(
+            next => this.teamBoards = next
+          )
+        );
+    });
+  }
+
+  deleteBoard(board: string): void {
+    this.localStorageService.deleteState(board)
+      .add(
+        () => this.localStorageService.getTeamBoards()
+          .subscribe(next => this.teamBoards = next)
+      );
+    this.soundService.heyListen();
   }
 }
