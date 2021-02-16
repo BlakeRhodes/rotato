@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {LocalStorageService} from '../services/local-storage.service';
 import {SoundService} from '../services/sound.service';
 import {notFound} from '../utillity/lulz';
-import {DELETE_BUTTON_TEXT} from '../utillity/constants';
+import {BACK_BURNER_MESSAGE, DELETE_BUTTON_TEXT} from '../utillity/constants';
 import {ThemeService} from '../services/theme.service';
 
 @Component({
@@ -19,6 +19,7 @@ export class BoardsComponent implements OnInit {
   boardPlaceHolder = 'Frank\'s House of Refactors';
   inputLabel = 'Cutting Board Name';
   deleteText = DELETE_BUTTON_TEXT;
+  backBurnerMessage= BACK_BURNER_MESSAGE;
 
   constructor(
     private localStorageService: LocalStorageService,

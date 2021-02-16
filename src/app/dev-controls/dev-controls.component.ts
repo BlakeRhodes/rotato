@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {LocalStorageService} from '../services/local-storage.service';
 import {SoundService} from '../services/sound.service';
-import {DELETE_BUTTON_TEXT} from '../utillity/constants';
+import {BACK_BURNER_MESSAGE, DELETE_BUTTON_TEXT} from '../utillity/constants';
 import {ThemeService} from '../services/theme.service';
 
 @Component({
@@ -18,6 +18,7 @@ export class DevControlsComponent implements OnInit {
   DevPlaceHolder = 'Dev D. Developer';
   inputLabel = 'Devs Name';
   deleteButtonText = DELETE_BUTTON_TEXT;
+  backBurnerMessage= BACK_BURNER_MESSAGE;
 
   constructor(
     private localStorageService: LocalStorageService,

@@ -7,6 +7,7 @@ import {SoundService} from '../services/sound.service';
 import {Pair} from '../utillity/pair';
 import {RotationService} from '../services/rotation.service';
 import {ThemeService} from '../services/theme.service';
+import {DOUBLE_CLICK_MESSAGE} from '../utillity/constants';
 
 @Component({
   selector: 'app-display',
@@ -24,6 +25,7 @@ export class DisplayComponent {
   boards: string[] = [];
   displayTitleText = 'Spuddies';
   toolTip = 'SPIN THE POTATO! MAKE IT ROTATO!';
+  doubleClickMessage = DOUBLE_CLICK_MESSAGE;
 
   constructor(
     private localStorageService: LocalStorageService,
