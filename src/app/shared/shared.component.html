@@ -1,0 +1,21 @@
+<mat-card
+  [ngClass]="getBackground()"
+>
+  <mat-card-title>
+    Opening this link replace your current board, are you sure?
+  </mat-card-title>
+  <mat-card-actions>
+    <button
+      mat-raised-button
+      (click)="handleYes()"
+    >
+      Yes
+    </button>
+    <button
+      mat-raised-button
+      (click)="handleNo()"
+    >
+      No
+    </button>
+  </mat-card-actions>
+</mat-card>

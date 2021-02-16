@@ -25,7 +25,6 @@
     "hammerjs": "^2.0.8",
     "ngx-indexed-db": "^6.1.2",
     "rxjs": "~6.6.0",
-    "screenshot-desktop": "^1.12.3",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
   },

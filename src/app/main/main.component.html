@@ -1,0 +1,30 @@
+<div class="wrapper"
+     *ngIf="isDesktop()"
+     [ngClass]="getBackground()"
+>
+  <app-potato [shouldISpinAPotato]="spin"></app-potato>
+  <router-outlet></router-outlet>
+  <div class="three-columns"
+       [ngClass]="getBackground()"
+  >
+    <app-dev-controls></app-dev-controls>
+    <app-display
+      (taterSpinningTime)="handleTheSpinningPotato()"
+    ></app-display>
+    <app-boards></app-boards>
+  </div>
+  <app-footer></app-footer>
+</div>
+<div
+  class="mobile-wrapper"
+  [ngClass]="getBackground()"
+  *ngIf="!isDesktop()"
+>
+  <app-mobile-potato
+    [shouldISpinAPotato]="spin"
+  >
+  </app-mobile-potato>
+  <app-mobile-stepper (taterSpinningTime)="handleTheSpinningPotato()"></app-mobile-stepper>
+</div>
+
+

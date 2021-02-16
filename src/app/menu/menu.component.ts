@@ -3,11 +3,13 @@ import {Theme} from '../utillity/theme';
 import {ThemeService} from '../services/theme.service';
 import {LocalStorageService} from '../services/local-storage.service';
 import {SoundService} from '../services/sound.service';
-import {THEME_KEY} from '../utillity/constants';
+import {HOST, THEME_KEY} from '../utillity/constants';
 import {MatCheckboxChange} from '@angular/material/checkbox';
 import {SaveDialogComponent} from '../save-dialog/save-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {DecodeService} from '../services/decode.service';
+import {Clipboard} from '@angular/cdk/clipboard';
 
 @Component({
   selector: 'app-menu',
@@ -27,14 +29,17 @@ export class MenuComponent implements OnInit {
   enableSound: boolean;
   enableSoundText = 'Enable Sound';
   teamBoards: string [] = [];
+  sharedLink = 'shared/?board=';
   private boardName: string;
 
   constructor(
     private themeService: ThemeService,
     private localStorageService: LocalStorageService,
+    private decodeService: DecodeService,
     private soundService: SoundService,
     public dialog: MatDialog,
     private snackbar: MatSnackBar,
+    private clipboard: Clipboard,
   ) {
   }
 
@@ -100,5 +105,11 @@ export class MenuComponent implements OnInit {
     this.snackbar.open(message, action, {
       duration: 2000,
     });
+  }
+
+  handleShare() {
+    const link = `${HOST}${this.sharedLink}${this.decodeService.encode()}`;
+    this.snackbar.open('Copied to the Clipboard', '🥔🥔🥔🥔');
+    this.clipboard.copy(link);
   }
 }

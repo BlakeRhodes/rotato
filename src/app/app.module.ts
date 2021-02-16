@@ -30,6 +30,11 @@ import {dbConfig} from './configs/db-config';
 import {NgxIndexedDBModule} from 'ngx-indexed-db';
 import { SaveDialogComponent } from './save-dialog/save-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import {ClipboardModule} from '@angular/cdk/clipboard';
+import { SharedComponent } from './shared/shared.component';
+import {RouterModule} from '@angular/router';
+import {routes} from './configs/routes';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
   declarations: [
@@ -43,10 +48,13 @@ import {MatDialogModule} from '@angular/material/dialog';
     MobileSelectorComponent,
     MenuComponent,
     SaveDialogComponent,
+    SharedComponent,
+    MainComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    ClipboardModule,
     DragDropModule,
     HammerModule,
     MatButtonModule,
@@ -61,6 +69,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     ReactiveFormsModule,
     MatIconModule,
     MatCheckboxModule,
+    RouterModule.forRoot(routes),
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production, registrationStrategy: 'registerImmediately'}),
     NgxIndexedDBModule.forRoot(dbConfig),
   ],
