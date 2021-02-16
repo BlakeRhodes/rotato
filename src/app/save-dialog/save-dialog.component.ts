@@ -8,7 +8,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
   styleUrls: ['./save-dialog.component.scss']
 })
 export class SaveDialogComponent {
-  name: string;
+  name = '';
   constructor(
     public dialogRef: MatDialogRef<SaveDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: string) {}

@@ -7,6 +7,7 @@ import {THEME_KEY} from '../utillity/constants';
 import {MatCheckboxChange} from '@angular/material/checkbox';
 import {SaveDialogComponent} from '../save-dialog/save-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-menu',
@@ -33,6 +34,7 @@ export class MenuComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private soundService: SoundService,
     public dialog: MatDialog,
+    private snackbar: MatSnackBar,
   ) {
   }
 
@@ -75,7 +77,11 @@ export class MenuComponent implements OnInit {
       this.localStorageService.saveState(this.boardName)
         .add(() => this.localStorageService.getTeamBoards()
           .subscribe(
-            next => this.teamBoards = next
+            next => {
+                this.teamBoards = next;
+                this.openSnackBar(`${this.boardName} was saved.`, '🥔🥔🥔🥔');
+                this.soundService.heyListen();
+            }
           )
         );
     });
@@ -87,6 +93,12 @@ export class MenuComponent implements OnInit {
         () => this.localStorageService.getTeamBoards()
           .subscribe(next => this.teamBoards = next)
       );
+    this.openSnackBar(`${board} has been deleted.`, 'Good');
     this.soundService.heyListen();
+  }
+  private openSnackBar(message: string, action: string): void {
+    this.snackbar.open(message, action, {
+      duration: 2000,
+    });
   }
 }

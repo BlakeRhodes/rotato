@@ -5,17 +5,13 @@ import {LocalStorageService} from './local-storage.service';
   providedIn: 'root'
 })
 export class SoundService {
-  private yeet = new Audio();
-  private hey = new Audio();
-  private spin = new Audio();
-  private pop = new Audio();
+  private yeet = new Audio('assets/yeet.mp3');
+  private hey = new Audio('assets/hey-listen.mp3');
+  private spin = new Audio('assets/spin.mp3');
+  private pop = new Audio('assets/pop.mp3');
   soundEnabled = false;
 
   constructor(private localStorageService: LocalStorageService) {
-    this.hey.src = 'assets/hey-listen.mp3';
-    this.yeet.src = 'assets/yeet.mp3';
-    this.spin.src = 'assets/spin.mp3';
-    this.pop.src = 'assets/pop.mp3';
     this.soundEnabled = localStorageService.getEnableSound();
   }
 
@@ -23,28 +19,28 @@ export class SoundService {
   doAYeet(): void {
     if (this.soundEnabled) {
       this.yeet.load();
-      this.yeet.play();
+      this.yeet.play().then();
     }
   }
 
   heyListen(): void {
     if (this.soundEnabled) {
       this.hey.load();
-      this.hey.play();
+      this.hey.play().then();
     }
   }
 
   spinning(): void {
     if (this.soundEnabled) {
       this.spin.load();
-      this.spin.play();
+      this.spin.play().then();
     }
   }
 
   dropPop(): void {
     if (this.soundEnabled) {
       this.pop.load();
-      this.pop.play();
+      this.pop.play().then();
     }
   }
 }

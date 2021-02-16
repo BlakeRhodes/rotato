@@ -4,7 +4,7 @@
   [matMenuTriggerFor]="settings"
   aria-label="Settings"
 >
-  {{isMobile ? '' : 'Settings'}}
+  {{isMobile ? '' : 'Options'}}
   <mat-icon *ngIf="isMobile">
     menu
   </mat-icon>
@@ -16,6 +16,7 @@
     aria-label="Load"
     *ngIf="teamBoards.length>0"
     [matMenuTriggerFor]="load"
+    matTooltip="Load from Browser's Database"
   >
     Load
   </button>
@@ -23,6 +24,7 @@
     mat-menu-item
     aria-label="Save"
     (click)="openDialog()"
+    matTooltip="Save to Browser's Database"
   >
     Save
   </button>
@@ -31,6 +33,7 @@
     aria-label="Delete"
     [matMenuTriggerFor]="delete"
     *ngIf="teamBoards.length>0"
+    matTooltip="😵🥔"
   >
     Delete
   </button>

@@ -24,7 +24,6 @@ export class LocalStorageService {
 
   constructor(
     private databaseService: NgxIndexedDBService,
-    private snackbar: MatSnackBar,
   ) {
     const version = localStorage.getItem(this.versionKey);
     const theme = localStorage.getItem(THEME_KEY);
@@ -53,6 +52,9 @@ export class LocalStorageService {
   }
 
   saveState(name: string): Subscription {
+    if (!name){
+      return;
+    }
     const teamBoard: TeamBoard = {
       name,
       version: CURRENT_DATA_VERSION,
@@ -107,7 +109,6 @@ export class LocalStorageService {
   deleteState(name: string): Subscription {
     return this.databaseService.getByIndex(TEAM_BOARDS_KEY, 'name', name)
       .subscribe(next => {
-        this.openSnackBar(`${next.name} was deleted.`, 'Good');
         this.databaseService.delete(TEAM_BOARDS_KEY, next.id).subscribe();
       });
   }
@@ -200,11 +201,5 @@ export class LocalStorageService {
 
   set(field: string, update: any): void {
     localStorage.setItem(field, JSON.stringify(update));
-  }
-
-  private openSnackBar(message: string, action: string) {
-    this.snackbar.open(message, action, {
-      duration: 2000,
-    });
   }
 }
