@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {LocalStorageService} from './local-storage.service';
 import {TeamBoard} from '../utillity/team-board';
 import {CURRENT_DATA_VERSION} from '../utillity/constants';
-import { encode } from "@msgpack/msgpack";
+import { encode } from '@msgpack/msgpack';
 
 @Injectable({
   providedIn: 'root'

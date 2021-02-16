@@ -107,7 +107,7 @@ export class MenuComponent implements OnInit {
     });
   }
 
-  handleShare() {
+  handleShare(): void {
     const link = `${HOST}${this.sharedLink}${this.decodeService.encode()}`;
     this.snackbar.open('Copied to the Clipboard', '🥔🥔🥔🥔');
     this.clipboard.copy(link);

@@ -22,12 +22,12 @@ export class SharedComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.rawLink = params['board'];
+      this.rawLink = params.board;
 
     });
   }
 
-  handleYes() {
+  handleYes(): void {
     const board = this.decodeService.decode(this.rawLink);
     this.localStorageService.setDevs(board.devs);
     this.localStorageService.setPairs(board.pairs);
@@ -39,7 +39,7 @@ export class SharedComponent implements OnInit {
     this.router.navigate(['/']).then();
   }
 
-  handleNo() {
+  handleNo(): void {
     this.router.navigate(['/']).then();
   }
 
