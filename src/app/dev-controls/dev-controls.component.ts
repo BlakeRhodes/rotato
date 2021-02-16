@@ -18,7 +18,7 @@ export class DevControlsComponent implements OnInit {
   DevPlaceHolder = 'Dev D. Developer';
   inputLabel = 'Devs Name';
   deleteButtonText = DELETE_BUTTON_TEXT;
-  backBurnerMessage= BACK_BURNER_MESSAGE;
+  backBurnerMessage = BACK_BURNER_MESSAGE;
 
   constructor(
     private localStorageService: LocalStorageService,

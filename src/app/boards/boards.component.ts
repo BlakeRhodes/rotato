@@ -19,7 +19,7 @@ export class BoardsComponent implements OnInit {
   boardPlaceHolder = 'Frank\'s House of Refactors';
   inputLabel = 'Cutting Board Name';
   deleteText = DELETE_BUTTON_TEXT;
-  backBurnerMessage= BACK_BURNER_MESSAGE;
+  backBurnerMessage = BACK_BURNER_MESSAGE;
 
   constructor(
     private localStorageService: LocalStorageService,

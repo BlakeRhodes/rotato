@@ -38,6 +38,10 @@ mat-card.added-list-item{
   animation: rotation 50s infinite linear;
 }
 
+.add-button {
+  color: chocolate !important;
+}
+
 @keyframes rotation {
   from {
     transform: rotate(359deg);
