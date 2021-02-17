@@ -1,13 +1,16 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {LocalStorageService} from '../services/local-storage.service';
 import {arraysAreEqual} from '../utillity/lulz';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {SoundService} from '../services/sound.service';
 import {Pair} from '../utillity/pair';
 import {RotationService} from '../services/rotation.service';
 import {ThemeService} from '../services/theme.service';
 import {DOUBLE_CLICK_MESSAGE} from '../utillity/constants';
+import {NgxCaptureService} from 'ngx-capture';
+import {Clipboard} from '@angular/cdk/clipboard';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {ScreenshotComponent} from '../screenshot/screenshot.component';
 
 @Component({
   selector: 'app-display',
@@ -15,6 +18,7 @@ import {DOUBLE_CLICK_MESSAGE} from '../utillity/constants';
   styleUrls: ['./display.component.scss']
 })
 export class DisplayComponent {
+  @ViewChild('screen', {static: true}) screen: any;
   @Output() taterSpinningTime: EventEmitter<any> = new EventEmitter<any>();
   @Input()
   isMobile = false;
@@ -30,9 +34,10 @@ export class DisplayComponent {
   constructor(
     private localStorageService: LocalStorageService,
     private soundService: SoundService,
-    private snackBar: MatSnackBar,
     private rotationService: RotationService,
     private themeService: ThemeService,
+    private captureService: NgxCaptureService,
+    private dialog: MatDialog,
   ) {
     this.pairs = localStorageService.getPairs();
     this.carriers = localStorageService.getCarriers();
@@ -93,7 +98,7 @@ export class DisplayComponent {
     const found = this.sticking.find(
       stickingPair => arraysAreEqual(stickingPair.devs, pair.devs)
     );
-    if (found){
+    if (found) {
       return this.themeService.getSelected();
     }
     return this.themeService.getBackground(2);
@@ -103,7 +108,7 @@ export class DisplayComponent {
     const found = this.sticking.find(
       stickingPair => arraysAreEqual(stickingPair.devs, pair.devs)
     );
-    if (found){
+    if (found) {
       this.handleSticking(pair);
     }
   }
@@ -124,5 +129,19 @@ export class DisplayComponent {
 
   getBackground(): string {
     return this.themeService.getBackground(4);
+  }
+
+  screenShot() {
+    this.captureService.getImage(this.screen.nativeElement, true)
+      .subscribe(image => {
+        this.openDialog(image);
+      });
+  }
+
+  private openDialog(img: string) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = { image: img};
+
+    this.dialog.open(ScreenshotComponent, dialogConfig)
   }
 }

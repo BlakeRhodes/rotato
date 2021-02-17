@@ -45,7 +45,6 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.enableSound = this.soundService.soundEnabled;
-    console.log('yep');
     this.localStorageService.getTeamBoards()
       .subscribe(boards => this.teamBoards = boards);
   }

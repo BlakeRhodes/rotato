@@ -35,6 +35,8 @@ import { SharedComponent } from './shared/shared.component';
 import {RouterModule} from '@angular/router';
 import {routes} from './configs/routes';
 import { MainComponent } from './main/main.component';
+import {NgxCaptureModule} from 'ngx-capture';
+import { ScreenshotComponent } from './screenshot/screenshot.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,7 @@ import { MainComponent } from './main/main.component';
     SaveDialogComponent,
     SharedComponent,
     MainComponent,
+    ScreenshotComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +72,7 @@ import { MainComponent } from './main/main.component';
     ReactiveFormsModule,
     MatIconModule,
     MatCheckboxModule,
+    NgxCaptureModule,
     RouterModule.forRoot(routes),
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production, registrationStrategy: 'registerImmediately'}),
     NgxIndexedDBModule.forRoot(dbConfig),

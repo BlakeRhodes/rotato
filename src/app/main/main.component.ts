@@ -24,9 +24,6 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.mediaQueryService.screenType.subscribe(screenType => this.screenType = screenType);
-    const message1 = this.decodeService.encode();
-    console.log(message1);
-    console.log(this.decodeService.decode(message1));
   }
 
   handleTheSpinningPotato(): void {

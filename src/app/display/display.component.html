@@ -1,68 +1,84 @@
-<div class="pairing-controls">
-  <mat-card
-    class="spuddies-label"
-    [ngClass]="[getLabelColor(), getBackground()]"
-  >
-    <div class="title">
-      {{displayTitleText}}
-    </div>
-    <button
-      mat-fab
-      class="rotate-button"
-      aria-label="Rotate Pairs"
-      (click)="handleClick()"
-      [matTooltip]="toolTip"
+<div
+  #screen
+  class="screen-shot"
+>
+  <div class="pairing-controls">
+    <mat-card
+      class="spuddies-label"
+      [ngClass]="[getLabelColor(), getBackground()]"
     >
-      <mat-icon
-        class="rotate-slowly"
-      >
-        rotate_left
-      </mat-icon>
-    </button>
-  </mat-card>
-</div>
-<div cdkDropListGroup>
-  <mat-card
-    cdkDropList
-    (cdkDropListDropped)="handleDrop($event, pair)"
-    (cdkDropListExited)="handleExit(pair)"
-    [ngClass]="isSticking(pair)"
-    [cdkDropListData]="pair.devs"
-    class="pair-card"
-    *ngFor="let pair of pairs; index as i"
-  >
-    <mat-card-title>
+      <div class="title">
+        {{displayTitleText}}
+      </div>
       <div>
-        {{pair.board}}
-      </div>
-    </mat-card-title>
-    <div class="cards-with-button">
-      <div class="dev-cards">
-        <mat-card
-          cdkDrag
-          class="dev mat-title"
-          [ngClass]="getColor(dev)"
-          (dblclick)="handleMarkAsCarry(dev)"
-          (press)="handleMarkAsCarry(dev)"
-          *ngFor="let dev of pair.devs"
-          [matTooltip]="isMobile?'':doubleClickMessage"
+        <button
+          mat-fab
+          (click)="screenShot()"
+          matTooltip="Screen Shot your Spuddies"
         >
-          <div>{{dev}}</div>
-          <mat-icon class="drag-indicator">
-            drag_indicator
+          <mat-icon>
+            camera
           </mat-icon>
-        </mat-card>
+        </button>
+        <button
+          mat-fab
+          class="rotate-button"
+          aria-label="Rotate Pairs"
+          (click)="handleClick()"
+          [matTooltip]="toolTip"
+        >
+          <mat-icon
+            class="rotate-slowly"
+          >
+            rotate_left
+          </mat-icon>
+        </button>
       </div>
-      <button
-        aria-label="Stay Paired"
-        mat-fab
-        (click)="handleSticking(pair)"
-        matTooltip="Stay Paired"
-      >
-        <mat-icon>
-          {{isTurnedIn(pair) ? 'turned_in' : 'turned_in_not'}}
-        </mat-icon>
-      </button>
-    </div>
-  </mat-card>
+    </mat-card>
+  </div>
+  <div cdkDropListGroup>
+    <mat-card
+      cdkDropList
+      (cdkDropListDropped)="handleDrop($event, pair)"
+      (cdkDropListExited)="handleExit(pair)"
+      [ngClass]="isSticking(pair)"
+      [cdkDropListData]="pair.devs"
+      class="pair-card"
+      *ngFor="let pair of pairs; index as i"
+    >
+      <mat-card-title>
+        <div>
+          {{pair.board}}
+        </div>
+      </mat-card-title>
+      <div class="cards-with-button">
+        <div class="dev-cards">
+          <mat-card
+            cdkDrag
+            class="dev mat-title"
+            [ngClass]="getColor(dev)"
+            (dblclick)="handleMarkAsCarry(dev)"
+            (press)="handleMarkAsCarry(dev)"
+            *ngFor="let dev of pair.devs"
+            [matTooltip]="isMobile?'':doubleClickMessage"
+          >
+            <div>{{dev}}</div>
+            <mat-icon class="drag-indicator">
+              drag_indicator
+            </mat-icon>
+          </mat-card>
+        </div>
+        <button
+          aria-label="Stay Paired"
+          mat-fab
+          (click)="handleSticking(pair)"
+          matTooltip="Stay Paired"
+        >
+          <mat-icon>
+            {{isTurnedIn(pair) ? 'turned_in' : 'turned_in_not'}}
+          </mat-icon>
+        </button>
+      </div>
+    </mat-card>
+  </div>
 </div>
