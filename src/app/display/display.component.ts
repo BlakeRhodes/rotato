@@ -8,7 +8,6 @@ import {RotationService} from '../services/rotation.service';
 import {ThemeService} from '../services/theme.service';
 import {DOUBLE_CLICK_MESSAGE} from '../utillity/constants';
 import {NgxCaptureService} from 'ngx-capture';
-import {Clipboard} from '@angular/cdk/clipboard';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ScreenshotComponent} from '../screenshot/screenshot.component';
 
@@ -131,17 +130,17 @@ export class DisplayComponent {
     return this.themeService.getBackground(4);
   }
 
-  screenShot() {
+  screenShot(): void {
     this.captureService.getImage(this.screen.nativeElement, true)
       .subscribe(image => {
         this.openDialog(image);
       });
   }
 
-  private openDialog(img: string) {
+  private openDialog(img: string): void{
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = { image: img};
 
-    this.dialog.open(ScreenshotComponent, dialogConfig)
+    this.dialog.open(ScreenshotComponent, dialogConfig);
   }
 }

@@ -78,6 +78,6 @@ export class BoardsComponent implements OnInit {
   }
 
   isStrikeThrough(dev: string): string {
-    return this.isDisabled(dev)? 'strike-through': '';
+    return this.isDisabled(dev) ? 'strike-through' : '';
   }
 }
