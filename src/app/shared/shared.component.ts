@@ -72,7 +72,7 @@ export class SharedComponent implements OnInit {
               this.router.navigate(['/']).then();
             }
           )
-        )
+        );
     });
   }
 

@@ -45,7 +45,7 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.enableSound = this.soundService.soundEnabled;
-    console.log("yep");
+    console.log('yep');
     this.localStorageService.getTeamBoards()
       .subscribe(boards => this.teamBoards = boards);
   }
@@ -113,7 +113,7 @@ export class MenuComponent implements OnInit {
     const link = `${HOST}${this.sharedLink}${this.decodeService.encode()}`;
     this.snackbar.open('Copied to the Clipboard',
       '🥔🥔🥔🥔',
-      {duration: 2000,}
+      {duration: 2000, }
     );
     this.clipboard.copy(link);
   }
