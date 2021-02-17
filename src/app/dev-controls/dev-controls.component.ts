@@ -77,7 +77,7 @@ export class DevControlsComponent implements OnInit {
     return this.themeService.getFormColor();
   }
 
-  isStrikeThrough(dev: string) {
-    return this.isDisabled(dev)? 'strike-through': '';
+  isStrikeThrough(dev: string): string {
+    return this.isDisabled(dev) ? 'strike-through' : '';
   }
 }
