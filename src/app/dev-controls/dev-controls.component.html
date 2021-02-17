@@ -33,11 +33,22 @@
     *ngFor="let dev of devs; let i = index"
     (dblclick)="handleDisable(i,dev)"
     (press)="handleDisable(i,dev)"
-    [ngClass]="getCurrentClass(dev)"
+    [ngClass]="[getCurrentClass(dev), isStrikeThrough(dev)]"
   >
     <div class="mat-title">
       {{dev}}
     </div>
+    <div>
+    <button
+      class="icon-button"
+      mat-icon-button
+      aria-label="Disable Dev"
+      (click)="handleDisable(i,dev)"
+      >
+      <mat-icon>
+        {{isDisabled(dev)? 'person':'person_off'}}
+      </mat-icon>
+    </button>
     <button
       class="icon-button"
       mat-icon-button
@@ -45,9 +56,10 @@
       (click)="handleDelete(i)"
     >
       <mat-icon>
-        remove_circle
+        delete
       </mat-icon>
     </button>
+    </div>
   </mat-card>
 </div>
 

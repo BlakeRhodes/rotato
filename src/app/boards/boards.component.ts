@@ -76,4 +76,8 @@ export class BoardsComponent implements OnInit {
   getInputColor(): string {
     return this.themeService.getInput();
   }
+
+  isStrikeThrough(dev: string) {
+    return this.isDisabled(dev)? 'strike-through': '';
+  }
 }

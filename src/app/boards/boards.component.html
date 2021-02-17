@@ -35,20 +35,33 @@
     *ngFor="let board of boards; let i = index"
     (dblclick)="handleDisable(i,board)"
     (press)="handleDisable(i, board)"
-    [ngClass]="getCurrentClass(board)"
+    [ngClass]="[getCurrentClass(board),isStrikeThrough(board)]"
   >
     <div class="mat-title">
       {{board}}
     </div>
-    <button
-      class="icon-button"
-      aria-label="Peel Board"
-      mat-icon-button
-      (click)="handleDelete(i)"
-    >
-      <mat-icon>
-        remove_circle
-      </mat-icon>
-    </button>
+    <div>
+      <button
+        class="icon-button"
+        aria-label="Disable Board"
+        mat-icon-button
+        (click)="handleDisable(i, board)"
+      >
+        <mat-icon>
+          {{isDisabled(board) ? 'label' : 'label_off'}}
+        </mat-icon>
+      </button>
+      <button
+        class="icon-button"
+        aria-label="Peel Board"
+        mat-icon-button
+        (click)="handleDelete(i)"
+      >
+        <mat-icon>
+          delete
+        </mat-icon>
+      </button>
+
+    </div>
   </mat-card>
 </div>
