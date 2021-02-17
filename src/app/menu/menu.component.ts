@@ -45,6 +45,7 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.enableSound = this.soundService.soundEnabled;
+    console.log("yep");
     this.localStorageService.getTeamBoards()
       .subscribe(boards => this.teamBoards = boards);
   }
@@ -83,9 +84,9 @@ export class MenuComponent implements OnInit {
         .add(() => this.localStorageService.getTeamBoards()
           .subscribe(
             next => {
-                this.teamBoards = next;
-                this.openSnackBar(`${this.boardName} was saved.`, '🥔🥔🥔🥔');
-                this.soundService.heyListen();
+              this.teamBoards = next;
+              this.openSnackBar(`${this.boardName} was saved.`, '🥔🥔🥔🥔');
+              this.soundService.heyListen();
             }
           )
         );
@@ -101,6 +102,7 @@ export class MenuComponent implements OnInit {
     this.openSnackBar(`${board} has been deleted.`, 'Good');
     this.soundService.heyListen();
   }
+
   private openSnackBar(message: string, action: string): void {
     this.snackbar.open(message, action, {
       duration: 2000,
@@ -109,7 +111,10 @@ export class MenuComponent implements OnInit {
 
   handleShare(): void {
     const link = `${HOST}${this.sharedLink}${this.decodeService.encode()}`;
-    this.snackbar.open('Copied to the Clipboard', '🥔🥔🥔🥔');
+    this.snackbar.open('Copied to the Clipboard',
+      '🥔🥔🥔🥔',
+      {duration: 2000,}
+    );
     this.clipboard.copy(link);
   }
 }

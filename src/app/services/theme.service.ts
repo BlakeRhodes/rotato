@@ -47,4 +47,9 @@ export class ThemeService {
     const theme = localStorage.getItem(THEME_KEY);
     return `${theme}-tab`;
   }
+
+  getSharedPage() {
+    const theme = localStorage.getItem(THEME_KEY);
+    return `${theme}-shared-page`;
+  }
 }

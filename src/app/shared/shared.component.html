@@ -1,14 +1,15 @@
-<mat-card
+<mat-card class="wrapper"
   [ngClass]="getBackground()"
 >
   <mat-card-title>
-    Opening this link replace your current board, are you sure?
+    Would you like to save your current board before opening this one??
   </mat-card-title>
   <mat-card-actions>
     <button
       mat-raised-button
-      (click)="handleYes()"
-    >
+      (click)="openDialog()"
+      cdkFocusInitial
+      >
       Yes
     </button>
     <button
@@ -16,6 +17,12 @@
       (click)="handleNo()"
     >
       No
+    </button>
+    <button
+      mat-raised-button
+      (click)="handleCancel()"
+    >
+      Cancel
     </button>
   </mat-card-actions>
 </mat-card>
