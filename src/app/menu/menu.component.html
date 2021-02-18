@@ -20,6 +20,14 @@
   </button>
   <button
     mat-menu-item
+    aria-label="Save"
+    (click)="openDialog()"
+    matTooltip="Save to Browser's Database"
+  >
+    Save
+  </button>
+  <button
+    mat-menu-item
     aria-label="Load"
     *ngIf="teamBoards.length>0"
     [matMenuTriggerFor]="load"
@@ -29,16 +37,8 @@
   </button>
   <button
     mat-menu-item
-    aria-label="Save"
-    (click)="openDialog()"
-    matTooltip="Save to Browser's Database"
-  >
-    Save
-  </button>
-  <button
-    mat-menu-item
     aria-label="Delete"
-    [matMenuTriggerFor]="delete"
+    [matMenuTriggerFor]="deleteboard"
     *ngIf="teamBoards.length>0"
     matTooltip="😵🥔"
   >
@@ -51,6 +51,12 @@
   >
     Theme
   </button>
+  <mat-checkbox
+    [checked]="enableSound"
+    (change)="handleEnableSound($event)"
+  >
+    {{enableSoundText}}
+  </mat-checkbox>
   <a
     href="https://github.com/BlakeRhodes/rotato"
     mat-menu-item
@@ -60,12 +66,6 @@
       code
     </mat-icon>
   </a>
-  <mat-checkbox
-    [checked]="enableSound"
-    (change)="handleEnableSound($event)"
-  >
-    {{enableSoundText}}
-  </mat-checkbox>
 </mat-menu>
 
 <mat-menu #load="matMenu">
@@ -79,7 +79,7 @@
   </button>
 </mat-menu>
 
-<mat-menu #delete="matMenu">
+<mat-menu #deleteboard="matMenu">
   <button
     mat-menu-item
     *ngFor="let board of teamBoards"
