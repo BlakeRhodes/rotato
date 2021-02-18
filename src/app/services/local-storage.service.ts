@@ -5,7 +5,6 @@ import {NgxIndexedDBService} from 'ngx-indexed-db';
 import {TeamBoard} from '../utillity/team-board';
 import {Observable, Subscription} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'

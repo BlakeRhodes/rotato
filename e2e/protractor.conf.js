@@ -4,6 +4,7 @@
 
 const { SpecReporter, StacktraceOption } = require('jasmine-spec-reporter');
 
+// noinspection JSValidateTypes
 /**
  * @type { import("protractor").Config }
  */

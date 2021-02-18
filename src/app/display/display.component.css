@@ -29,10 +29,6 @@ mat-card-title {
   align-items: center;
 }
 
-.drag-indicator {
-  margin: 0 0 0 1rem;
-}
-
 .pair-card {
   display: flex;
   min-height: 6rem;
@@ -71,11 +67,6 @@ mat-card-title {
   width: 100%;
   font-weight: 500;
   padding: 0.5rem;
-}
-
-.mat-fab {
-  padding: 0;
-  margin: 0.5rem 1rem !important;
 }
 
 .cards-with-button {

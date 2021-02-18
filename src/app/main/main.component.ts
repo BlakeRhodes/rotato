@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {ScreenType} from '../utillity/enums';
 import {ThemeService} from '../services/theme.service';
 import {MediaQueryService} from '../services/media-query.service';
-import {DecodeService} from '../services/decode.service';
 import {delay} from '../utillity/lulz';
 
 @Component({
@@ -18,7 +17,7 @@ export class MainComponent implements OnInit {
   constructor(
     private themeService: ThemeService,
     private mediaQueryService: MediaQueryService,
-    private decodeService: DecodeService,
+
   ) {
   }
 

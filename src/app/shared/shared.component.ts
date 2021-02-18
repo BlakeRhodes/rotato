@@ -66,7 +66,7 @@ export class SharedComponent implements OnInit {
       this.localStorageService.saveState(this.boardName)
         .add(() => this.localStorageService.getTeamBoards()
           .subscribe(
-            next => {
+            () => {
               this.openSnackBar(`${this.boardName} was saved.`, '🥔🥔🥔🥔');
               this.soundService.heyListen();
               this.router.navigate(['/']).then();
