@@ -1,7 +1,10 @@
 <mat-card
   [ngClass]="[getColor(),getBackground()]"
 >
-  <div class="mat-display-4 title">
+  <div
+    class="mat-display-4 title"
+    [class.rotate]="shouldISpinAPotato"
+  >
     {{appName}}
   </div>
   <div>

@@ -29,7 +29,7 @@ export class MainComponent implements OnInit {
   handleTheSpinningPotato(): void {
     (async () => {
       this.spin = true;
-      await delay(250);
+      await delay(500);
       this.spin = false;
     })();
   }
