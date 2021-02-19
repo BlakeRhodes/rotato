@@ -3,7 +3,7 @@ import {Theme} from '../utillity/theme';
 import {ThemeService} from '../services/theme.service';
 import {LocalStorageService} from '../services/local-storage.service';
 import {SoundService} from '../services/sound.service';
-import {HOST, THEME_KEY} from '../utillity/constants';
+import {THEME_KEY} from '../utillity/constants';
 import {MatCheckboxChange} from '@angular/material/checkbox';
 import {SaveDialogComponent} from '../save-dialog/save-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
@@ -29,7 +29,7 @@ export class MenuComponent implements OnInit {
   enableSound: boolean;
   enableSoundText = 'Enable Sound';
   teamBoards: string [] = [];
-  sharedLink = 'shared/?board=';
+  sharedLink = 'shared?board=';
   private boardName: string;
 
   constructor(
@@ -109,7 +109,8 @@ export class MenuComponent implements OnInit {
   }
 
   handleShare(): void {
-    const link = `${HOST}${this.sharedLink}${this.decodeService.encode()}`;
+    const link = `${location.protocol}//${location.host}/${this.sharedLink}${this.decodeService.encode()}`;
+    console.log(link);
     this.snackbar.open('Copied to the Clipboard',
       '🥔🥔🥔🥔',
       {duration: 2000, }
