@@ -38,11 +38,12 @@ export class LocalStorageService {
     if (!theme) {
       localStorage.setItem(THEME_KEY, 'classic');
     }
-    console.log(version);
+
     if (version !== CURRENT_DATA_VERSION) {
-      this.setAllowSolo(true);
+      this.handleAllowSoloFeature(version);
       localStorage.setItem(this.versionKey, CURRENT_DATA_VERSION);
     }
+    console.log(version);
 
     const enableSound = localStorage.getItem(this.enableSoundKey);
     if (enableSound) {
@@ -61,7 +62,7 @@ export class LocalStorageService {
   }
 
   saveState(name: string): Subscription {
-    if (!name){
+    if (!name) {
       return;
     }
     const teamBoard: TeamBoard = {
@@ -210,5 +211,11 @@ export class LocalStorageService {
 
   set(field: string, update: any): void {
     localStorage.setItem(field, JSON.stringify(update));
+  }
+
+  private handleAllowSoloFeature(version: string) {
+    if (version === '1.0.0.0') {
+      this.setAllowSolo(true);
+    }
   }
 }
