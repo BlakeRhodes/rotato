@@ -10,6 +10,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {DecodeService} from '../services/decode.service';
 import {Clipboard} from '@angular/cdk/clipboard';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -40,6 +41,7 @@ export class MenuComponent implements OnInit {
     public dialog: MatDialog,
     private snackbar: MatSnackBar,
     private clipboard: Clipboard,
+    private route: ActivatedRoute,
   ) {
   }
 
@@ -109,7 +111,7 @@ export class MenuComponent implements OnInit {
   }
 
   handleShare(): void {
-    const link = `${location.protocol}//${location.host}/${this.sharedLink}${this.decodeService.encode()}`;
+    const link = `${location.href}${this.sharedLink}${this.decodeService.encode()}`;
     console.log(link);
     this.snackbar.open('Copied to the Clipboard',
       '🥔🥔🥔🥔',
