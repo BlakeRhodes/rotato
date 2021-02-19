@@ -41,7 +41,6 @@ export class MenuComponent implements OnInit {
     public dialog: MatDialog,
     private snackbar: MatSnackBar,
     private clipboard: Clipboard,
-    private route: ActivatedRoute,
   ) {
   }
 
@@ -112,7 +111,6 @@ export class MenuComponent implements OnInit {
 
   handleShare(): void {
     const link = `${location.href}${this.sharedLink}${this.decodeService.encode()}`;
-    console.log(link);
     this.snackbar.open('Copied to the Clipboard',
       '🥔🥔🥔🥔',
       {duration: 2000, }
