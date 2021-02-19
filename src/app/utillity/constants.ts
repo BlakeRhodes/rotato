@@ -1,4 +1,3 @@
-import {environment} from '../../environments/environment';
 import {ListType} from './list-type';
 
 export const DELETE_BUTTON_TEXT = 'PEEL';
