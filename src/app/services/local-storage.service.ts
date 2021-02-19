@@ -1,6 +1,14 @@
 import {Injectable} from '@angular/core';
 import {Pair} from '../utillity/pair';
-import {CURRENT_DATA_VERSION, TEAM_BOARDS_KEY, THEME_KEY} from '../utillity/constants';
+import {
+  BOARDS_KEY,
+  CURRENT_DATA_VERSION,
+  DEV_KEY,
+  DISABLED_BOARDS_KEY,
+  DISABLED_DEV_KEY,
+  TEAM_BOARDS_KEY,
+  THEME_KEY
+} from '../utillity/constants';
 import {NgxIndexedDBService} from 'ngx-indexed-db';
 import {TeamBoard} from '../utillity/team-board';
 import {Observable, Subscription} from 'rxjs';
@@ -11,12 +19,12 @@ import {map} from 'rxjs/operators';
 })
 export class LocalStorageService {
   private enableSound: boolean;
-  private devKey = 'devs';
+  private devKey = DEV_KEY;
   private pairsKey = 'pairs';
   private carriersKey = 'carriers';
-  private disabledKey = 'disabled';
-  private boardsKey = 'boards';
-  private disabledBoardsKey = 'disabledBoards';
+  private disabledKey = DISABLED_DEV_KEY;
+  private boardsKey = BOARDS_KEY;
+  private disabledBoardsKey = DISABLED_BOARDS_KEY;
   private enableSoundKey = 'enableSound';
   private versionKey = 'version';
   private stickingKey = 'sticking';
@@ -110,14 +118,6 @@ export class LocalStorageService {
       .subscribe(next => {
         this.databaseService.delete(TEAM_BOARDS_KEY, next.id).subscribe();
       });
-  }
-
-  addDev(name: string): void {
-    this.add(this.devKey, name);
-  }
-
-  addBoard(name: string): void {
-    this.add(this.boardsKey, name);
   }
 
   add(key: string, value: any): void {
