@@ -56,8 +56,13 @@ export class RotationService {
       }
     }
 
+    let solo: string;
     if (devs.length % 2 !== 0) {
-      devs.push(null);
+      if(this.localStorageService.getAllowSolo()) {
+        devs.push(null);
+      } else {
+        solo = devs.pop();
+      }
     }
 
     for (let i = 0; i < devs.length / 2; i++) {
@@ -74,6 +79,10 @@ export class RotationService {
           devs: pair
         }
       );
+    }
+
+    if(!this.localStorageService.getAllowSolo() && solo){
+      pairs[0].devs.push(solo);
     }
 
     return pairs;

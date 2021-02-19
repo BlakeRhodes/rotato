@@ -28,6 +28,7 @@ export class LocalStorageService {
   private enableSoundKey = 'enableSound';
   private versionKey = 'version';
   private stickingKey = 'sticking';
+  private allowSoloKey = 'allowSolo';
 
   constructor(
     private databaseService: NgxIndexedDBService,
@@ -37,10 +38,12 @@ export class LocalStorageService {
     if (!theme) {
       localStorage.setItem(THEME_KEY, 'classic');
     }
-    console.log(version);
+
     if (version !== CURRENT_DATA_VERSION) {
+      this.handleAllowSoloFeature(version);
       localStorage.setItem(this.versionKey, CURRENT_DATA_VERSION);
     }
+    console.log(version);
 
     const enableSound = localStorage.getItem(this.enableSoundKey);
     if (enableSound) {
@@ -59,7 +62,7 @@ export class LocalStorageService {
   }
 
   saveState(name: string): Subscription {
-    if (!name){
+    if (!name) {
       return;
     }
     const teamBoard: TeamBoard = {
@@ -130,6 +133,10 @@ export class LocalStorageService {
     return this.get(this.devKey) as string[];
   }
 
+  getAllowSolo(): boolean {
+    return this.get(this.allowSoloKey) as boolean;
+  }
+
   getPairs(): Pair[] {
     return this.get(this.pairsKey) as Pair[];
   }
@@ -166,6 +173,10 @@ export class LocalStorageService {
     return [];
   }
 
+  setAllowSolo(value: boolean): void {
+    this.set(this.allowSoloKey, value);
+  }
+
   setDevs(devs: string[]): void {
     this.set(this.devKey, devs);
   }
@@ -200,5 +211,11 @@ export class LocalStorageService {
 
   set(field: string, update: any): void {
     localStorage.setItem(field, JSON.stringify(update));
+  }
+
+  private handleAllowSoloFeature(version: string) {
+    if (version === '1.0.0.0') {
+      this.setAllowSolo(true);
+    }
   }
 }

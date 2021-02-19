@@ -51,12 +51,24 @@
   >
     Theme
   </button>
-  <mat-checkbox
-    [checked]="enableSound"
-    (change)="handleEnableSound($event)"
+  <div
   >
-    {{enableSoundText}}
-  </mat-checkbox>
+    <mat-checkbox
+      [checked]="enableSound"
+      (change)="handleEnableSound($event)"
+    >
+      {{enableSoundText}}
+    </mat-checkbox>
+  </div>
+  <div
+  >
+    <mat-checkbox
+      [checked]="allowSolo"
+      (change)="handleAllowSolo($event)"
+    >
+      {{allowSoloText}}
+    </mat-checkbox>
+  </div>
   <a
     href="https://github.com/BlakeRhodes/rotato"
     mat-menu-item
