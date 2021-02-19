@@ -28,6 +28,7 @@ export class LocalStorageService {
   private enableSoundKey = 'enableSound';
   private versionKey = 'version';
   private stickingKey = 'sticking';
+  private allowSoloKey = 'allowSolo';
 
   constructor(
     private databaseService: NgxIndexedDBService,
@@ -39,6 +40,7 @@ export class LocalStorageService {
     }
     console.log(version);
     if (version !== CURRENT_DATA_VERSION) {
+      this.setAllowSolo(true);
       localStorage.setItem(this.versionKey, CURRENT_DATA_VERSION);
     }
 
@@ -130,6 +132,10 @@ export class LocalStorageService {
     return this.get(this.devKey) as string[];
   }
 
+  getAllowSolo(): boolean {
+    return this.get(this.allowSoloKey) as boolean;
+  }
+
   getPairs(): Pair[] {
     return this.get(this.pairsKey) as Pair[];
   }
@@ -164,6 +170,10 @@ export class LocalStorageService {
       return JSON.parse(current);
     }
     return [];
+  }
+
+  setAllowSolo(value: boolean): void {
+    this.set(this.allowSoloKey, value);
   }
 
   setDevs(devs: string[]): void {

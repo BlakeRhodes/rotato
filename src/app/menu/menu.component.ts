@@ -32,6 +32,8 @@ export class MenuComponent implements OnInit {
   teamBoards: string [] = [];
   sharedLink = 'shared?board=';
   private boardName: string;
+  allowSolo: boolean;
+  allowSoloText = 'Allow Solo';
 
   constructor(
     private themeService: ThemeService,
@@ -46,6 +48,7 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.enableSound = this.soundService.soundEnabled;
+    this.allowSolo = this.localStorageService.getAllowSolo();
     this.localStorageService.getTeamBoards()
       .subscribe(boards => this.teamBoards = boards);
   }
@@ -116,5 +119,9 @@ export class MenuComponent implements OnInit {
       {duration: 2000, }
     );
     this.clipboard.copy(link);
+  }
+
+  handleAllowSolo(event: MatCheckboxChange): void {
+    this.localStorageService.setAllowSolo(event.checked);
   }
 }
