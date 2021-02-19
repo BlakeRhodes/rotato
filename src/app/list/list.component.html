@@ -1,5 +1,4 @@
 <form class="form-container">
-
   <mat-form-field
     class="wide-value-input"
     [ngClass]="getFormColor()"
@@ -7,11 +6,11 @@
     <mat-label
       [ngClass]="getColor()"
     >
-      {{inputLabel}}
+      {{type.label}}
     </mat-label>
     <input
       matInput
-      #boardName
+      #itemName
       [ngClass]="getInputColor()"
     >
   </mat-form-field>
@@ -19,8 +18,8 @@
     class="icon-button add-button"
     mat-icon-button
     color="accent"
-    aria-label="Add Board"
-    (click)="handleAdd(boardName.value); boardName.value = ''"
+    [attr.aria-label]="'Add '+type.typeName"
+    (click)="handleAdd(itemName.value); itemName.value = ''"
   >
     <mat-icon>
       add_circle
@@ -32,28 +31,28 @@
   <mat-card
     class="added-list-item"
     [matTooltip]="isMobile?'':backBurnerMessage"
-    *ngFor="let board of boards; let i = index"
-    (dblclick)="handleDisable(i,board)"
-    (press)="handleDisable(i, board)"
-    [ngClass]="[getCurrentClass(board),isStrikeThrough(board)]"
+    *ngFor="let item of list; let i = index"
+    (dblclick)="handleDisable(i,item)"
+    (press)="handleDisable(i, item)"
+    [ngClass]="[getCurrentClass(item),isStrikeThrough(item)]"
   >
     <div class="mat-title">
-      {{board}}
+      {{item}}
     </div>
     <div>
       <button
         class="icon-button"
-        aria-label="Disable Board"
+        [attr.aria-label]="'Disable '+type.typeName"
         mat-icon-button
-        (click)="handleDisable(i, board)"
+        (click)="handleDisable(i, item)"
       >
         <mat-icon>
-          {{isDisabled(board) ? 'label' : 'label_off'}}
+          {{isDisabled(item) ? 'label' : 'label_off'}}
         </mat-icon>
       </button>
       <button
         class="icon-button"
-        aria-label="Peel Board"
+        [attr.aria-label]="'Peel '+type.typeName"
         mat-icon-button
         (click)="handleDelete(i)"
       >
@@ -61,7 +60,6 @@
           delete
         </mat-icon>
       </button>
-
     </div>
   </mat-card>
 </div>

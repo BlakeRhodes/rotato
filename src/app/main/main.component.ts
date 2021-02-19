@@ -3,6 +3,8 @@ import {ScreenType} from '../utillity/enums';
 import {ThemeService} from '../services/theme.service';
 import {MediaQueryService} from '../services/media-query.service';
 import {delay} from '../utillity/lulz';
+import {ListType} from '../utillity/list-type';
+import {BOARD_TYPE, DEV_TYPE} from '../utillity/constants';
 
 @Component({
   selector: 'app-main',
@@ -13,6 +15,9 @@ export class MainComponent implements OnInit {
 
   spin = false;
   screenType: ScreenType;
+  dev: ListType = DEV_TYPE;
+
+  board: ListType = BOARD_TYPE;
 
   constructor(
     private themeService: ThemeService,

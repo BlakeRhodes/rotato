@@ -11,10 +11,10 @@
   <mat-tab
     label="Developers"
   >
-    <app-dev-controls [isMobile]="true"></app-dev-controls>
+    <app-list [isMobile]="true" [type]="dev"></app-list>
   </mat-tab>
   <mat-tab label="Boards">
-    <app-boards [isMobile]="true"></app-boards>
+    <app-list [isMobile]="true" [type]="board"></app-list>
   </mat-tab>
   <mat-tab label="Spuddies">
     <app-display

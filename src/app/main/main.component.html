@@ -7,11 +7,17 @@
   <div class="three-columns"
        [ngClass]="getBackground()"
   >
-    <app-dev-controls></app-dev-controls>
+    <app-list
+      [type]="dev"
+    >
+    </app-list>
     <app-display
       (taterSpinningTime)="handleTheSpinningPotato()"
     ></app-display>
-    <app-boards></app-boards>
+    <app-list
+      [type]="board"
+    >
+    </app-list>
   </div>
   <app-footer></app-footer>
 </div>

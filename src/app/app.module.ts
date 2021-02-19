@@ -6,7 +6,6 @@ import {PotatoComponent} from './potato/potato.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
-import {DevControlsComponent} from './dev-controls/dev-controls.component';
 import {DisplayComponent} from './display/display.component';
 import {MatInputModule} from '@angular/material/input';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -15,7 +14,6 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {BoardsComponent} from './boards/boards.component';
 import {FooterComponent} from './footer/footer.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {ServiceWorkerModule} from '@angular/service-worker';
@@ -28,23 +26,22 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {HammerConfiguration} from './configs/hammer-configuration';
 import {dbConfig} from './configs/db-config';
 import {NgxIndexedDBModule} from 'ngx-indexed-db';
-import { SaveDialogComponent } from './save-dialog/save-dialog.component';
+import {SaveDialogComponent} from './save-dialog/save-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {ClipboardModule} from '@angular/cdk/clipboard';
-import { SharedComponent } from './shared/shared.component';
+import {SharedComponent} from './shared/shared.component';
 import {RouterModule} from '@angular/router';
 import {routes} from './configs/routes';
-import { MainComponent } from './main/main.component';
+import {MainComponent} from './main/main.component';
 import {NgxCaptureModule} from 'ngx-capture';
-import { ScreenshotComponent } from './screenshot/screenshot.component';
+import {ScreenshotComponent} from './screenshot/screenshot.component';
+import {ListComponent} from './list/list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PotatoComponent,
-    DevControlsComponent,
     DisplayComponent,
-    BoardsComponent,
     FooterComponent,
     MobilePotatoComponent,
     MobileSelectorComponent,
@@ -53,6 +50,7 @@ import { ScreenshotComponent } from './screenshot/screenshot.component';
     SharedComponent,
     MainComponent,
     ScreenshotComponent,
+    ListComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,7 +5,10 @@
 
     <div class="wrapper">
       <app-menu [isMobile]="true"></app-menu>
-      <div class="title-mobile">
+      <div
+        class="title-mobile"
+        [class.rotate-x]="shouldISpinAPotato"
+      >
         {{appName}}
       </div>
       <div>
