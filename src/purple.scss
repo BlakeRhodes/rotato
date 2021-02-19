@@ -1,0 +1,60 @@
+@use 'colors';
+.purple-color-1 {
+  color: whitesmoke;
+}
+
+.purple-color-2 {
+  color: whitesmoke;
+}
+
+.purple-selected{
+  color: whitesmoke;
+  background: purple !important;
+}
+
+.purple-background-1{
+  background: rebeccapurple;
+  .mat-tab-label-content{
+    color: whitesmoke;
+  }
+}
+
+.purple-background-2{
+  background: rebeccapurple;
+  color: whitesmoke;
+}
+
+.purple-background-3{
+  background: mediumpurple;
+}
+
+.purple-background-4{
+  background: mediumpurple;
+}
+
+.purple-background-5{
+  background: mediumpurple !important;
+  color: whitesmoke;
+}
+
+.purple-label{
+  color: whitesmoke;
+  background: rebeccapurple;
+}
+
+.purple-input{
+  background-color: rebeccapurple !important;
+  color: whitesmoke !important;
+}
+
+.purple-form{
+  .mat-form-field-underline{
+    background: whitesmoke !important;
+  }
+}
+
+.purple-shared-page{
+  background: blueviolet !important;
+  color: whitesmoke;
+}
+

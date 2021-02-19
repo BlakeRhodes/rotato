@@ -16,7 +16,9 @@ export const DEV_TYPE: ListType = {
   listKey: DEV_KEY,
   disabledKey: DISABLED_DEV_KEY,
   typeName: 'Dev',
-  label: 'Chef\'s Name'
+  label: 'Chef\'s Name',
+  iconOn: 'person',
+  iconOff: 'person_off',
 };
 
 export const BOARD_TYPE: ListType = {
@@ -24,4 +26,6 @@ export const BOARD_TYPE: ListType = {
   disabledKey: DISABLED_BOARDS_KEY,
   typeName: 'Board',
   label: 'Cutting Board Name',
+  iconOn: 'label',
+  iconOff: 'label_off'
 };

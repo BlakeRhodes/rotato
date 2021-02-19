@@ -3,4 +3,6 @@ export interface ListType{
   listKey: string;
   disabledKey: string;
   typeName: string;
+  iconOn: string;
+  iconOff: string;
 }

@@ -10,7 +10,6 @@ import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {DecodeService} from '../services/decode.service';
 import {Clipboard} from '@angular/cdk/clipboard';
-import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -26,6 +25,7 @@ export class MenuComponent implements OnInit {
     {sheet: 'classic', name: 'Fried'},
     {sheet: 'dark', name: 'Baked'},
     {sheet: 'black', name: 'Burnt'},
+    {sheet: 'purple', name: 'Vitelotte'}
   ];
   enableSound: boolean;
   enableSoundText = 'Enable Sound';

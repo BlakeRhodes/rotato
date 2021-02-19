@@ -47,7 +47,7 @@
         (click)="handleDisable(i, item)"
       >
         <mat-icon>
-          {{isDisabled(item) ? 'label' : 'label_off'}}
+          {{isDisabled(item) ? type.iconOff : type.iconOn}}
         </mat-icon>
       </button>
       <button
