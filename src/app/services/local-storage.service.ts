@@ -213,7 +213,7 @@ export class LocalStorageService {
     localStorage.setItem(field, JSON.stringify(update));
   }
 
-  private handleAllowSoloFeature(version: string) {
+  private handleAllowSoloFeature(version: string): void {
     if (version === '1.0.0.0') {
       this.setAllowSolo(true);
     }
