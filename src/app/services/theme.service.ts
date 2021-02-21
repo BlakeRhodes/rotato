@@ -18,7 +18,7 @@ export class ThemeService {
     return `${theme}-selected`;
   }
 
-  getListItem(){
+  getListItem(): string{
     const theme = localStorage.getItem(THEME_KEY);
     return `${theme}-list-item`;
   }
@@ -38,27 +38,27 @@ export class ThemeService {
     return `${theme}-shared-page`;
   }
 
-  getHeader() {
+  getHeader(): string {
     const theme = localStorage.getItem(THEME_KEY);
     return `${theme}-header`;
   }
 
-  getSpuddies() {
+  getSpuddies(): string {
     const theme = localStorage.getItem(THEME_KEY);
     return `${theme}-spuddies`;
   }
 
-  getPairCard() {
+  getPairCard(): string {
     const theme = localStorage.getItem(THEME_KEY);
     return `${theme}-pair-card`;
   }
 
-  devCard() {
+  devCard(): string {
     const theme = localStorage.getItem(THEME_KEY);
     return `${theme}-dev-card`;
   }
 
-  getBackground() {
+  getBackground(): string {
     const theme = localStorage.getItem(THEME_KEY);
     return `${theme}-background`;
   }

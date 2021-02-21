@@ -20,6 +20,6 @@ export class MobilePotatoComponent implements OnInit {
   }
 
   getStyle(): string {
-    return this.themeService.getHeader()
+    return this.themeService.getHeader();
   }
 }

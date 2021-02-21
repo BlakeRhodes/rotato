@@ -130,7 +130,7 @@ export class DisplayComponent {
   }
 
   getStyle(): string {
-    return this.themeService.getSpuddies()
+    return this.themeService.getSpuddies();
   }
 
   private openDialog(img: string): void{

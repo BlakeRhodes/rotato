@@ -49,7 +49,7 @@ export class PotatoComponent {
     this.flipped[i] = !this.flipped[i];
   }
 
-  getStyle() {
-    return this.themeService.getHeader()
+  getStyle(): string {
+    return this.themeService.getHeader();
   }
 }
