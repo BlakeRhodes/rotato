@@ -1,11 +1,40 @@
 @use 'colors';
 
-.black-color-1 {
-  color: darkgrey;
+.black-background{
+  background: black;
+  .mat-tab-label-content{
+    color: darkgrey;
+  }
 }
 
-.black-color-2 {
+.black-dev-card{
+  background: black !important;
   color: darkgrey;
+  border: darkgrey 1px solid;
+}
+
+.black-pair-card{
+  background: black;
+  color: darkgrey;
+  border: darkgrey 1px solid;
+}
+
+.black-spuddies{
+  color: darkgrey;
+  background: black;
+  border: darkgrey 1px solid;
+}
+
+.black-header{
+  color: darkgrey;
+  background: black;
+  border: darkgrey 1px solid;
+}
+
+.black-list-item{
+  background: black !important;
+  color: darkgrey;
+  border: darkgrey 1px solid;
 }
 
 .black-selected{
@@ -13,48 +42,17 @@
   background: darkgrey !important;
 }
 
-.black-background-1{
-  background: black;
-  .mat-tab-label-content{
-    color: darkgrey;
-  }
-}
-
-.black-background-2{
-  background: black;
-  color: darkgrey;
-  border: darkgrey 1px solid;
-}
-
-.black-background-3{
-  background: black;
-  border: darkgrey 1px solid;
-}
-
-.black-background-4{
-  background: black;
-  border: darkgrey 1px solid;
-}
-
-.black-background-5{
-  background: black !important;
-  color: darkgrey;
-  border: darkgrey 1px solid;
-}
-
-.black-label{
-  color: darkgrey;
-  background: black;
-}
-
 .black-input{
-  background-color: black !important;
-  color: grey !important;
-}
-
-.black-form{
   .mat-form-field-underline{
-    background: grey !important;
+    background: darkgrey !important;
+  }
+  input{
+    background-color: black !important;
+    color: darkgrey !important;
+  }
+  mat-label{
+    color: darkgrey;
+    background: black;
   }
 }
 

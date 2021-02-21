@@ -1,11 +1,32 @@
 @use 'colors';
 
-.light-color-1 {
+.light-background{
+  background: white;
+  .mat-tab-label-content{
+    color: darkkhaki;
+  }
+}
+
+.light-dev-card{
+  background: white !important;
+  color: darkkhaki;
+  border: lemonchiffon 1px solid;
+}
+
+.light-pair-card{
   color: darkkhaki;
 }
 
-.light-color-2 {
+.light-spuddies{
   color: darkkhaki;
+  background: white;
+  border: lemonchiffon 1px solid;
+}
+
+.light-header{
+  background: white;
+  color: darkkhaki;
+  border: lemonchiffon 1px solid;
 }
 
 .light-selected{
@@ -14,47 +35,22 @@
   border: darkkhaki 1px solid;
 }
 
-.light-background-1{
-  background: white;
-  .mat-tab-label-content{
-    color: darkkhaki;
-  }
-}
-
-.light-background-2{
-  background: white;
-  color: darkkhaki;
-}
-
-.light-background-3{
-  background: white;
-  border: lemonchiffon 1px solid;
-}
-
-.light-background-4{
-  background: white;
-  border: lemonchiffon 1px solid;
-}
-
-.light-background-5{
+.light-list-item{
   background: white !important;
   color: darkkhaki;
   border: lemonchiffon 1px solid;
 }
 
-.light-label{
-  color: darkkhaki;
-  background: white;
-}
-
 .light-input{
   background-color: white !important;
   color: darkkhaki !important;
-}
 
-.light-form{
   .mat-form-field-underline{
     background: white !important;
   }
-}
 
+  mat-label{
+    color: darkkhaki;
+    background: white;
+  }
+}

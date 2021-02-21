@@ -13,34 +13,19 @@ export class ThemeService {
     return localStorage.getItem(THEME_KEY);
   }
 
-  getColor(value: number): string {
-    const theme = localStorage.getItem(THEME_KEY);
-    return `${theme}-color-${value}`;
-  }
-
   getSelected(): string{
     const theme = localStorage.getItem(THEME_KEY);
     return `${theme}-selected`;
   }
 
-  getBackground(value: number): string {
+  getListItem(){
     const theme = localStorage.getItem(THEME_KEY);
-    return `${theme}-background-${value}`;
+    return `${theme}-list-item`;
   }
 
-  getLabel(): string {
-    const theme = localStorage.getItem(THEME_KEY);
-    return `${theme}-label`;
-  }
-
-  getInput(): string {
+  getInputColor(): string {
     const theme = localStorage.getItem(THEME_KEY);
     return `${theme}-input`;
-  }
-
-  getFormColor(): string {
-    const theme = localStorage.getItem(THEME_KEY);
-    return `${theme}-form`;
   }
 
   getTab(): string {
@@ -51,5 +36,30 @@ export class ThemeService {
   getSharedPage(): string {
     const theme = localStorage.getItem(THEME_KEY);
     return `${theme}-shared-page`;
+  }
+
+  getHeader() {
+    const theme = localStorage.getItem(THEME_KEY);
+    return `${theme}-header`;
+  }
+
+  getSpuddies() {
+    const theme = localStorage.getItem(THEME_KEY);
+    return `${theme}-spuddies`;
+  }
+
+  getPairCard() {
+    const theme = localStorage.getItem(THEME_KEY);
+    return `${theme}-pair-card`;
+  }
+
+  devCard() {
+    const theme = localStorage.getItem(THEME_KEY);
+    return `${theme}-dev-card`;
+  }
+
+  getBackground() {
+    const theme = localStorage.getItem(THEME_KEY);
+    return `${theme}-background`;
   }
 }

@@ -64,19 +64,11 @@ export class ListComponent implements OnInit {
   }
 
   getCurrentClass(item: string): string {
-    return this.isDisabled(item) ? this.themeService.getSelected() : this.themeService.getBackground(5);
-  }
-
-  getFormColor(): string {
-    return this.themeService.getFormColor();
-  }
-
-  getColor(): string {
-    return this.themeService.getLabel();
+    return this.isDisabled(item) ? this.themeService.getSelected() : this.themeService.getListItem();
   }
 
   getInputColor(): string {
-    return this.themeService.getInput();
+    return this.themeService.getInputColor();
   }
 
   isStrikeThrough(dev: string): string {

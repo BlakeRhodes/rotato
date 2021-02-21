@@ -1,17 +1,15 @@
 <form class="form-container">
   <mat-form-field
     class="wide-value-input"
-    [ngClass]="getFormColor()"
+    [ngClass]="getInputColor()"
   >
     <mat-label
-      [ngClass]="getColor()"
     >
       {{type.label}}
     </mat-label>
     <input
       matInput
       #itemName
-      [ngClass]="getInputColor()"
     >
   </mat-form-field>
   <button
