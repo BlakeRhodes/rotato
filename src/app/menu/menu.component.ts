@@ -53,10 +53,6 @@ export class MenuComponent implements OnInit {
       .subscribe(boards => this.teamBoards = boards);
   }
 
-  getBackground(): string {
-    return this.themeService.getBackground();
-  }
-
   setTheme(theme: string): void {
     localStorage.setItem(THEME_KEY, theme);
   }
