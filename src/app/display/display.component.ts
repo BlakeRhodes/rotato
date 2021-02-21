@@ -100,7 +100,7 @@ export class DisplayComponent {
     if (found) {
       return this.themeService.getSelected();
     }
-    return this.themeService.getBackground(2);
+    return this.themeService.getPairCard();
   }
 
   handleExit(pair: Pair): void {
@@ -113,11 +113,7 @@ export class DisplayComponent {
   }
 
   getColor(dev: string): string {
-    return this.isCarrying(dev) ? this.themeService.getSelected() : this.themeService.getBackground(5);
-  }
-
-  getLabelColor(): string {
-    return this.themeService.getColor(1);
+    return this.isCarrying(dev) ? this.themeService.getSelected() : this.themeService.devCard();
   }
 
   isTurnedIn(pair: Pair): Pair {
@@ -126,15 +122,15 @@ export class DisplayComponent {
     );
   }
 
-  getBackground(): string {
-    return this.themeService.getBackground(4);
-  }
-
   screenShot(): void {
     this.captureService.getImage(this.screen.nativeElement, true)
       .subscribe(image => {
         this.openDialog(image);
       });
+  }
+
+  getStyle(): string {
+    return this.themeService.getSpuddies()
   }
 
   private openDialog(img: string): void{

@@ -54,7 +54,7 @@ export class MenuComponent implements OnInit {
   }
 
   getBackground(): string {
-    return this.themeService.getBackground(1);
+    return this.themeService.getBackground();
   }
 
   setTheme(theme: string): void {

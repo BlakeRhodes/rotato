@@ -1,46 +1,47 @@
 @use 'colors';
-.classic-color-1 {
-  color: #fffacd;
-}
-
-.classic-color-2 {
-  color: blanchedalmond;
-}
-
-.classic-selected{
-  color: lemonchiffon;
-  background: #deb887 !important;
-}
-
-.classic-background-1{
+.classic-background {
   background: blanchedalmond;
-  .mat-tab-label-content{
+
+  .mat-tab-label-content {
     color: black;
   }
 }
 
-.classic-background-2{
-  background: #ffebcd;
-}
-
-.classic-background-3{
-  background: colors.$dark-chocolate;
-}
-
-.classic-background-4{
-  background: goldenrod;
-}
-
-.classic-background-5{
+.classic-dev-card{
   background: white !important;
 }
 
-.classic-label{
-  color: black;
-  background: blanchedalmond !important;
+.classic-pair-card{
+  background: blanchedalmond;
 }
 
-.classic-shared-page{
+.classic-spuddies {
+  color: lemonchiffon;
+  background: goldenrod;
+}
+
+.classic-header{
+  color: blanchedalmond;
+  background: colors.$dark-chocolate;
+}
+
+.classic-selected {
+  color: lemonchiffon;
+  background: #deb887 !important;
+}
+
+.classic-list-item {
+  background: white !important;
+}
+
+.classic-input {
+  mat-label {
+    color: black;
+    background: blanchedalmond !important;
+  }
+}
+
+.classic-shared-page {
   color: lemonchiffon;
   background: colors.$dark-chocolate;
 }

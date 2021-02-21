@@ -39,7 +39,7 @@ export class MainComponent implements OnInit {
   }
 
   getBackground(): string {
-    return this.themeService.getBackground(1);
+    return this.themeService.getBackground();
   }
 
   isDesktop(): boolean {

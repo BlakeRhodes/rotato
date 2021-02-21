@@ -28,7 +28,7 @@ export class MobileSelectorComponent implements OnInit {
   }
 
   getBackground(): string {
-    return this.themeService.getBackground(1);
+    return this.themeService.getBackground();
   }
 
   handleRight(): void {

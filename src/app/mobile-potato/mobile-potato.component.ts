@@ -19,12 +19,7 @@ export class MobilePotatoComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getColor(): string {
-    return this.themeService.getColor(2);
+  getStyle(): string {
+    return this.themeService.getHeader()
   }
-
-  getBackground(): string {
-    return this.themeService.getBackground(3);
-  }
-
 }

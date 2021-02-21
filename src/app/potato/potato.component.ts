@@ -49,11 +49,7 @@ export class PotatoComponent {
     this.flipped[i] = !this.flipped[i];
   }
 
-  getColor(): string {
-    return this.themeService.getColor(2);
-  }
-
-  getBackground(): string {
-    return this.themeService.getBackground(3);
+  getStyle() {
+    return this.themeService.getHeader()
   }
 }

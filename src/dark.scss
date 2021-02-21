@@ -1,10 +1,30 @@
 @use 'colors';
-.dark-color-1 {
-  color: lemonchiffon;
+
+.dark-background{
+  background: black;
+  .mat-tab-label-content{
+    color: lemonchiffon;
+  }
 }
 
-.dark-color-2 {
+.dark-dev-card{
+  background: chocolate !important;
+  color: blanchedalmond;
+}
+
+.dark-pair-card{
+  background: sienna;
+  color: blanchedalmond;
+}
+
+.dark-spuddies{
   color: lemonchiffon;
+  background: colors.$dark-chocolate;
+}
+
+.dark-header{
+  color: lemonchiffon;
+  background: colors.$dark-chocolate;
 }
 
 .dark-selected{
@@ -12,44 +32,24 @@
   background: brown !important;
 }
 
-.dark-background-1{
-  background: black;
-  .mat-tab-label-content{
-    color: lemonchiffon;
-  }
-}
-
-.dark-background-2{
-  background: sienna;
-  color: blanchedalmond;
-}
-
-.dark-background-3{
-  background: colors.$dark-chocolate;
-}
-
-.dark-background-4{
-  background: colors.$dark-chocolate;
-}
-
-.dark-background-5{
+.dark-list-item{
   background: chocolate !important;
   color: blanchedalmond;
 }
 
-.dark-label{
-  color: lemonchiffon;
-  background: black;
-}
-
 .dark-input{
-  background-color: black !important;
-  color: lemonchiffon !important;
-}
-
-.dark-form{
   .mat-form-field-underline{
     background: lemonchiffon !important;
+  }
+
+  mat-label{
+    color: lemonchiffon;
+    background: black;
+  }
+
+  input{
+    background-color: black !important;
+    color: lemonchiffon !important;
   }
 }
 
