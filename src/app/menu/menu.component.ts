@@ -125,6 +125,6 @@ export class MenuComponent implements OnInit {
   }
 
   handleSound($event: MatSliderChange) {
-    this.soundService.setVolume($event.value)
+    this.soundService.setVolume($event.value);
   }
 }

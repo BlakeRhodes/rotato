@@ -42,7 +42,7 @@ export class LocalStorageService {
       localStorage.setItem(THEME_KEY, 'classic');
     }
 
-    if(!volume){
+    if (!volume){
       localStorage.setItem(this.volumeKey, '.75');
     }
 

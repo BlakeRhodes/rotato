@@ -39,10 +39,10 @@ export class SoundService {
     this.localStorageService.setVolume(value);
   }
 
-  private play(sound): void{
+  private play(sound: HTMLAudioElement): void{
     if (this.soundEnabled) {
       sound.load();
-      sound.volume = this.volume
+      sound.volume = this.volume;
       sound.play().then();
     }
   }
