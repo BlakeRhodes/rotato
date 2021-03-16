@@ -9,38 +9,41 @@ export class SoundService {
   private hey = new Audio('assets/hey-listen.mp3');
   private spin = new Audio('assets/spin.mp3');
   private pop = new Audio('assets/pop.mp3');
+  private volume: number;
   soundEnabled = false;
 
   constructor(private localStorageService: LocalStorageService) {
     this.soundEnabled = localStorageService.getEnableSound();
+    this.volume = localStorageService.getVolume();
   }
 
 
   doAYeet(): void {
-    if (this.soundEnabled) {
-      this.yeet.load();
-      this.yeet.play().then();
-    }
+    this.play(this.yeet);
   }
 
   heyListen(): void {
-    if (this.soundEnabled) {
-      this.hey.load();
-      this.hey.play().then();
-    }
+    this.play(this.hey);
   }
 
   spinning(): void {
-    if (this.soundEnabled) {
-      this.spin.load();
-      this.spin.play().then();
-    }
+    this.play(this.spin);
   }
 
   dropPop(): void {
+    this.play(this.pop);
+  }
+
+  setVolume(value: number) {
+    this.volume = value;
+    this.localStorageService.setVolume(value);
+  }
+
+  private play(sound): void{
     if (this.soundEnabled) {
-      this.pop.load();
-      this.pop.play().then();
+      sound.load();
+      sound.volume = this.volume
+      sound.play().then();
     }
   }
 }

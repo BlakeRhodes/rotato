@@ -29,14 +29,21 @@ export class LocalStorageService {
   private versionKey = 'version';
   private stickingKey = 'sticking';
   private allowSoloKey = 'allowSolo';
+  private volumeKey = 'volume';
 
   constructor(
     private databaseService: NgxIndexedDBService,
   ) {
     const version = localStorage.getItem(this.versionKey);
     const theme = localStorage.getItem(THEME_KEY);
+    const volume = localStorage.getItem(this.volumeKey);
+
     if (!theme) {
       localStorage.setItem(THEME_KEY, 'classic');
+    }
+
+    if(!volume){
+      localStorage.setItem(this.volumeKey, '.75');
     }
 
     if (version !== CURRENT_DATA_VERSION) {
@@ -165,6 +172,10 @@ export class LocalStorageService {
     return this.get(this.enableSoundKey) as boolean;
   }
 
+  getVolume() {
+    return +localStorage.getItem(this.volumeKey);
+  }
+
   get(field: string): any {
     const current = localStorage.getItem(field);
     if (current) {
@@ -207,6 +218,10 @@ export class LocalStorageService {
 
   setSticking(value: Pair[]): void {
     this.set(this.stickingKey, value);
+  }
+
+  setVolume(value: number) {
+    this.set(this.volumeKey, value);
   }
 
   set(field: string, update: any): void {

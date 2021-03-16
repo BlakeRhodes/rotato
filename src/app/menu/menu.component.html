@@ -51,17 +51,15 @@
   >
     Theme
   </button>
-  <div
+  <button
+    mat-menu-item
+    aria-label="Sound"
+    [matMenuTriggerFor]="sound"
+    matTooltip="🎶🥔"
   >
-    <mat-checkbox
-      [checked]="enableSound"
-      (change)="handleEnableSound($event)"
-    >
-      {{enableSoundText}}
-    </mat-checkbox>
-  </div>
-  <div
-  >
+    Sound
+  </button>
+  <div>
     <mat-checkbox
       [checked]="allowSolo"
       (change)="handleAllowSolo($event)"
@@ -78,43 +76,57 @@
       code
     </mat-icon>
   </a>
-</mat-menu>
 
-<mat-menu #load="matMenu">
-  <button
-    mat-menu-item
-    *ngFor="let board of teamBoards"
-    [attr.aria-label]="board"
-    (click)="loadBoard(board)"
-  >
-    {{board}}
-  </button>
-</mat-menu>
-
-<mat-menu #deleteboard="matMenu">
-  <button
-    mat-menu-item
-    *ngFor="let board of teamBoards"
-    [attr.aria-label]="board"
-    (click)="deleteBoard(board)"
-  >
-    {{board}}
-  </button>
-</mat-menu>
-
-<mat-menu #style="matMenu">
-  <button
-    mat-menu-item
-    [attr.aria-label]="theme.name"
-    *ngFor="let theme of themes"
-    (click)="setTheme(theme.sheet)"
-  >
-    {{theme.name}}
-    <mat-icon
-      class="checkmark"
-      *ngIf="isSelected(theme.sheet)"
+  <mat-menu #load="matMenu">
+    <button
+      mat-menu-item
+      *ngFor="let board of teamBoards"
+      [attr.aria-label]="board"
+      (click)="loadBoard(board)"
     >
-      done
-    </mat-icon>
-  </button>
+      {{board}}
+    </button>
+  </mat-menu>
+
+  <mat-menu #deleteboard="matMenu">
+    <button
+      mat-menu-item
+      *ngFor="let board of teamBoards"
+      [attr.aria-label]="board"
+      (click)="deleteBoard(board)"
+    >
+      {{board}}
+    </button>
+  </mat-menu>
+
+  <mat-menu #style="matMenu">
+    <button
+      mat-menu-item
+      [attr.aria-label]="theme.name"
+      *ngFor="let theme of themes"
+      (click)="setTheme(theme.sheet)"
+    >
+      {{theme.name}}
+      <mat-icon
+        class="checkmark"
+        *ngIf="isSelected(theme.sheet)"
+      >
+        done
+      </mat-icon>
+    </button>
+  </mat-menu>
+
+  <mat-menu #sound="matMenu">
+    <div>
+      <mat-slider min="0" max="1" step="0.125" [value]="volume" (change)="handleSound($event)"></mat-slider>
+    </div>
+    <div>
+      <mat-checkbox
+        [checked]="enableSound"
+        (change)="handleEnableSound($event)"
+      >
+        {{enableSoundText}}
+      </mat-checkbox>
+    </div>
+  </mat-menu>
 </mat-menu>
