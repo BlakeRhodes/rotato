@@ -36,6 +36,7 @@ import {MainComponent} from './main/main.component';
 import {NgxCaptureModule} from 'ngx-capture';
 import {ScreenshotComponent} from './screenshot/screenshot.component';
 import {ListComponent} from './list/list.component';
+import {MatSliderModule} from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import {ListComponent} from './list/list.component';
     MatDialogModule,
     MatInputModule,
     MatMenuModule,
+    MatSliderModule,
     MatSnackBarModule,
     MatTabsModule,
     MatTooltipModule,

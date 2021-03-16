@@ -10,6 +10,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {DecodeService} from '../services/decode.service';
 import {Clipboard} from '@angular/cdk/clipboard';
+import {MatSliderChange} from '@angular/material/slider';
 
 @Component({
   selector: 'app-menu',
@@ -34,6 +35,7 @@ export class MenuComponent implements OnInit {
   private boardName: string;
   allowSolo: boolean;
   allowSoloText = 'Allow Solo';
+  volume: number;
 
   constructor(
     private themeService: ThemeService,
@@ -49,6 +51,7 @@ export class MenuComponent implements OnInit {
   ngOnInit(): void {
     this.enableSound = this.soundService.soundEnabled;
     this.allowSolo = this.localStorageService.getAllowSolo();
+    this.volume = this.localStorageService.getVolume();
     this.localStorageService.getTeamBoards()
       .subscribe(boards => this.teamBoards = boards);
   }
@@ -119,5 +122,9 @@ export class MenuComponent implements OnInit {
 
   handleAllowSolo(event: MatCheckboxChange): void {
     this.localStorageService.setAllowSolo(event.checked);
+  }
+
+  handleSound($event: MatSliderChange) {
+    this.soundService.setVolume($event.value)
   }
 }
