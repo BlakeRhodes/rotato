@@ -105,12 +105,6 @@ export class MenuComponent implements OnInit {
     this.soundService.heyListen();
   }
 
-  private openSnackBar(message: string, action: string): void {
-    this.snackbar.open(message, action, {
-      duration: 2000,
-    });
-  }
-
   handleShare(): void {
     const link = `${location.href}${this.sharedLink}${this.decodeService.encode()}`;
     this.snackbar.open('Copied to the Clipboard',
@@ -124,7 +118,13 @@ export class MenuComponent implements OnInit {
     this.localStorageService.setAllowSolo(event.checked);
   }
 
-  handleSound($event: MatSliderChange) {
+  handleSound($event: MatSliderChange): void {
     this.soundService.setVolume($event.value);
+  }
+
+  private openSnackBar(message: string, action: string): void {
+    this.snackbar.open(message, action, {
+      duration: 2000,
+    });
   }
 }

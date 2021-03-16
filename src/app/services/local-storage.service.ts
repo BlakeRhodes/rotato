@@ -172,7 +172,7 @@ export class LocalStorageService {
     return this.get(this.enableSoundKey) as boolean;
   }
 
-  getVolume() {
+  getVolume(): number {
     return +localStorage.getItem(this.volumeKey);
   }
 
@@ -220,7 +220,7 @@ export class LocalStorageService {
     this.set(this.stickingKey, value);
   }
 
-  setVolume(value: number) {
+  setVolume(value: number): void {
     this.set(this.volumeKey, value);
   }
 

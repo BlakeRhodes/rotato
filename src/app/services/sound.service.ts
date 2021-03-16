@@ -34,7 +34,7 @@ export class SoundService {
     this.play(this.pop);
   }
 
-  setVolume(value: number) {
+  setVolume(value: number): void {
     this.volume = value;
     this.localStorageService.setVolume(value);
   }
