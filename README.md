@@ -1,6 +1,6 @@
 # Rotato 🥔+🔄=🍐
 
-This project is a pairing board for teams that use pair programming . It allows you to rotate team members and tasks easily with the click of a button. It is designed to be independent of a backend as both an engineering challenge, and because what do you think I am made of money? It is a progressive web app so you can even install it on your phone, if you want. It offers several themes and pairing options including sharing boards vi a link.
+This project is a pairing board for teams that use pair programming . It allows you to rotate team members and tasks easily with the click of a button. It is designed to be independent of a backend as both an engineering challenge, and because what do you think I am made of money? It is a progressive web app so you can even install it on your phone, if you want. It offers several themes and pairing options including sharing boards via a link.
 
 ## Development server
 
