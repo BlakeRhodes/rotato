@@ -1,10 +1,15 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {BACK_BURNER_MESSAGE, DELETE_BUTTON_TEXT} from '../utillity/constants';
+import {BACK_BURNER_MESSAGE, DEV_TYPE, BOARD_TYPE, DELETE_BUTTON_TEXT} from '../utillity/constants';
 import {LocalStorageService} from '../services/local-storage.service';
 import {SoundService} from '../services/sound.service';
 import {ThemeService} from '../services/theme.service';
 import {notFound} from '../utillity/lulz';
 import {ListType} from '../utillity/list-type';
+import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
+import { DevService } from '../services/dev.service';
+import { BoardService } from '../services/board.service';
+import { RefreshService } from '../services/refresh.service';
 
 @Component({
   selector: 'app-list',
@@ -27,12 +32,15 @@ export class ListComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private soundService: SoundService,
     private themeService: ThemeService,
+    private dialog: MatDialog,
+    private devService: DevService,
+    private boardService: BoardService,
+    private refreshService: RefreshService
   ) {
   }
 
   ngOnInit(): void {
-    this.list = this.localStorageService.get(this.type.listKey);
-    this.disabledList = this.localStorageService.get(this.type.disabledKey);
+    this.loadData();
   }
 
   handleAdd(item: string): void {
@@ -59,6 +67,30 @@ export class ListComponent implements OnInit {
     this.localStorageService.set(this.type.disabledKey, this.disabledList);
   }
 
+  handleEdit(i: number, item: string): void {
+    const dialogRef = this.dialog.open(EditDialogComponent, {
+      data: {type: this.type, name: item}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result) {
+        return;
+      }
+
+      switch (this.type) {
+        case DEV_TYPE:
+          this.devService.update(item, result);
+          break;
+        case BOARD_TYPE:
+          this.boardService.update(item, result);
+          break;
+      }
+
+      this.loadData();
+      this.refreshService.triggerRefresh();
+    });
+  }
+
   isDisabled(item: string): string {
     return this.disabledList.find(name => name === item);
   }
@@ -73,5 +105,10 @@ export class ListComponent implements OnInit {
 
   isStrikeThrough(dev: string): string {
     return this.isDisabled(dev) ? 'strike-through' : '';
+  }
+
+  private loadData(): void {
+    this.list = this.localStorageService.get(this.type.listKey);
+    this.disabledList = this.localStorageService.get(this.type.disabledKey);
   }
 }

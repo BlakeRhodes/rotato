@@ -1,0 +1,35 @@
+<div mat-dialog-title>
+    Change {{type.label}}
+  </div>
+  <div
+    mat-dialog-content
+  >
+    <mat-form-field>
+      <mat-label>
+        {{placeholder}}
+      </mat-label>
+      <input
+        matInput
+        [(ngModel)]="name"
+        cdkFocusInitial
+      >
+    </mat-form-field>
+  </div>
+  <div
+    mat-dialog-actions
+  >
+    <button
+      mat-raised-button
+      (click)="handleCancel()"
+    >
+      Cancel
+    </button>
+    <button
+      mat-raised-button
+      [disabled]="name===''"
+      [mat-dialog-close]="name"
+    >
+      Ok
+    </button>
+  </div>
+  
