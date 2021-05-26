@@ -37,6 +37,7 @@ import {NgxCaptureModule} from 'ngx-capture';
 import {ScreenshotComponent} from './screenshot/screenshot.component';
 import {ListComponent} from './list/list.component';
 import {MatSliderModule} from '@angular/material/slider';
+import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import {MatSliderModule} from '@angular/material/slider';
     MainComponent,
     ScreenshotComponent,
     ListComponent,
+    EditDialogComponent,
   ],
   imports: [
     BrowserModule,

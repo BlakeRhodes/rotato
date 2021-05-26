@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {LocalStorageService} from '../services/local-storage.service';
 import {arraysAreEqual} from '../utillity/lulz';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
@@ -10,13 +10,14 @@ import {DOUBLE_CLICK_MESSAGE} from '../utillity/constants';
 import {NgxCaptureService} from 'ngx-capture';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ScreenshotComponent} from '../screenshot/screenshot.component';
+import { RefreshService } from '../services/refresh.service';
 
 @Component({
   selector: 'app-display',
   templateUrl: './display.component.html',
   styleUrls: ['./display.component.scss']
 })
-export class DisplayComponent {
+export class DisplayComponent implements OnInit {
   @ViewChild('screen', {static: true}) screen: any;
   @Output() taterSpinningTime: EventEmitter<any> = new EventEmitter<any>();
   @Input()
@@ -37,11 +38,15 @@ export class DisplayComponent {
     private themeService: ThemeService,
     private captureService: NgxCaptureService,
     private dialog: MatDialog,
-  ) {
-    this.pairs = localStorageService.getPairs();
-    this.carriers = localStorageService.getCarriers();
-    this.boards = localStorageService.getBoards();
-    this.sticking = localStorageService.getSticking();
+    private refreshService: RefreshService
+  ) { }
+
+  ngOnInit(): void {
+    this.loadData();
+
+    this.refreshService.onRefresh().subscribe(() => {
+      this.loadData();
+    });
   }
 
   handleClick(): void {
@@ -138,5 +143,12 @@ export class DisplayComponent {
     dialogConfig.data = { image: img};
 
     this.dialog.open(ScreenshotComponent, dialogConfig);
+  }
+
+  private loadData(): void {
+    this.pairs = this.localStorageService.getPairs();
+    this.carriers = this.localStorageService.getCarriers();
+    this.boards = this.localStorageService.getBoards();
+    this.sticking = this.localStorageService.getSticking();
   }
 }
