@@ -142,11 +142,11 @@ export class DisplayComponent implements OnInit {
   }
 
   isDevStrikeThrough(dev: string): string {
-    return this.disabledDevs.find(name => name === dev) ? 'strike-through': '';
+    return this.disabledDevs.find(name => name === dev) ? 'strike-through' : '';
   }
 
   isBoardStrikeThrough(board: string): string {
-    return this.disabledBoards.find(name => name === board) ? 'strike-through': '';
+    return this.disabledBoards.find(name => name === board) ? 'strike-through' : '';
   }
 
   private openDialog(img: string): void{
