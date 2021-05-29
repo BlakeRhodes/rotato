@@ -61,7 +61,7 @@ export class ListComponent implements OnInit {
         break;
     }
 
-    this.list.splice(i, 1);
+    this.loadData();
     this.refreshService.triggerRefresh();
     this.soundService.doAYeet();
   }
@@ -74,6 +74,7 @@ export class ListComponent implements OnInit {
       this.disabledList.splice(index, 1);
     }
     this.localStorageService.set(this.type.disabledKey, this.disabledList);
+    this.refreshService.triggerRefresh();
   }
 
   handleEdit(i: number, item: string): void {

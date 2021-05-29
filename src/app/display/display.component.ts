@@ -27,6 +27,9 @@ export class DisplayComponent implements OnInit {
   sticking: Pair[];
   carriers: string[] = [];
   boards: string[] = [];
+  disabledDevs: string[] = [];
+  disabledBoards: string[] = [];
+
   displayTitleText = 'Spuddies';
   toolTip = 'SPIN THE POTATO! MAKE IT ROTATO!';
   doubleClickMessage = DOUBLE_CLICK_MESSAGE;
@@ -138,6 +141,14 @@ export class DisplayComponent implements OnInit {
     return this.themeService.getSpuddies();
   }
 
+  isDevStrikeThrough(dev: string): string {
+    return this.disabledDevs.find(name => name === dev) ? 'strike-through': '';
+  }
+
+  isBoardStrikeThrough(board: string): string {
+    return this.disabledBoards.find(name => name === board) ? 'strike-through': '';
+  }
+
   private openDialog(img: string): void{
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = { image: img};
@@ -150,5 +161,7 @@ export class DisplayComponent implements OnInit {
     this.carriers = this.localStorageService.getCarriers();
     this.boards = this.localStorageService.getBoards();
     this.sticking = this.localStorageService.getSticking();
+    this.disabledDevs = this.localStorageService.getDisabled();
+    this.disabledBoards = this.localStorageService.getDisabledBoards();
   }
 }
