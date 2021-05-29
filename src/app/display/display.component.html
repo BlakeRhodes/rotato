@@ -50,7 +50,7 @@
       *ngFor="let pair of pairs; index as i"
     >
       <mat-card-title>
-        <div>
+        <div [ngClass]=isBoardStrikeThrough(pair.board)>
           {{pair.board}}
         </div>
       </mat-card-title>
@@ -65,7 +65,7 @@
             *ngFor="let dev of pair.devs"
             [matTooltip]="isMobile?'':doubleClickMessage"
           >
-            <div>{{dev}}</div>
+            <div [ngClass]=isDevStrikeThrough(dev)>{{dev}}</div>
             <mat-icon class="drag-indicator">
               drag_indicator
             </mat-icon>
