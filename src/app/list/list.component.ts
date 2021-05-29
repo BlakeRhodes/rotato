@@ -51,9 +51,18 @@ export class ListComponent implements OnInit {
     this.list = this.localStorageService.get(this.type.listKey);
   }
 
-  handleDelete(i: number): void {
+  handleDelete(i: number, item: string): void {
+    switch (this.type) {
+      case DEV_TYPE:
+        this.devService.delete(item);
+        break;
+      case BOARD_TYPE:
+        this.boardService.delete(item);
+        break;
+    }
+
     this.list.splice(i, 1);
-    this.localStorageService.set(this.type.listKey, this.list);
+    this.refreshService.triggerRefresh();
     this.soundService.doAYeet();
   }
 
