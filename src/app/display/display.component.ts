@@ -11,6 +11,7 @@ import {NgxCaptureService} from 'ngx-capture';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ScreenshotComponent} from '../screenshot/screenshot.component';
 import { RefreshService } from '../services/refresh.service';
+import { SpuddyService } from '../services/spuddy.service';
 
 @Component({
   selector: 'app-display',
@@ -29,10 +30,12 @@ export class DisplayComponent implements OnInit {
   boards: string[] = [];
   disabledDevs: string[] = [];
   disabledBoards: string[] = [];
+  availableDevs: string[] = [];
 
   displayTitleText = 'Spuddies';
   toolTip = 'SPIN THE POTATO! MAKE IT ROTATO!';
   doubleClickMessage = DOUBLE_CLICK_MESSAGE;
+  availableDevCardTitle = '🔥🥔🔥 Fresh Taters 🔥🥔🔥';
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -41,7 +44,8 @@ export class DisplayComponent implements OnInit {
     private themeService: ThemeService,
     private captureService: NgxCaptureService,
     private dialog: MatDialog,
-    private refreshService: RefreshService
+    private refreshService: RefreshService,
+    private spuddyService: SpuddyService
   ) { }
 
   ngOnInit(): void {
@@ -57,6 +61,7 @@ export class DisplayComponent implements OnInit {
     this.taterSpinningTime.emit();
     this.pairs = this.rotationService.makeItRotato();
     this.localStorageService.setPairs(this.pairs);
+    this.availableDevs = [];
   }
 
   handleDrop(event: CdkDragDrop<string[]>, pair: Pair): void {
@@ -141,12 +146,32 @@ export class DisplayComponent implements OnInit {
     return this.themeService.getSpuddies();
   }
 
+  getPairCardStyle(): string {
+    return this.themeService.getPairCard();
+  }
+
+  getDevCardStyle(): string {
+    return this.themeService.devCard();
+  }
+
   isDevStrikeThrough(dev: string): string {
     return this.disabledDevs.find(name => name === dev) ? 'strike-through' : '';
   }
 
   isBoardStrikeThrough(board: string): string {
     return this.disabledBoards.find(name => name === board) ? 'strike-through' : '';
+  }
+
+  addEmptyPair(): void {
+    this.pairs.push({board: undefined, devs: []});
+    this.localStorageService.setPairs(this.pairs);
+    this.soundService.dropPop();
+  }
+
+  deletePair(index: number): void {
+    this.pairs.splice(index, 1);
+    this.localStorageService.setPairs(this.pairs);
+    this.soundService.doAYeet();
   }
 
   private openDialog(img: string): void{
@@ -157,11 +182,14 @@ export class DisplayComponent implements OnInit {
   }
 
   private loadData(): void {
-    this.pairs = this.localStorageService.getPairs();
-    this.carriers = this.localStorageService.getCarriers();
-    this.boards = this.localStorageService.getBoards();
-    this.sticking = this.localStorageService.getSticking();
-    this.disabledDevs = this.localStorageService.getDisabled();
-    this.disabledBoards = this.localStorageService.getDisabledBoards();
+    const spuddyData = this.spuddyService.getData();
+
+    this.pairs = spuddyData.pairs;
+    this.carriers = spuddyData.carriers;
+    this.boards = spuddyData.boards;
+    this.sticking = spuddyData.sticking;
+    this.disabledDevs = spuddyData.disabled;
+    this.disabledBoards = spuddyData.disabledBoards;
+    this.availableDevs = spuddyData.availableDevs;
   }
 }
