@@ -83,7 +83,8 @@ mat-card-title {
 
 .dev-cards{
   display: flex;
-  justify-content: center;
+  justify-content: left;
+  flex-wrap: wrap;
 }
 
 .screen-shot{

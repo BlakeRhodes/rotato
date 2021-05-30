@@ -12,6 +12,16 @@
       </div>
       <div>
         <button
+        mat-mini-fab
+        (click)="addEmptyPair()"
+        matTooltip="Add an Empty Pairing Slot"
+        aria-label="Add Slot"
+        >
+          <mat-icon>
+            add
+          </mat-icon>
+        </button>
+        <button
           mat-mini-fab
           (click)="screenShot()"
           matTooltip="Screen Shot your Spuddies"
@@ -76,11 +86,51 @@
           mat-fab
           (click)="handleSticking(pair)"
           matTooltip="Stay Paired"
+          *ngIf="pair.devs.length > 0; else showDeleteButton"
         >
           <mat-icon>
             {{isTurnedIn(pair) ? 'turned_in' : 'turned_in_not'}}
           </mat-icon>
         </button>
+        <ng-template #showDeleteButton>
+          <button
+          aria-label="Delete Slot"
+          mat-fab
+          (click)="deletePair(i)"
+          matTooltip="Delete Slot"
+          *ngIf="pair.devs.length === 0"
+          >
+            <mat-icon>
+              delete
+            </mat-icon>
+          </button>
+        </ng-template>
+      </div>
+    </mat-card>
+    <mat-card 
+      cdkDropList
+      *ngIf="availableDevs.length > 0"
+      class="pair-card"
+      [ngClass]="getPairCardStyle()"
+      [cdkDropListData]="availableDevs"
+    >
+      <mat-card-title>
+        <div>{{availableDevCardTitle}}</div>
+      </mat-card-title>
+      <div class="cards-with-button">
+        <div class="dev-cards">
+          <mat-card
+          cdkDrag
+          class="dev mat-title"
+          [ngClass]="getDevCardStyle()"
+          *ngFor="let dev of availableDevs"
+          >
+            <div>{{dev}}</div>
+            <mat-icon class="drag-indicator">
+              drag_indicator
+            </mat-icon>
+          </mat-card>
+        </div>
       </div>
     </mat-card>
   </div>

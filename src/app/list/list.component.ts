@@ -49,6 +49,7 @@ export class ListComponent implements OnInit {
       this.soundService.dropPop();
     }
     this.list = this.localStorageService.get(this.type.listKey);
+    this.refreshService.triggerRefresh();
   }
 
   handleDelete(i: number, item: string): void {
