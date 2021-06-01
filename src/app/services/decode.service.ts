@@ -26,7 +26,7 @@ export class DecodeService {
       sticking: this.localStorageService.getSticking(),
     };
     return encodeURIComponent(
-      btoa(
+      this.encodeToBase64(
         JSON.stringify(teamBoard)
       )
     );
@@ -34,9 +34,17 @@ export class DecodeService {
 
   decode(value: string): TeamBoard {
     return JSON.parse(
-      atob(
+      this.decodeFromBase64(
         decodeURIComponent(value)
       )
     );
+  }
+
+  private encodeToBase64(value: string): string {
+    return btoa(unescape(encodeURIComponent(value)));
+  }
+
+  private decodeFromBase64(value: string): string {
+    return decodeURIComponent(escape(atob(value)));
   }
 }
