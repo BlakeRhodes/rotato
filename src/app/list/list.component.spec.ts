@@ -1,3 +1,4 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BoardService } from '../services/board.service';
@@ -14,24 +15,36 @@ describe('ListComponent', () => {
   let component: ListComponent;
   let fixture: ComponentFixture<ListComponent>;
 
-  const localStorageService = jasmine.createSpyObj('LocalStorageService', [
-    'add',
-    'get',
-    'set'
-  ]);
-  const soundService = jasmine.createSpyObj('SoundService', ['dropPop', 'doAYeet']);
-  const themeService = jasmine.createSpyObj('ThemeService', [
-    'getSelected',
-    'getListItem',
-    'getInputColor'
-  ]);
-  const devService = jasmine.createSpyObj('DevService', ['delete', 'update']);
-  const boardService = jasmine.createSpyObj('BoardService', ['delete', 'update']);
-  const refreshService = jasmine.createSpyObj('RefreshService', ['triggerRefresh']);
+  const localStorageService = {
+    add: jest.fn(),
+    get: jest.fn(),
+    set: jest.fn()
+  };
+  const soundService = {
+    dropPop: jest.fn(),
+    doAYeet: jest.fn()
+  };
+  const themeService = {
+    getSelected: jest.fn(),
+    getListItem: jest.fn(),
+    getInputColor: jest.fn()
+  };
+  const devService = {
+    delete: jest.fn(),
+    update: jest.fn()
+  };
+  const boardService = {
+    delete: jest.fn(),
+    update: jest.fn()
+  };
+  const refreshService = {
+    triggerRefresh: jest.fn()
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ListComponent ],
+      schemas: [NO_ERRORS_SCHEMA],
+      declarations: [ListComponent],
       imports: [MatDialogModule],
       providers: [
         {provide: LocalStorageService, useValue: localStorageService},

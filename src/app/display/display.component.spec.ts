@@ -1,3 +1,4 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxCaptureService } from 'ngx-capture';
@@ -14,30 +15,37 @@ describe('DisplayComponent', () => {
   let component: DisplayComponent;
   let fixture: ComponentFixture<DisplayComponent>;
 
-  const localStorageService = jasmine.createSpyObj('LocalStorageService', [
-    'setPairs',
-    'setCarriers',
-    'setSticking'
-  ]);
-  const soundService = jasmine.createSpyObj('SoundService', [
-    'spinning',
-    'dropPop',
-    'doAYeet'
-  ]);
-  const rotationService = jasmine.createSpyObj('RotationService', ['makeItRotato']);
-  const themeService = jasmine.createSpyObj('ThemeService', [
-    'getSelected',
-    'getPairCard',
-    'devCard',
-    'getSpuddies'
-  ]);
-  const captureService = jasmine.createSpyObj('NgxCaptureService', ['getImage']);
+  const localStorageService = {
+    setPairs: jest.fn(),
+    setCarriers: jest.fn(),
+    setSticking: jest.fn()
+  };
+  const soundService = {
+    spinning: jest.fn(),
+    dropPop: jest.fn(),
+    doAYeet: jest.fn()
+  };
+  const rotationService = {
+    makeItRotato: jest.fn()
+  };
+  const themeService = {
+    getSelected: jest.fn(),
+    getPairCard: jest.fn(),
+    devCard: jest.fn(),
+    getSpuddies: jest.fn()
+  };
+  const captureService = {
+    getImage: jest.fn()
+  };
   const refreshService = new RefreshService();
-  const spuddyService = jasmine.createSpyObj('SpuddyService', ['getData']);
+  const spuddyService = {
+    getData: jest.fn()
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DisplayComponent ],
+      schemas: [NO_ERRORS_SCHEMA],
+      declarations: [DisplayComponent],
       imports: [MatDialogModule],
       providers: [
         {provide: LocalStorageService, useValue: localStorageService},
@@ -53,7 +61,7 @@ describe('DisplayComponent', () => {
   });
 
   beforeEach(() => {
-    spuddyService.getData.and.returnValue({
+    spuddyService.getData.mockReturnValue({
       pairs: [],
       sticking: [],
       carriers: [],

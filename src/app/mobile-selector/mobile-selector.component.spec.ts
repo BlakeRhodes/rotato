@@ -1,3 +1,4 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MobileSelectorComponent } from './mobile-selector.component';
@@ -8,7 +9,8 @@ describe('MobileStepperComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MobileSelectorComponent ]
+      schemas: [NO_ERRORS_SCHEMA],
+      declarations: [MobileSelectorComponent]
     })
     .compileComponents();
   });
