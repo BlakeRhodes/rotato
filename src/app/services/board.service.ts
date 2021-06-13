@@ -12,9 +12,7 @@ export class BoardService {
 
   update(oldValue: string, newValue: string): void {
     const updatedBoards = replaceIfExists(this.localStorageService.getBoards(), oldValue, newValue);
-    if (!!updatedBoards) {
-      this.localStorageService.setBoards(updatedBoards);
-    }
+    this.localStorageService.setBoards(updatedBoards);
 
     const updatedDisabledBoards = replaceIfExists(this.localStorageService.getDisabledBoards(), oldValue, newValue);
     if (!!updatedDisabledBoards) {
@@ -34,9 +32,7 @@ export class BoardService {
 
   delete(value: string): void {
     const updatedBoards = removeIfExists(this.localStorageService.getBoards(), value);
-    if (!!updatedBoards) {
-      this.localStorageService.setBoards(updatedBoards);
-    }
+    this.localStorageService.setBoards(updatedBoards);
 
     const updatedDisabledBoards = removeIfExists(this.localStorageService.getDisabledBoards(), value);
     if (!!updatedDisabledBoards) {

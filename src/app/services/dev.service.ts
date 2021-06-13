@@ -13,9 +13,7 @@ export class DevService {
 
   update(oldValue: string, newValue: string): void {
     const updatedDevs = replaceIfExists(this.localStorageService.getDevs(), oldValue, newValue);
-    if (!!updatedDevs) {
-      this.localStorageService.setDevs(updatedDevs);
-    }
+    this.localStorageService.setDevs(updatedDevs);
 
     const updatedDisabledDevs = replaceIfExists(this.localStorageService.getDisabled(), oldValue, newValue);
     if (!!updatedDisabledDevs) {
@@ -40,11 +38,10 @@ export class DevService {
 
   delete(value: string): void {
     const updatedDevs = removeIfExists(this.localStorageService.getDevs(), value);
-    if (!!updatedDevs) {
-      this.localStorageService.setDevs(updatedDevs);
-    }
+    this.localStorageService.setDevs(updatedDevs);
 
     const updatedDisabledDevs = removeIfExists(this.localStorageService.getDisabled(), value);
+
     if (!!updatedDisabledDevs) {
       this.localStorageService.setDisabled(updatedDisabledDevs);
     }

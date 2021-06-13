@@ -10,12 +10,13 @@ export function replaceIfExists<T>(array: T[], oldValue: T, newValue: T): T[] {
 }
 
 export function removeIfExists<T>(array: T[], value: T): T[] {
-    const splicedArray = [...array];
-    splicedArray.splice(array.indexOf(value), 1);
+    const arrayIndex = array.indexOf(value);
 
-    if (splicedArray.length === array.length) {
+    if (arrayIndex < 0) {
         return null;
     }
 
+    const splicedArray = [...array];
+    splicedArray.splice(array.indexOf(value), 1);
     return splicedArray;
 }
