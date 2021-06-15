@@ -1,3 +1,4 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PotatoComponent } from './potato.component';
@@ -8,7 +9,8 @@ describe('PotatoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PotatoComponent ]
+      schemas: [NO_ERRORS_SCHEMA],
+      declarations: [PotatoComponent]
     })
     .compileComponents();
   });
