@@ -8,7 +8,7 @@ import {Theme} from '../utillity/theme';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
   themes: Theme[] = [
     { sheet: 'light', name: 'Mashed'},
     { sheet: 'classic', name: 'Fried'},
@@ -18,9 +18,6 @@ export class FooterComponent implements OnInit {
   constructor(
     private themeService: ThemeService,
   ) {
-  }
-
-  ngOnInit(): void {
   }
 
   getBackground(): string {

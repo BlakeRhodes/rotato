@@ -8,7 +8,7 @@ import {BOARD_TYPE, DEV_TYPE} from '../utillity/constants';
   templateUrl: './mobile-selector.component.html',
   styleUrls: ['./mobile-selector.component.scss']
 })
-export class MobileSelectorComponent implements OnInit {
+export class MobileSelectorComponent {
   @Output() taterSpinningTime: EventEmitter<any> = new EventEmitter<any>();
   currentIndex = 0;
 
@@ -18,9 +18,6 @@ export class MobileSelectorComponent implements OnInit {
   constructor(
     private themeService: ThemeService,
   ) {
-  }
-
-  ngOnInit(): void {
   }
 
   handleSpin($event: any): void {

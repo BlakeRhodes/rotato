@@ -13,4 +13,4 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Running unit tests
 
-Yeah, shamefully I have not written any tests. This is a utilitarian piece of code that exists because our team's favorite pairing board has closed shop. We needed something fast and cheap. If you want to backfill some tests, well then put in a pull request you absolute legend!
+Run `npm run test` to run the test for the project. This run automatically when you push 
