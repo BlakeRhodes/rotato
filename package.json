@@ -60,5 +60,7 @@
       "<rootDir>/setup-jest.ts"
     ]
   },
-  "pre-push": []
+  "pre-push": [
+    "test:githook"
+  ]
 }
