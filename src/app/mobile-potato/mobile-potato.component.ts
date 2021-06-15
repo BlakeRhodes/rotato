@@ -7,16 +7,13 @@ import {ThemeService} from '../services/theme.service';
   templateUrl: './mobile-potato.component.html',
   styleUrls: ['./mobile-potato.component.scss']
 })
-export class MobilePotatoComponent implements OnInit {
+export class MobilePotatoComponent {
   @Input() shouldISpinAPotato: boolean;
   appName = APP_NAME;
 
   constructor(
     private themeService: ThemeService,
   ) {
-  }
-
-  ngOnInit(): void {
   }
 
   getStyle(): string {
