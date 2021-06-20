@@ -22,7 +22,7 @@ export class RotationService {
     const sticking = this.localStorageService.getSticking();
     const stickingBoards = sticking.map(pair => pair.board);
     const stickingDevs = sticking.flatMap(pair => pair.devs);
-    const pairs = sticking;
+    const pairs = [...sticking];
 
     devs = devs.filter(dev => !disabled.includes(dev));
     devs = devs.filter(dev => !stickingDevs.includes(dev));
