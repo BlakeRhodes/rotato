@@ -38,15 +38,8 @@ describe('RotationService', () => {
 
             rotatoValidato((results: Pair[]) => {
                 expect(results).toHaveLength(3);
-                expect(results[0].devs).toHaveLength(2);
-                expect(results[1].devs).toHaveLength(2);
-                expect(results[2].devs).toHaveLength(2);
-
-                const boardsFromResults = [results[0].board, results[1].board, results[2].board];
-                const devsFromResults = [...results[0].devs, ...results[1].devs, ...results[2].devs];
-
-                expect(boardsFromResults).toIncludeSameMembers(boards);
-                expect(devsFromResults).toIncludeSameMembers(devs);
+                expect(results).toSatisfyAll(pairHasTwoDevs);
+                verifyPairsContainDevsAndBoards(results, devs, boards);
             }, (allResults: Pair[][]) => verifyAllPairsAreUnique(allResults));
         });
 
@@ -63,6 +56,10 @@ describe('RotationService', () => {
             localStorageService.getCarriers.mockReturnValue(carryingDevs);
 
             rotatoValidato((results: Pair[]) => {
+                expect(results).toHaveLength(3);
+                expect(results).toSatisfyAll(pairHasTwoDevs);
+                verifyPairsContainDevsAndBoards(results, devs, boards);
+
                 const pairHasOneCarryingAndOneClean = (pair: Pair) =>
                     (carryingDevs.includes(pair.devs[0]) && cleanDevs.includes(pair.devs[1])) ||
                     (carryingDevs.includes(pair.devs[1]) && cleanDevs.includes(pair.devs[0]));
@@ -101,13 +98,8 @@ describe('RotationService', () => {
             const results = rotationService.makeItRotato();
 
             expect(results).toHaveLength(3);
-            expect(results[0].devs).toHaveLength(2);
-            expect(results[1].devs).toHaveLength(2);
-            expect(results[2].devs).toHaveLength(2);
-
-            const boardsFromResult = [results[0].board, results[1].board, results[2].board];
-
-            expect(boardsFromResult).toIncludeSameMembers([enabledBoard, undefined, undefined]);
+            expect(results).toSatisfyAll(pairHasTwoDevs);
+            verifyPairsContainDevsAndBoards(results, devs, [enabledBoard, undefined, undefined]);
         });
 
         it('should make pair without board when not enough boards exist', () => {
@@ -119,8 +111,9 @@ describe('RotationService', () => {
 
             const results = rotationService.makeItRotato();
 
-            const boardsFromResult = [results[0].board, results[1].board];
-            expect(boardsFromResult).toIncludeSameMembers([board, undefined]);
+            expect(results).toHaveLength(2);
+            expect(results).toSatisfyAll(pairHasTwoDevs);
+            verifyPairsContainDevsAndBoards(results, devs, [board, undefined]);
         });
 
         it('should keep sticking pairs in the rotated pairs', () => {
@@ -142,7 +135,12 @@ describe('RotationService', () => {
             localStorageService.getSticking.mockReturnValue([firstStickingPair, secondStickingPair]);
 
             rotatoValidato((results: Pair[]) => {
+                expect(results).toHaveLength(5);
+                expect(results).toSatisfyAll(pairHasTwoDevs);
+                verifyPairsContainDevsAndBoards(results, devs, boards);
+
                 expect(results).toIncludeAllMembers([firstStickingPair, secondStickingPair]);
+
             }, (allResults: Pair[][]) => {
                 const allResultsWithoutStickingPairs = allResults.map(results =>
                     results.filter(x => x !== firstStickingPair && x !== secondStickingPair)
@@ -161,6 +159,7 @@ describe('RotationService', () => {
 
             rotatoValidato((results: Pair[]) => {
                 expect(results).toHaveLength(1);
+                expect(results[0].devs).toIncludeSameMembers(devs);
                 expect(results[0].board).toBeOneOf(boards);
             }, (allResults: Pair[][]) => {
                 const distinctBoards = new Set(allResults.map(results => results[0].board));
@@ -177,6 +176,9 @@ describe('RotationService', () => {
                 localStorageService.getBoards.mockReturnValue(boards);
 
                 rotatoValidato((results: Pair[]) => {
+                    expect(results).toHaveLength(2);
+                    verifyPairsContainDevsAndBoards(results, devs, boards);
+
                     const hasATriplePairAndDoublePair = (pairs: Pair[]) =>
                         (pairs[0].devs.length === 3 && pairs[1].devs.length === 2) ||
                         (pairs[0].devs.length === 2 && pairs[1].devs.length === 3);
@@ -194,8 +196,9 @@ describe('RotationService', () => {
                 localStorageService.getAllowSolo.mockReturnValue(true);
 
                 rotatoValidato((results: Pair[]) => {
-                    const pairSizes = results.map(x => x.devs.length);
+                    verifyPairsContainDevsAndBoards(results, devs, boards);
 
+                    const pairSizes = results.map(x => x.devs.length);
                     expect(pairSizes).toIncludeSameMembers([2, 2, 1]);
                 }, (allResults: Pair[][]) => verifyAllPairsAreUnique(allResults));
             });
@@ -252,6 +255,16 @@ describe('RotationService', () => {
         }
     }
 });
+
+const pairHasTwoDevs = (pair: Pair) => pair.devs.length === 2;
+
+function verifyPairsContainDevsAndBoards(pairs: Pair[], expectedDevs: string[], expectedBoards: string[]) {
+    const devs = pairs.flatMap(pair => pair.devs);
+    expect(devs).toIncludeSameMembers(expectedDevs);
+
+    const boards = pairs.map(pair => pair.board);
+    expect(boards).toIncludeSameMembers(expectedBoards);
+}
 
 function verifyAllPairsAreUnique(allPairs: Pair[][]): void {
     const allDevPairings = allPairs.map(results => results.map(pair => pair.devs));
