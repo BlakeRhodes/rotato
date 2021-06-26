@@ -11,7 +11,8 @@ describe('RotationService', () => {
         getDisabled: jest.fn(),
         getDisabledBoards: jest.fn(),
         getSticking: jest.fn(),
-        getAllowSolo: jest.fn()
+        getAllowSolo: jest.fn(),
+        getPairs: jest.fn()
     };
 
     const rotationService = new RotationService(localStorageService as any);
@@ -22,6 +23,7 @@ describe('RotationService', () => {
         localStorageService.getDisabledBoards.mockReturnValue([]);
         localStorageService.getSticking.mockReturnValue([]);
         localStorageService.getAllowSolo.mockReturnValue(false);
+        localStorageService.getPairs.mockReturnValue([]);
     });
 
     afterEach(() => {
@@ -65,6 +67,29 @@ describe('RotationService', () => {
                     (carryingDevs.includes(pair.devs[1]) && cleanDevs.includes(pair.devs[0]));
 
                 expect(results).toSatisfyAll(pairHasOneCarryingAndOneClean);
+            }, (allResults: Pair[][]) => verifyAllPairsAreUnique(allResults));
+        });
+
+        it('should make a solo pair when there are more carriers than clean devs', () => {
+            const carryingDevs = [getNthDev(1), getNthDev(2)];
+            
+            const devs = getDevs(3);
+            const boards = getBoards(2);
+
+            localStorageService.getDevs.mockReturnValue(devs);
+            localStorageService.getBoards.mockReturnValue(boards);
+            localStorageService.getCarriers.mockReturnValue(carryingDevs);
+
+            rotatoValidato((results: Pair[]) => {
+                verifyPairsContainDevsAndBoards(results, devs, boards);
+
+                const pairSizes = results.map(x => x.devs.length);
+                expect(pairSizes).toIncludeSameMembers([2, 1]);
+
+                const oneCarrierIsSolo = (pairs: Pair[]) =>
+                    (pairs[0].devs.length === 1 && carryingDevs.includes(pairs[0].devs[0])) ||
+                    (pairs[1].devs.length === 1 && carryingDevs.includes(pairs[0].devs[0]));
+                expect(results).toSatisfy(oneCarrierIsSolo);
             }, (allResults: Pair[][]) => verifyAllPairsAreUnique(allResults));
         });
 
@@ -201,6 +226,136 @@ describe('RotationService', () => {
                     const pairSizes = results.map(x => x.devs.length);
                     expect(pairSizes).toIncludeSameMembers([2, 2, 1]);
                 }, (allResults: Pair[][]) => verifyAllPairsAreUnique(allResults));
+            });
+        });
+
+        describe('when there are carrying devs from previous rotation', () => {
+            it('should keep carrying dev on the same board', () => {
+                const carryingDev = getNthDev(1);
+                const carryingBoard = getNthBoard(1);
+
+                const previousPairs: Pair[] = [
+                    {board: carryingBoard, devs: [carryingDev, getNthDev(2)]},
+                    {board: getNthBoard(2), devs: [getNthDev(3), getNthDev(4)]}
+                ]
+
+                const devs = getDevs(6);
+                const boards = getBoards(3);
+
+                localStorageService.getDevs.mockReturnValue(devs);
+                localStorageService.getBoards.mockReturnValue(boards);
+                localStorageService.getCarriers.mockReturnValue([carryingDev]);
+                localStorageService.getPairs.mockReturnValue(previousPairs);
+
+                rotatoValidato((results: Pair[]) => {
+                    expect(results).toHaveLength(3);
+                    expect(results).toSatisfyAll(pairHasTwoDevs);
+                    verifyPairsContainDevsAndBoards(results, devs, boards);
+
+                    const carryingDevIsOnTheSameBoard = (pairs: Pair[]) =>
+                        (pairs[0].devs.includes(carryingDev) && pairs[0].board === carryingBoard) ||
+                        (pairs[1].devs.includes(carryingDev) && pairs[1].board === carryingBoard) ||
+                        (pairs[2].devs.includes(carryingDev) && pairs[2].board === carryingBoard);
+
+                    expect(results).toSatisfy(carryingDevIsOnTheSameBoard);
+                }, (allResults: Pair[][]) => {
+                    const allDevsThatPairedWithCarryingDev = new Set(allResults.map(results => 
+                        results.filter(pair => pair.devs.includes(carryingDev))[0].devs
+                            .filter(dev => dev !== carryingDev)[0]
+                    ));
+                    expect(allDevsThatPairedWithCarryingDev.size).toBeGreaterThan(1);
+
+                    const allResultsWithoutCarryingPair = allResults.map(results => results.filter(pair => !pair.devs.includes(carryingDev)));
+                    verifyAllPairsAreUnique(allResultsWithoutCarryingPair);
+                });
+            });
+
+            it('should keep carrying devs paired together when two devs are carrying one board', () => {
+                const firstCarryingDev = getNthDev(1);
+                const secondCarryingDev = getNthDev(2);
+                const carryingBoard = getNthBoard(1);
+
+                const carryingPair: Pair = {board: carryingBoard, devs: [firstCarryingDev, secondCarryingDev]};
+
+                const previousPairs: Pair[] = [
+                    carryingPair,
+                    {board: getNthBoard(2), devs: [getNthDev(3), getNthDev(4)]}
+                ]
+
+                const devs = getDevs(6);
+                const boards = getBoards(3);
+
+                localStorageService.getDevs.mockReturnValue(devs);
+                localStorageService.getBoards.mockReturnValue(boards);
+                localStorageService.getCarriers.mockReturnValue([firstCarryingDev, secondCarryingDev]);
+                localStorageService.getPairs.mockReturnValue(previousPairs);
+
+                rotatoValidato((results: Pair[]) => {
+                    expect(results).toHaveLength(3);
+                    expect(results).toSatisfyAll(pairHasTwoDevs);
+                    verifyPairsContainDevsAndBoards(results, devs, boards);
+
+                    expect(carryingPair).toBeOneOf(results);
+                }, (allResults: Pair[][]) => {
+                    const allResultsWithoutCarryingPair = allResults.map(results =>
+                        results.filter(pair => pair == carryingPair)
+                    );
+                    verifyAllPairsAreUnique(allResultsWithoutCarryingPair);
+                });
+            });
+
+            it('should put carrying pair on a new board when previous pair board is disabled', () => {
+                const disabledCarryingBoard = getNthBoard(1);
+                const firstOtherBoard = getNthBoard(2);
+                const secondOtherBoard = getNthBoard(3);
+
+                const carryingDev = getNthDev(1);
+
+                const carryingPair: Pair = {board: disabledCarryingBoard, devs: [carryingDev, getNthDev(2)]};
+
+                const devs = getDevs(2);
+
+                const boards = [
+                    disabledCarryingBoard,
+                    firstOtherBoard,
+                    secondOtherBoard
+                ]
+                
+                localStorageService.getDevs.mockReturnValue(devs);
+                localStorageService.getBoards.mockReturnValue(boards);
+                localStorageService.getCarriers.mockReturnValue([carryingDev]);
+                localStorageService.getDisabledBoards.mockReturnValue([disabledCarryingBoard]);
+                localStorageService.getPairs.mockReturnValue([carryingPair]);
+
+                rotatoValidato((results: Pair[]) => {
+                    expect(results).toHaveLength(1);
+                    expect(results[0].devs).toIncludeSameMembers(devs);
+                    expect(results[0].board).toBeOneOf([firstOtherBoard, secondOtherBoard]);
+                }, (allResults: Pair[][]) => {
+                    const distinctBoards = new Set(allResults.map(results => results[0].board));
+                    expect(distinctBoards.size).toBeGreaterThan(1);
+                });
+            });
+
+            it('should ignore carrying devs when carrying devs are sticking from the previous rotation', () => {
+                const stickingCarryingDev = getNthDev(1);
+                const stickingPair: Pair = {board: undefined, devs: [stickingCarryingDev, getNthDev(2)]};
+    
+                const devs = getDevs(4);
+    
+                localStorageService.getDevs.mockReturnValue(devs);
+                localStorageService.getBoards.mockReturnValue([]);
+                localStorageService.getCarriers.mockReturnValue([stickingCarryingDev]);
+                localStorageService.getSticking.mockReturnValue([stickingPair]);
+                localStorageService.getPairs.mockReturnValue([stickingPair, {devs: [getNthDev(3), getNthDev(4)]}])
+    
+                const results = rotationService.makeItRotato();
+    
+                expect(results).toHaveLength(2);
+                expect(results).toSatisfyAll(pairHasTwoDevs);
+                verifyPairsContainDevsAndBoards(results, devs, [undefined, undefined]);
+    
+                expect(stickingPair).toBeOneOf(results);
             });
         });
     });
