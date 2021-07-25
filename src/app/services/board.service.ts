@@ -50,6 +50,12 @@ export class BoardService {
     }
   }
 
+  getBoardsInRotation(): string[] {
+    return this.localStorageService.getPairs()
+      .filter(pair => !!pair.board)
+      .map(pair => pair.board);
+  }
+
   private replaceBoardInPairIfExists(pairs: Pair[], oldValue: string, newValue: string): Pair[] {
     const pairIndex = pairs.findIndex(x => x.board === oldValue);
 

@@ -25,6 +25,8 @@ export class ListComponent implements OnInit {
   list: string[];
   disabledList: string[];
 
+  itemsInRotation?: string[];
+
   deleteText = DELETE_BUTTON_TEXT;
   backBurnerMessage = BACK_BURNER_MESSAGE;
 
@@ -41,6 +43,10 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadData();
+
+    if (this.type === BOARD_TYPE) {
+      this.refreshService.onBoardRefresh().subscribe(() => this.loadData());
+    }
   }
 
   handleAdd(item: string): void {
@@ -49,7 +55,7 @@ export class ListComponent implements OnInit {
       this.soundService.dropPop();
     }
     this.list = this.localStorageService.get(this.type.listKey);
-    this.refreshService.triggerRefresh();
+    this.refreshService.triggerDisplayRefresh();
   }
 
   handleDelete(i: number, item: string): void {
@@ -63,7 +69,7 @@ export class ListComponent implements OnInit {
     }
 
     this.loadData();
-    this.refreshService.triggerRefresh();
+    this.refreshService.triggerDisplayRefresh();
     this.soundService.doAYeet();
   }
 
@@ -75,7 +81,7 @@ export class ListComponent implements OnInit {
       this.disabledList.splice(index, 1);
     }
     this.localStorageService.set(this.type.disabledKey, this.disabledList);
-    this.refreshService.triggerRefresh();
+    this.refreshService.triggerDisplayRefresh();
   }
 
   handleEdit(i: number, item: string): void {
@@ -98,7 +104,7 @@ export class ListComponent implements OnInit {
       }
 
       this.loadData();
-      this.refreshService.triggerRefresh();
+      this.refreshService.triggerDisplayRefresh();
     });
   }
 
@@ -118,8 +124,25 @@ export class ListComponent implements OnInit {
     return this.isDisabled(dev) ? 'strike-through' : '';
   }
 
+  canBePutInRotation(item: string): boolean {
+    return !!this.itemsInRotation && this.itemsInRotation.indexOf(item) < 0 && this.disabledList.indexOf(item) < 0;
+  }
+
+  putInRotation(item: string): void {
+    const pairs = this.localStorageService.getPairs();
+    pairs.push({board: item, devs: []});
+    this.localStorageService.setPairs(pairs);
+    this.soundService.dropPop();
+    this.loadData();
+    this.refreshService.triggerDisplayRefresh();
+  }
+
   private loadData(): void {
     this.list = this.localStorageService.get(this.type.listKey);
     this.disabledList = this.localStorageService.get(this.type.disabledKey);
+
+    if (this.type === BOARD_TYPE) {
+      this.itemsInRotation = this.boardService.getBoardsInRotation();
+    }
   }
 }

@@ -39,6 +39,17 @@
     </div>
     <div>
       <button
+        *ngIf="canBePutInRotation(item)"
+        class="icon-button"
+        [attr.aria-label]="'Put '+type.typeName+' in rotation'"
+        mat-icon-button
+        (click)="putInRotation(item)"
+      >
+        <mat-icon>
+          add
+        </mat-icon>
+      </button>
+      <button
         class="icon-button"
         [attr.aria-label]="'Rename '+type.typeName"
         mat-icon-button

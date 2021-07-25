@@ -1,6 +1,7 @@
 import { BoardService } from './board.service';
 import * as faker from 'faker';
 import { shuffle } from '../utillity/lulz';
+import { Pair } from '../utillity/pair';
 
 describe('BoardService', () => {
 
@@ -301,5 +302,39 @@ describe('BoardService', () => {
 
       expect(localStorageService.setSticking).not.toHaveBeenCalled();
     });
+  });
+
+  describe('getBoardsInRotation', () => {
+    it('should return all boards stored in the pairs', () => {
+      const firstBoardName = faker.unique(faker.address.country);
+      const secondBoardName = faker.unique(faker.address.country);
+      const thirdBoardName = faker.unique(faker.address.country);
+
+      const pairs: Pair[] = [
+        {board: firstBoardName, devs: [faker.name.firstName(), faker.name.firstName()]},
+        {board: secondBoardName, devs: [faker.name.firstName(), faker.name.firstName()]},
+        {board: thirdBoardName, devs: [faker.name.firstName(), faker.name.firstName()]}
+      ]
+
+      localStorageService.getPairs.mockReturnValue(pairs);
+
+      const results = boardService.getBoardsInRotation();
+
+      expect(results).toIncludeSameMembers([firstBoardName, secondBoardName, thirdBoardName]);
+    });
+
+    it('should ignore pairs without a board', () => {
+      const pairs: Pair[] = [
+        {board: undefined, devs: [faker.name.firstName(), faker.name.firstName()]},
+        {board: undefined, devs: [faker.name.firstName(), faker.name.firstName()]},
+        {board: undefined, devs: [faker.name.firstName(), faker.name.firstName()]}
+      ];
+
+      localStorageService.getPairs.mockReturnValue(pairs);
+
+      const results = boardService.getBoardsInRotation();
+
+      expect(results).toHaveLength(0);
+    })
   });
 });

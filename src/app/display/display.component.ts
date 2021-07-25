@@ -51,7 +51,7 @@ export class DisplayComponent implements OnInit {
   ngOnInit(): void {
     this.loadData();
 
-    this.refreshService.onRefresh().subscribe(() => {
+    this.refreshService.onDisplayRefresh().subscribe(() => {
       this.loadData();
     });
   }
@@ -61,6 +61,7 @@ export class DisplayComponent implements OnInit {
     this.taterSpinningTime.emit();
     this.pairs = this.rotationService.makeItRotato();
     this.localStorageService.setPairs(this.pairs);
+    this.refreshService.triggerBoardRefresh();
     this.availableDevs = [];
   }
 
@@ -172,6 +173,7 @@ export class DisplayComponent implements OnInit {
     this.pairs.splice(index, 1);
     this.localStorageService.setPairs(this.pairs);
     this.soundService.doAYeet();
+    this.refreshService.triggerBoardRefresh();
   }
 
   private openDialog(img: string): void{
