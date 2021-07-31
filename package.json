@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "prebuild": "npm version patch",
     "test": "jest --watch",
     "test:githook": "jest",
     "lint": "npx eslint src/**/*.ts",
