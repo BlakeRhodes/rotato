@@ -74,6 +74,7 @@ mat-card.added-list-item {
 
 html, body {
   height: 100%;
+  scrollbar-width: none;
 }
 
 body {
@@ -89,4 +90,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
 }
