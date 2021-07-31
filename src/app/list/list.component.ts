@@ -119,7 +119,7 @@ export class ListComponent implements OnInit {
   }
 
   showAddBoard(item: string) {
-    return this.type === BOARD_TYPE && found(this.disabledList.findIndex(name => name == item))
+    return this.type === BOARD_TYPE;
   }
 
   handleAddBoard(i: number, item: string) {
