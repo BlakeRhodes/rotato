@@ -59,7 +59,7 @@ describe('SharedComponent', () => {
         {provide: MatSnackBar, useValue: snackbar}
       ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

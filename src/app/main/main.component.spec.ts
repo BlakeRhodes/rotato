@@ -12,7 +12,7 @@ describe('MainComponent', () => {
       schemas: [NO_ERRORS_SCHEMA],
       declarations: [MainComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

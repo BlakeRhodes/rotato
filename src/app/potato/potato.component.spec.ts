@@ -12,7 +12,7 @@ describe('PotatoComponent', () => {
       schemas: [NO_ERRORS_SCHEMA],
       declarations: [PotatoComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

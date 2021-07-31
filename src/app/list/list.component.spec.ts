@@ -55,7 +55,7 @@ describe('ListComponent', () => {
         {provide: RefreshService, useValue: refreshService}
       ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

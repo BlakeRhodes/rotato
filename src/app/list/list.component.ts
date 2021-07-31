@@ -54,12 +54,12 @@ export class ListComponent implements OnInit {
 
   handleDelete(i: number, item: string): void {
     switch (this.type) {
-      case DEV_TYPE:
-        this.devService.delete(item);
-        break;
-      case BOARD_TYPE:
-        this.boardService.delete(item);
-        break;
+    case DEV_TYPE:
+      this.devService.delete(item);
+      break;
+    case BOARD_TYPE:
+      this.boardService.delete(item);
+      break;
     }
 
     this.loadData();
@@ -89,12 +89,12 @@ export class ListComponent implements OnInit {
       }
 
       switch (this.type) {
-        case DEV_TYPE:
-          this.devService.update(item, result);
-          break;
-        case BOARD_TYPE:
-          this.boardService.update(item, result);
-          break;
+      case DEV_TYPE:
+        this.devService.update(item, result);
+        break;
+      case BOARD_TYPE:
+        this.boardService.update(item, result);
+        break;
       }
 
       this.loadData();

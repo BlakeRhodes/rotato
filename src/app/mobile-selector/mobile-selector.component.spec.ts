@@ -12,7 +12,7 @@ describe('MobileStepperComponent', () => {
       schemas: [NO_ERRORS_SCHEMA],
       declarations: [MobileSelectorComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

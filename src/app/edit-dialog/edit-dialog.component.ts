@@ -15,10 +15,10 @@ export class EditDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<EditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-      this.type = data.type;
-      this.name = data.name;
-      this.placeholder = this.getThatSweetEmojiPlaceholder(data.type);
-    }
+    this.type = data.type;
+    this.name = data.name;
+    this.placeholder = this.getThatSweetEmojiPlaceholder(data.type);
+  }
 
   handleCancel(): void {
     this.dialogRef.close();
@@ -26,12 +26,12 @@ export class EditDialogComponent {
 
   private getThatSweetEmojiPlaceholder(type: ListType): string {
     switch (type) {
-      case DEV_TYPE:
-        return '✏️🧑‍🍳';
-      case BOARD_TYPE:
-        return '✏️🍽️';
-      default:
-        return '';
+    case DEV_TYPE:
+      return '✏️🧑‍🍳';
+    case BOARD_TYPE:
+      return '✏️🍽️';
+    default:
+      return '';
     }
   }
 }

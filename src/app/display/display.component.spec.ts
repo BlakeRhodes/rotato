@@ -57,7 +57,7 @@ describe('DisplayComponent', () => {
         {provide: SpuddyService, useValue: spuddyService}
       ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

@@ -12,7 +12,7 @@ describe('FooterComponent', () => {
       schemas: [NO_ERRORS_SCHEMA],
       declarations: [FooterComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

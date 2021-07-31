@@ -57,7 +57,7 @@ describe('MenuComponent', () => {
         {provide: Clipboard, useValue: clipboard}
       ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

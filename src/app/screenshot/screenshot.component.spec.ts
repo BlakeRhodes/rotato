@@ -19,7 +19,7 @@ describe('ScreenshotComponent', () => {
         {provide: MAT_DIALOG_DATA, useValue: dialogData}
       ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
