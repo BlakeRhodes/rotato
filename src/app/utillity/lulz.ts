@@ -15,6 +15,10 @@ export function notFound(index: number): boolean{
   return index === -1;
 }
 
+export function found(index: number): boolean{
+  return !notFound(index)
+}
+
 export function delay(ms: number): Promise<unknown> {
   return new Promise(
     resolve => setTimeout(resolve, ms)

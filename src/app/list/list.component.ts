@@ -3,7 +3,7 @@ import {BACK_BURNER_MESSAGE, DEV_TYPE, BOARD_TYPE, DELETE_BUTTON_TEXT} from '../
 import {LocalStorageService} from '../services/local-storage.service';
 import {SoundService} from '../services/sound.service';
 import {ThemeService} from '../services/theme.service';
-import {notFound} from '../utillity/lulz';
+import {found, notFound} from '../utillity/lulz';
 import {ListType} from '../utillity/list-type';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -116,6 +116,23 @@ export class ListComponent implements OnInit {
 
   isStrikeThrough(dev: string): string {
     return this.isDisabled(dev) ? 'strike-through' : '';
+  }
+
+  showAddBoard(item: string) {
+    return this.type === BOARD_TYPE;
+  }
+
+  handleAddBoard(i: number, item: string) {
+    const pairs = this.localStorageService.getPairs();
+    if( notFound(pairs.findIndex(pair => pair.board === item))){
+      pairs.push({board:item, devs:[]});
+      this.localStorageService.setPairs(pairs);
+    }
+    const index = this.disabledList.findIndex(name => name === item);
+    this.disabledList.splice(index, 1);
+    this.localStorageService.set(this.type.disabledKey, this.disabledList);
+    this.loadData();
+    this.refreshService.triggerRefresh();
   }
 
   private loadData(): void {
