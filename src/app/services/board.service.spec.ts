@@ -301,5 +301,23 @@ describe('BoardService', () => {
 
       expect(localStorageService.setSticking).not.toHaveBeenCalled();
     });
+
+    it('should remove pair completely when board is removed from a pair with no devs', () => {
+      
+      localStorageService.getBoards.mockReturnValue([]);
+      localStorageService.getDisabledBoards.mockReturnValue([]);
+      localStorageService.getSticking.mockReturnValue([]);
+
+      localStorageService.getPairs.mockReturnValue(shuffle([
+        {board: boardToDelete, devs: []},
+        {board: firstOtherBoardName, devs: firstPairDevs}
+      ]));
+
+      boardService.delete(boardToDelete);
+
+      expect(localStorageService.setPairs).toHaveBeenCalledWith([
+        {board: firstOtherBoardName, devs: firstPairDevs}
+      ]);
+    });
   });
 });
