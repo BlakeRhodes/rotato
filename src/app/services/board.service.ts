@@ -63,6 +63,18 @@ export class BoardService {
   }
 
   private removeBoardInPairIfExists(pairs: Pair[], value: string): Pair[] {
-    return this.replaceBoardInPairIfExists(pairs, value, undefined);
+    const pairIndex = pairs.findIndex(x => x.board === value);
+
+    if (pairIndex < 0) {
+      return null;
+    }
+
+    if (pairs[pairIndex].devs.length === 0) {
+      pairs.splice(pairIndex, 1);
+    } else {
+      pairs[pairIndex].board = undefined;
+    }
+
+    return pairs;  
   }
 }
