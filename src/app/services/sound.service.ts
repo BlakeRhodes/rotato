@@ -43,7 +43,7 @@ export class SoundService {
     if (this.soundEnabled) {
       sound.load();
       sound.volume = this.volume;
-      sound.play().then();
+      sound.play()?.then();
     }
   }
 }
