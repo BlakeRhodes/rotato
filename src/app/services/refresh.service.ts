@@ -6,15 +6,24 @@ import { Observable, Subject } from 'rxjs';
 })
 export class RefreshService {
 
-  private refresh: Subject<void> = new Subject();
+  private displayRefresh: Subject<void> = new Subject();
+  private listRefresh: Subject<void> = new Subject();
 
   constructor() { }
 
-  triggerRefresh(): void {
-    this.refresh.next();
+  triggerDisplayRefresh(): void {
+    this.displayRefresh.next();
   }
 
-  onRefresh(): Observable<void> {
-    return this.refresh.asObservable();
+  onDisplayRefresh(): Observable<void> {
+    return this.displayRefresh.asObservable();
+  }
+
+  triggerListRefresh(): void {
+    this.listRefresh.next();
+  }
+
+  onListRefresh(): Observable<void> {
+    return this.listRefresh.asObservable();
   }
 }

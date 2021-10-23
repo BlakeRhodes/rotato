@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { removeIfExists, replaceIfExists } from '../utillity/helper-methods';
-import { arraysAreEqual } from '../utillity/lulz';
+import { notFound } from '../utillity/lulz';
 import { Pair } from '../utillity/pair';
 import { LocalStorageService } from './local-storage.service';
 
@@ -60,6 +60,44 @@ export class DevService {
     if (!!updatedStickingPairs) {
       this.localStorageService.setSticking(updatedStickingPairs);
     }
+  }
+
+  toggleDisabled(value: string) {
+    const disabledDevs = this.localStorageService.getDisabled();
+
+    const toggledDevIndex = disabledDevs.indexOf(value);
+
+    if (notFound(toggledDevIndex)) {
+      disabledDevs.push(value);
+
+      const updatedCarryingDevs = removeIfExists(this.localStorageService.getCarriers(), value);
+      if (!!updatedCarryingDevs) {
+        this.localStorageService.setCarriers(updatedCarryingDevs);
+      }
+    } else {
+      disabledDevs.splice(toggledDevIndex, 1);
+    }
+
+    this.localStorageService.setDisabled(disabledDevs);
+  }
+
+  toggleCarrying(value: string) {
+    const carryingDevs = this.localStorageService.getCarriers();
+
+    const toggledDevIndex = carryingDevs.indexOf(value);
+
+    if (notFound(toggledDevIndex)) {
+      carryingDevs.push(value);
+
+      const updatedDisabledDevs = removeIfExists(this.localStorageService.getDisabled(), value);
+      if (!!updatedDisabledDevs) {
+        this.localStorageService.setDisabled(updatedDisabledDevs);
+      }
+    } else {
+      carryingDevs.splice(toggledDevIndex, 1);
+    }
+
+    this.localStorageService.setCarriers(carryingDevs);
   }
 
   private replaceDevInPairIfExists(pairs: Pair[], oldValue: string, newValue: string): Pair[] {

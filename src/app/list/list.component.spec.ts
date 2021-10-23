@@ -37,9 +37,7 @@ describe('ListComponent', () => {
     delete: jest.fn(),
     update: jest.fn()
   };
-  const refreshService = {
-    triggerRefresh: jest.fn()
-  };
+  const refreshService = new RefreshService();
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

@@ -12,6 +12,7 @@ import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ScreenshotComponent} from '../screenshot/screenshot.component';
 import { RefreshService } from '../services/refresh.service';
 import { SpuddyService } from '../services/spuddy.service';
+import { DevService } from '../services/dev.service';
 
 @Component({
   selector: 'app-display',
@@ -45,13 +46,14 @@ export class DisplayComponent implements OnInit {
     private captureService: NgxCaptureService,
     private dialog: MatDialog,
     private refreshService: RefreshService,
-    private spuddyService: SpuddyService
+    private spuddyService: SpuddyService,
+    private devService: DevService
   ) { }
 
   ngOnInit(): void {
     this.loadData();
 
-    this.refreshService.onRefresh().subscribe(() => {
+    this.refreshService.onDisplayRefresh().subscribe(() => {
       this.loadData();
     });
   }
@@ -81,13 +83,10 @@ export class DisplayComponent implements OnInit {
   }
 
   handleMarkAsCarry(dev: string): void {
-    const found = this.carriers.findIndex(name => name === dev);
-    if (found === -1) {
-      this.carriers.push(dev);
-    } else {
-      this.carriers.splice(found, 1);
-    }
-    this.localStorageService.setCarriers(this.carriers);
+    this.devService.toggleCarrying(dev);
+    this.carriers = this.localStorageService.getCarriers();
+    this.disabledDevs = this.localStorageService.getDisabled();
+    this.refreshService.triggerListRefresh();
   }
 
   isCarrying(dev: string): string {
