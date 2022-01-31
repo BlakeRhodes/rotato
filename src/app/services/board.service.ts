@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { removeIfExists, replaceIfExists } from '../utillity/helper-methods';
 import { LocalStorageService } from './local-storage.service';
 import { Pair } from '../utillity/pair';
+import { notFound } from '../utillity/lulz';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +49,20 @@ export class BoardService {
     if (!!updatedStickingPairs) {
       this.localStorageService.setSticking(updatedStickingPairs);
     }
+  }
+
+  toggleDisabled(value: string) {
+    const disabledBoards = this.localStorageService.getDisabledBoards();
+
+    const toggledBoardIndex = disabledBoards.indexOf(value);
+
+    if (notFound(toggledBoardIndex)) {
+      disabledBoards.push(value);
+    } else {
+      disabledBoards.splice(toggledBoardIndex, 1);
+    }
+
+    this.localStorageService.setDisabledBoards(disabledBoards);
   }
 
   private replaceBoardInPairIfExists(pairs: Pair[], oldValue: string, newValue: string): Pair[] {

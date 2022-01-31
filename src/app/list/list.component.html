@@ -30,8 +30,8 @@
     class="added-list-item"
     [matTooltip]="isMobile?'':backBurnerMessage"
     *ngFor="let item of list; let i = index"
-    (dblclick)="handleDisable(i,item)"
-    (press)="handleDisable(i, item)"
+    (dblclick)="handleDisable(item)"
+    (press)="handleDisable(item)"
     [ngClass]="[getCurrentClass(item),isStrikeThrough(item)]"
   >
     <div class="mat-title">
@@ -52,7 +52,7 @@
         class="icon-button"
         [attr.aria-label]="'Disable '+type.typeName"
         mat-icon-button
-        (click)="handleDisable(i, item)"
+        (click)="handleDisable(item)"
       >
         <mat-icon>
           {{isDisabled(item) ? type.iconOff : type.iconOn}}

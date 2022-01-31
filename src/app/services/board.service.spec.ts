@@ -320,4 +320,41 @@ describe('BoardService', () => {
       ]);
     });
   });
+
+  describe('toggleDisabled', () => {
+    const toggledBoard = faker.unique(faker.address.country);
+
+    const firstDisabledBoard = faker.unique(faker.address.country);
+    const secondDisabledBoard = faker.unique(faker.address.country);
+
+    it('should add board to disabled list when board is not disabled', () => {
+      localStorageService.getDisabledBoards.mockReturnValue(shuffle([
+        firstDisabledBoard,
+        secondDisabledBoard
+      ]));
+
+      boardService.toggleDisabled(toggledBoard);
+
+      expect(localStorageService.setDisabledBoards).toHaveBeenCalledWith(expect.toIncludeSameMembers([
+        firstDisabledBoard,
+        secondDisabledBoard,
+        toggledBoard
+      ]));
+    });
+
+    it('should remove board from disabled list when board is disabled', () => {
+      localStorageService.getDisabledBoards.mockReturnValue(shuffle([
+        firstDisabledBoard,
+        secondDisabledBoard,
+        toggledBoard
+      ]));
+
+      boardService.toggleDisabled(toggledBoard);
+
+      expect(localStorageService.setDisabledBoards).toHaveBeenCalledWith(expect.toIncludeSameMembers([
+        firstDisabledBoard,
+        secondDisabledBoard
+      ]));
+    });
+  });
 });

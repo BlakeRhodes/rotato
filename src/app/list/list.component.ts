@@ -3,7 +3,7 @@ import {BACK_BURNER_MESSAGE, DEV_TYPE, BOARD_TYPE, DELETE_BUTTON_TEXT} from '../
 import {LocalStorageService} from '../services/local-storage.service';
 import {SoundService} from '../services/sound.service';
 import {ThemeService} from '../services/theme.service';
-import {found, notFound} from '../utillity/lulz';
+import {notFound} from '../utillity/lulz';
 import {ListType} from '../utillity/list-type';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -41,6 +41,10 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadData();
+
+    this.refreshService.onListRefresh().subscribe(() => {
+      this.loadData();
+    });
   }
 
   handleAdd(item: string): void {
@@ -49,33 +53,36 @@ export class ListComponent implements OnInit {
       this.soundService.dropPop();
     }
     this.list = this.localStorageService.get(this.type.listKey);
-    this.refreshService.triggerRefresh();
+    this.refreshService.triggerDisplayRefresh();
   }
 
   handleDelete(i: number, item: string): void {
     switch (this.type) {
-    case DEV_TYPE:
-      this.devService.delete(item);
-      break;
-    case BOARD_TYPE:
-      this.boardService.delete(item);
-      break;
+      case DEV_TYPE:
+        this.devService.delete(item);
+        break;
+      case BOARD_TYPE:
+        this.boardService.delete(item);
+        break;
     }
 
     this.loadData();
-    this.refreshService.triggerRefresh();
+    this.refreshService.triggerDisplayRefresh();
     this.soundService.doAYeet();
   }
 
-  handleDisable(i: number, item: string): void {
-    const index = this.disabledList.findIndex(name => name === item);
-    if (notFound(index)) {
-      this.disabledList.push(item);
-    } else {
-      this.disabledList.splice(index, 1);
+  handleDisable(item: string): void {
+    switch (this.type) {
+      case DEV_TYPE:
+        this.devService.toggleDisabled(item);
+        break;
+      case BOARD_TYPE:
+        this.boardService.toggleDisabled(item);
+        break;
     }
-    this.localStorageService.set(this.type.disabledKey, this.disabledList);
-    this.refreshService.triggerRefresh();
+
+    this.disabledList = this.localStorageService.get(this.type.disabledKey);
+    this.refreshService.triggerDisplayRefresh();
   }
 
   handleEdit(i: number, item: string): void {
@@ -98,7 +105,7 @@ export class ListComponent implements OnInit {
       }
 
       this.loadData();
-      this.refreshService.triggerRefresh();
+      this.refreshService.triggerDisplayRefresh();
     });
   }
 
@@ -132,7 +139,7 @@ export class ListComponent implements OnInit {
     this.disabledList.splice(index, 1);
     this.localStorageService.set(this.type.disabledKey, this.disabledList);
     this.loadData();
-    this.refreshService.triggerRefresh();
+    this.refreshService.triggerDisplayRefresh();
   }
 
   private loadData(): void {
