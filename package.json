@@ -27,7 +27,7 @@
     "@angular/service-worker": "^12.0.5",
     "hammerjs": "^2.0.8",
     "ngx-capture": "^0.12.1",
-    "ngx-indexed-db": "^10.0.0",
+    "ngx-indexed-db": "^9.4.2",
     "node": "^16.13.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
