@@ -1,6 +1,6 @@
 {
   "name": "rotato-ui",
-  "version": "1.2.10",
+  "version": "1.2.11",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -26,9 +26,9 @@
     "@angular/router": "^12.0.5",
     "@angular/service-worker": "^12.0.5",
     "hammerjs": "^2.0.8",
-    "ngx-capture": "^0.10.2",
-    "ngx-indexed-db": "^6.1.2",
-    "node": "^15.8.0",
+    "ngx-capture": "^0.12.1",
+    "ngx-indexed-db": "^10.0.0",
+    "node": "^16.13.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

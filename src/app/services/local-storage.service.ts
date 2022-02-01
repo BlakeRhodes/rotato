@@ -62,7 +62,7 @@ export class LocalStorageService {
   }
 
   getTeamBoards(): Observable<any> {
-    return this.databaseService.getAll(TEAM_BOARDS_KEY)
+    return this.databaseService.getAll<any>(TEAM_BOARDS_KEY)
       .pipe(
         map(project => project.map(value => value.name))
       );
@@ -86,7 +86,7 @@ export class LocalStorageService {
 
     const value = JSON.stringify(teamBoard);
 
-    return this.databaseService.getByIndex(TEAM_BOARDS_KEY, 'name', name)
+    return this.databaseService.getByIndex<any>(TEAM_BOARDS_KEY, 'name', name)
       .subscribe(next => {
         if (next) {
           return this.databaseService.update(
@@ -110,7 +110,7 @@ export class LocalStorageService {
   }
 
   loadState(name: string): Subscription {
-    return this.databaseService.getByIndex(TEAM_BOARDS_KEY, 'name', name)
+    return this.databaseService.getByIndex<any>(TEAM_BOARDS_KEY, 'name', name)
       .subscribe(result => {
         const teamBoard: TeamBoard = JSON.parse(result.value) as TeamBoard;
         this.setDevs(teamBoard.devs);
@@ -124,7 +124,7 @@ export class LocalStorageService {
   }
 
   deleteState(name: string): Subscription {
-    return this.databaseService.getByIndex(TEAM_BOARDS_KEY, 'name', name)
+    return this.databaseService.getByIndex<any>(TEAM_BOARDS_KEY, 'name', name)
       .subscribe(next => {
         this.databaseService.delete(TEAM_BOARDS_KEY, next.id).subscribe();
       });
