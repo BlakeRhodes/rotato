@@ -18,7 +18,6 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class LocalStorageService {
-  private enableSound: boolean;
   private devKey = DEV_KEY;
   private pairsKey = 'pairs';
   private carriersKey = 'carriers';
@@ -37,12 +36,13 @@ export class LocalStorageService {
     const version = localStorage.getItem(this.versionKey);
     const theme = localStorage.getItem(THEME_KEY);
     const volume = localStorage.getItem(this.volumeKey);
+    const enableSound = localStorage.getItem(this.enableSoundKey);
 
     if (!theme) {
       localStorage.setItem(THEME_KEY, 'classic');
     }
 
-    if (!volume){
+    if (!volume) {
       localStorage.setItem(this.volumeKey, '.75');
     }
 
@@ -52,11 +52,7 @@ export class LocalStorageService {
     }
     console.log(version);
 
-    const enableSound = localStorage.getItem(this.enableSoundKey);
-    if (enableSound) {
-      this.enableSound = JSON.parse(enableSound);
-    } else {
-      this.enableSound = true;
+    if (!enableSound) {
       localStorage.setItem(this.enableSoundKey, 'true');
     }
   }
