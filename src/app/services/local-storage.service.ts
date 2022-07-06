@@ -37,6 +37,7 @@ export class LocalStorageService {
     const theme = localStorage.getItem(THEME_KEY);
     const volume = localStorage.getItem(this.volumeKey);
     const enableSound = localStorage.getItem(this.enableSoundKey);
+    const allowSolo = localStorage.getItem(this.allowSoloKey);
 
     if (!theme) {
       localStorage.setItem(THEME_KEY, 'classic');
@@ -47,13 +48,17 @@ export class LocalStorageService {
     }
 
     if (version !== CURRENT_DATA_VERSION) {
-      this.handleAllowSoloFeature(version);
       localStorage.setItem(this.versionKey, CURRENT_DATA_VERSION);
     }
     console.log(version);
 
     if (!enableSound) {
       localStorage.setItem(this.enableSoundKey, 'true');
+    }
+
+    if (!allowSolo) {
+      const previousVersionAllowsSoloByDefault = version === '1.0.0.0';
+      this.setAllowSolo(previousVersionAllowsSoloByDefault);
     }
   }
 
@@ -222,11 +227,5 @@ export class LocalStorageService {
 
   set(field: string, update: any): void {
     localStorage.setItem(field, JSON.stringify(update));
-  }
-
-  private handleAllowSoloFeature(version: string): void {
-    if (version === '1.0.0.0') {
-      this.setAllowSolo(true);
-    }
   }
 }

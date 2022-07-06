@@ -20,6 +20,7 @@ describe('LocalStorageService', () => {
       when(getItemSpy).calledWith('version').mockReturnValue(CURRENT_DATA_VERSION);
       when(getItemSpy).calledWith('volume').mockReturnValue(faker.datatype.number().toString());
       when(getItemSpy).calledWith('enableSound').mockReturnValue(faker.datatype.boolean().toString());
+      when(getItemSpy).calledWith('allowSolo').mockReturnValue(faker.datatype.boolean().toString());
 
       new LocalStorageService(databaseService as any);
 
@@ -31,9 +32,11 @@ describe('LocalStorageService', () => {
       when(getItemSpy).calledWith('version').mockReturnValue(CURRENT_DATA_VERSION);
       when(getItemSpy).calledWith('volume').mockReturnValue(faker.datatype.number().toString());
       when(getItemSpy).calledWith('enableSound').mockReturnValue(faker.datatype.boolean().toString());
+      when(getItemSpy).calledWith('allowSolo').mockReturnValue(faker.datatype.boolean().toString());
 
       new LocalStorageService(databaseService as any);
 
+      expect(setItemSpy).toHaveBeenCalledTimes(1);
       expect(setItemSpy).toHaveBeenCalledWith(THEME_KEY, 'classic');
     });
 
@@ -42,9 +45,11 @@ describe('LocalStorageService', () => {
       when(getItemSpy).calledWith('version').mockReturnValue(CURRENT_DATA_VERSION);
       when(getItemSpy).calledWith('volume').mockReturnValue(null);
       when(getItemSpy).calledWith('enableSound').mockReturnValue(faker.datatype.boolean().toString());
+      when(getItemSpy).calledWith('allowSolo').mockReturnValue(faker.datatype.boolean().toString());
 
       new LocalStorageService(databaseService as any);
 
+      expect(setItemSpy).toHaveBeenCalledTimes(1);
       expect(setItemSpy).toHaveBeenCalledWith('volume', '.75');
     });
 
@@ -53,9 +58,11 @@ describe('LocalStorageService', () => {
       when(getItemSpy).calledWith('version').mockReturnValue(CURRENT_DATA_VERSION);
       when(getItemSpy).calledWith('volume').mockReturnValue(faker.datatype.number().toString());
       when(getItemSpy).calledWith('enableSound').mockReturnValue(null);
+      when(getItemSpy).calledWith('allowSolo').mockReturnValue(faker.datatype.boolean().toString());
 
       new LocalStorageService(databaseService as any);
 
+      expect(setItemSpy).toHaveBeenCalledTimes(1);
       expect(setItemSpy).toHaveBeenCalledWith('enableSound', 'true');
     });
 
@@ -64,9 +71,11 @@ describe('LocalStorageService', () => {
       when(getItemSpy).calledWith('version').mockReturnValue(faker.internet.ip());
       when(getItemSpy).calledWith('volume').mockReturnValue(faker.datatype.number().toString());
       when(getItemSpy).calledWith('enableSound').mockReturnValue(faker.datatype.boolean().toString());
+      when(getItemSpy).calledWith('allowSolo').mockReturnValue(faker.datatype.boolean().toString());
 
       new LocalStorageService(databaseService as any);
 
+      expect(setItemSpy).toHaveBeenCalledTimes(1);
       expect(setItemSpy).toHaveBeenCalledWith('version', CURRENT_DATA_VERSION);
     });
 
@@ -75,11 +84,40 @@ describe('LocalStorageService', () => {
       when(getItemSpy).calledWith('version').mockReturnValue('1.0.0.0');
       when(getItemSpy).calledWith('volume').mockReturnValue(faker.datatype.number().toString());
       when(getItemSpy).calledWith('enableSound').mockReturnValue(faker.datatype.boolean().toString());
+      when(getItemSpy).calledWith('allowSolo').mockReturnValue(null);
 
       new LocalStorageService(databaseService as any);
 
-      expect(setItemSpy).toHaveBeenNthCalledWith(1, 'allowSolo', 'true');
-      expect(setItemSpy).toHaveBeenNthCalledWith(2, 'version', CURRENT_DATA_VERSION);
+      expect(setItemSpy).toHaveBeenCalledTimes(2);
+      expect(setItemSpy).toHaveBeenNthCalledWith(1, 'version', CURRENT_DATA_VERSION);
+      expect(setItemSpy).toHaveBeenNthCalledWith(2, 'allowSolo', 'true');
+    });
+
+    it('should set allow solo to false when allow solo is not set in local storage', () => {
+      when(getItemSpy).calledWith(THEME_KEY).mockReturnValue(faker.music.genre);
+      when(getItemSpy).calledWith('version').mockReturnValue(CURRENT_DATA_VERSION);
+      when(getItemSpy).calledWith('volume').mockReturnValue(faker.datatype.number().toString());
+      when(getItemSpy).calledWith('enableSound').mockReturnValue(faker.datatype.boolean().toString());
+      when(getItemSpy).calledWith('allowSolo').mockReturnValue(null);
+
+      new LocalStorageService(databaseService as any);
+
+      expect(setItemSpy).toHaveBeenCalledTimes(1);
+      expect(setItemSpy).toHaveBeenCalledWith('allowSolo', 'false');
+    });
+
+    it('should set allow solo to false when allow solo is not set in local storage and old version is different', () => {
+      when(getItemSpy).calledWith(THEME_KEY).mockReturnValue(faker.music.genre);
+      when(getItemSpy).calledWith('version').mockReturnValue(faker.internet.ip());
+      when(getItemSpy).calledWith('volume').mockReturnValue(faker.datatype.number().toString());
+      when(getItemSpy).calledWith('enableSound').mockReturnValue(faker.datatype.boolean().toString());
+      when(getItemSpy).calledWith('allowSolo').mockReturnValue(null);
+
+      new LocalStorageService(databaseService as any);
+
+      expect(setItemSpy).toHaveBeenCalledTimes(2);
+      expect(setItemSpy).toHaveBeenNthCalledWith(1, 'version', CURRENT_DATA_VERSION);
+      expect(setItemSpy).toHaveBeenNthCalledWith(2, 'allowSolo', 'false');
     });
   });
 });
