@@ -16,7 +16,7 @@ describe('LocalStorageService', () => {
 
   describe('constructor', () => {
     it('should not set anything in local storage when all values are present', () => {
-      when(getItemSpy).calledWith(THEME_KEY).mockReturnValue(faker.music.genre);
+      when(getItemSpy).calledWith(THEME_KEY).mockReturnValue(faker.music.genre());
       when(getItemSpy).calledWith('version').mockReturnValue(CURRENT_DATA_VERSION);
       when(getItemSpy).calledWith('volume').mockReturnValue(faker.datatype.number().toString());
       when(getItemSpy).calledWith('enableSound').mockReturnValue(faker.datatype.boolean().toString());
@@ -41,7 +41,7 @@ describe('LocalStorageService', () => {
     });
 
     it('should set volume to default value when volume is not present in local storage', () => {
-      when(getItemSpy).calledWith(THEME_KEY).mockReturnValue(faker.music.genre);
+      when(getItemSpy).calledWith(THEME_KEY).mockReturnValue(faker.music.genre());
       when(getItemSpy).calledWith('version').mockReturnValue(CURRENT_DATA_VERSION);
       when(getItemSpy).calledWith('volume').mockReturnValue(null);
       when(getItemSpy).calledWith('enableSound').mockReturnValue(faker.datatype.boolean().toString());
@@ -54,7 +54,7 @@ describe('LocalStorageService', () => {
     });
 
     it('should enable sound when enable sound is not present in local storage', () => {
-      when(getItemSpy).calledWith(THEME_KEY).mockReturnValue(faker.music.genre);
+      when(getItemSpy).calledWith(THEME_KEY).mockReturnValue(faker.music.genre());
       when(getItemSpy).calledWith('version').mockReturnValue(CURRENT_DATA_VERSION);
       when(getItemSpy).calledWith('volume').mockReturnValue(faker.datatype.number().toString());
       when(getItemSpy).calledWith('enableSound').mockReturnValue(null);
@@ -67,7 +67,7 @@ describe('LocalStorageService', () => {
     });
 
     it('should set version number when version number in local storage does not match', () => {
-      when(getItemSpy).calledWith(THEME_KEY).mockReturnValue(faker.music.genre);
+      when(getItemSpy).calledWith(THEME_KEY).mockReturnValue(faker.music.genre());
       when(getItemSpy).calledWith('version').mockReturnValue(faker.internet.ip());
       when(getItemSpy).calledWith('volume').mockReturnValue(faker.datatype.number().toString());
       when(getItemSpy).calledWith('enableSound').mockReturnValue(faker.datatype.boolean().toString());
@@ -80,7 +80,7 @@ describe('LocalStorageService', () => {
     });
 
     it('should set allow solo to true when old version is 1.0.0.0', () => {
-      when(getItemSpy).calledWith(THEME_KEY).mockReturnValue(faker.music.genre);
+      when(getItemSpy).calledWith(THEME_KEY).mockReturnValue(faker.music.genre());
       when(getItemSpy).calledWith('version').mockReturnValue('1.0.0.0');
       when(getItemSpy).calledWith('volume').mockReturnValue(faker.datatype.number().toString());
       when(getItemSpy).calledWith('enableSound').mockReturnValue(faker.datatype.boolean().toString());
@@ -94,7 +94,7 @@ describe('LocalStorageService', () => {
     });
 
     it('should set allow solo to false when allow solo is not set in local storage', () => {
-      when(getItemSpy).calledWith(THEME_KEY).mockReturnValue(faker.music.genre);
+      when(getItemSpy).calledWith(THEME_KEY).mockReturnValue(faker.music.genre());
       when(getItemSpy).calledWith('version').mockReturnValue(CURRENT_DATA_VERSION);
       when(getItemSpy).calledWith('volume').mockReturnValue(faker.datatype.number().toString());
       when(getItemSpy).calledWith('enableSound').mockReturnValue(faker.datatype.boolean().toString());
@@ -107,7 +107,7 @@ describe('LocalStorageService', () => {
     });
 
     it('should set allow solo to false when allow solo is not set in local storage and old version is different', () => {
-      when(getItemSpy).calledWith(THEME_KEY).mockReturnValue(faker.music.genre);
+      when(getItemSpy).calledWith(THEME_KEY).mockReturnValue(faker.music.genre());
       when(getItemSpy).calledWith('version').mockReturnValue(faker.internet.ip());
       when(getItemSpy).calledWith('volume').mockReturnValue(faker.datatype.number().toString());
       when(getItemSpy).calledWith('enableSound').mockReturnValue(faker.datatype.boolean().toString());
