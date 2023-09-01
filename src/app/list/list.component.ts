@@ -58,12 +58,12 @@ export class ListComponent implements OnInit {
 
   handleDelete(i: number, item: string): void {
     switch (this.type) {
-      case DEV_TYPE:
-        this.devService.delete(item);
-        break;
-      case BOARD_TYPE:
-        this.boardService.delete(item);
-        break;
+    case DEV_TYPE:
+      this.devService.delete(item);
+      break;
+    case BOARD_TYPE:
+      this.boardService.delete(item);
+      break;
     }
 
     this.loadData();
@@ -73,12 +73,12 @@ export class ListComponent implements OnInit {
 
   handleDisable(item: string): void {
     switch (this.type) {
-      case DEV_TYPE:
-        this.devService.toggleDisabled(item);
-        break;
-      case BOARD_TYPE:
-        this.boardService.toggleDisabled(item);
-        break;
+    case DEV_TYPE:
+      this.devService.toggleDisabled(item);
+      break;
+    case BOARD_TYPE:
+      this.boardService.toggleDisabled(item);
+      break;
     }
 
     this.disabledList = this.localStorageService.get(this.type.disabledKey);
