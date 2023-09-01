@@ -1,0 +1,60 @@
+@use 'colors';
+
+$bg: #ffa155;
+$fontColor: #805935;
+$border: #ff7402 1px solid;
+
+.orange-background{
+  background: $bg;
+  .mat-tab-label-content{
+    color: $fontColor;
+  }
+}
+
+.orange-dev-card{
+  background: $bg !important;
+  color: $fontColor;
+  border: $border;
+}
+
+.orange-pair-card{
+  color: $fontColor;
+}
+
+.orange-spuddies{
+  color: $fontColor;
+  background: $bg;
+  border: $border;
+}
+
+.orange-header{
+  background: $bg;
+  color: $fontColor;
+  border: $border;
+}
+
+.orange-selected{
+  color: $fontColor;
+  background: $bg !important;
+  border: $border;
+}
+
+.orange-list-item{
+  background: $bg !important;
+  color: $fontColor;
+  border: $border;
+}
+
+.orange-input{
+  background-color: $bg !important;
+  color: $fontColor !important;
+
+  .mat-form-field-underline{
+    background: $bg !important;
+  }
+
+  mat-label{
+    color: $fontColor;
+    background: $bg;
+  }
+}

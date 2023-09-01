@@ -26,7 +26,9 @@ export class MenuComponent implements OnInit {
     {sheet: 'classic', name: 'Fried'},
     {sheet: 'dark', name: 'Baked'},
     {sheet: 'black', name: 'Burnt'},
-    {sheet: 'purple', name: 'Vitelotte'}
+    {sheet: 'purple', name: 'Vitelotte'},
+    {sheet: 'tan', name: 'Raw'},
+    {sheet: 'orange', name: 'Sweet'},
   ];
   enableSound: boolean;
   enableSoundText = 'Enable Sound';

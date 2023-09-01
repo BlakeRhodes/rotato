@@ -14,6 +14,8 @@ export class FooterComponent {
     { sheet: 'classic', name: 'Fried'},
     { sheet: 'dark', name: 'Baked'},
     { sheet: 'black', name: 'Burnt'},
+    { sheet: 'tan', name: 'Raw'},
+    { sheet: 'orange', name: 'Sweet'},
   ];
   constructor(
     private themeService: ThemeService,
