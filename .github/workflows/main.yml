@@ -26,13 +26,10 @@ jobs:
       run: npm install
 
     - name: Show me
-      run: git status
+      run: git stash
 
     - name: Build Angular
       run: npm run build
-
-    - name: Apply stash
-      run: git stash apply
 
     # Deploy to Azure Blob Storage
     - name: Upload to Azure Blob Storage
