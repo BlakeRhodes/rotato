@@ -20,7 +20,7 @@ jobs:
         
       # Install and build your Angular App
       - name: Install Packages
-        run: npm ci
+        run: npm install
 
       - name: Build Angular
         run: npm run build -- --prod
