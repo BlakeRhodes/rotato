@@ -25,6 +25,9 @@ jobs:
     - name: Install Packages
       run: npm install
 
+    - name: Show me
+      run: git status
+
     - name: Build Angular
       run: npm run build
 
