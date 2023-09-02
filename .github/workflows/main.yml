@@ -10,14 +10,26 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: azure/login@v1
+    - uses: 
       with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build
+      run: npm run build:prod
 
     - name: Upload to blob storage
       uses: azure/CLI@v1
       with:
         inlineScript: |
-            az storage blob upload-batch --account-name rotatoproduction --auth-mode key --overwrite -d '$web' -s .
+            az storage blob upload-batch --account-name rotatoproduction --auth-mode key --overwrite -d '$web' -s ./dist/rotato-ui
     - name: Purge CDN endpoint
       uses: azure/CLI@v1
       with:
