@@ -23,10 +23,10 @@ jobs:
       
     # Install and build your Angular App
     - name: Install Packages
-      run: npm ci
+      run: npm install
 
     - name: Build Angular
-      run: npm run build -- --prod
+      run: npm run build
 
     # Deploy to Azure Blob Storage
     - name: Upload to Azure Blob Storage
