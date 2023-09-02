@@ -8,38 +8,41 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - uses: actions/checkout@v2
+    - uses: azure/login@v1
+      with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Use Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: '18'
-        
-      # Install and build your Angular App
-      - name: Install Packages
-        run: npm install
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '18'
+      
+    # Install and build your Angular App
+    - name: Install Packages
+      run: npm ci
 
-      - name: Build Angular
-        run: npm run build -- --prod
+    - name: Build Angular
+      run: npm run build -- --prod
 
-      # Deploy to Azure Blob Storage
-      - name: Upload to Azure Blob Storage
-        uses: azure/CLI@v1
-        with:
+    # Deploy to Azure Blob Storage
+    - name: Upload to Azure Blob Storage
+      uses: azure/CLI@v1
+      with:
+        inlineScript: |
+          az storage blob upload-batch --account-name rotatoproduction --auth-mode key --overwrite -d '$web' -s /dist/rotato-ui
+      
+    - name: Purge CDN endpoint
+      uses: azure/CLI@v1
+      with:
           inlineScript: |
-            az storage blob upload-batch --account-name rotatoproduction --auth-mode key --overwrite -d '$web' -s /dist/rotato-ui
-        
-      - name: Purge CDN endpoint
-        uses: azure/CLI@v1
-        with:
-            inlineScript: |
-               az cdn endpoint purge --content-paths  "/*" --profile-name "rotatoCDN" --name "rotato" --resource-group "rotato-prod"
+             az cdn endpoint purge --content-paths  "/*" --profile-name "rotatoCDN" --name "rotato" --resource-group "rotato-prod"
 
   # Azure logout
-      - name: logout
-        run: |
-            az logout
-        if: always()
+    - name: logout
+      run: |
+          az logout
+      if: always()
