@@ -23,13 +23,14 @@ jobs:
       run: npm install
 
     - name: Build
-      run: npm run build:prod
+      run: npm run build
 
     - name: Upload to blob storage
       uses: azure/CLI@v1
       with:
         inlineScript: |
-            az storage blob upload-batch --account-name rotatoproduction --auth-mode key --overwrite -d '$web' -s ./dist/rotato-ui
+            az storage blob upload-batch --account-name rotatoproduction --auth-mode key --overwrite -d '$web' -s /dist/rotato-ui
+    
     - name: Purge CDN endpoint
       uses: azure/CLI@v1
       with:
