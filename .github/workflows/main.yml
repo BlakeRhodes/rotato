@@ -28,6 +28,9 @@ jobs:
     - name: Build Angular
       run: npm run build
 
+    - name: Apply stash
+      run: git stash apply
+
     # Deploy to Azure Blob Storage
     - name: Upload to Azure Blob Storage
       uses: azure/CLI@v1
