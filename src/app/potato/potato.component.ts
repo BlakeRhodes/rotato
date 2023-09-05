@@ -1,13 +1,14 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {APP_NAME} from '../utillity/constants';
 import {ThemeService} from '../services/theme.service';
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-potato',
   templateUrl: './potato.component.html',
   styleUrls: ['./potato.component.scss']
 })
-export class PotatoComponent {
+export class PotatoComponent implements OnInit {
   @Input() shouldISpinAPotato = true;
   showToys = false;
   appName = APP_NAME;
@@ -35,10 +36,17 @@ export class PotatoComponent {
     false,
     false,
   ];
+  potatoPath: string;
+  private potatoPathSubscription: Subscription;
 
   constructor(
       private themeService: ThemeService,
   ) {
+  }
+
+  ngOnInit(): void {
+    this.potatoPathSubscription = this.themeService.potatoPath$
+      .subscribe(path => this.potatoPath = path);
   }
 
   isFlipped(i: number): boolean {
