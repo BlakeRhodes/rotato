@@ -13,6 +13,7 @@ import {ScreenshotComponent} from '../screenshot/screenshot.component';
 import { RefreshService } from '../services/refresh.service';
 import { SpuddyService } from '../services/spuddy.service';
 import { DevService } from '../services/dev.service';
+import {SelectPersonComponent} from "../select-person/select-person.component";
 
 @Component({
   selector: 'app-display',
@@ -56,6 +57,26 @@ export class DisplayComponent implements OnInit {
     this.refreshService.onDisplayRefresh().subscribe(() => {
       this.loadData();
     });
+  }
+
+  selectPerson() {
+    const allDevs = [];
+
+    allDevs.concat(this.availableDevs);
+
+    this.pairs.forEach(pair => {
+      pair.devs.forEach(dev => {
+        allDevs.push(dev);
+      });
+    });
+
+    if (allDevs.length > 0) {
+      const randomDev = allDevs[Math.floor(Math.random() * allDevs.length)];
+      this.openSelectedPersonDialog(randomDev + ' is the chosen spud!');
+    }
+    else {
+      this.openSelectedPersonDialog('All out of spuds!');
+    }
   }
 
   handleClick(): void {
@@ -178,6 +199,13 @@ export class DisplayComponent implements OnInit {
     dialogConfig.data = { image: img};
 
     this.dialog.open(ScreenshotComponent, dialogConfig);
+  }
+
+  private openSelectedPersonDialog(message: string): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = { message: message };
+
+    this.dialog.open(SelectPersonComponent, dialogConfig);
   }
 
   private loadData(): void {
