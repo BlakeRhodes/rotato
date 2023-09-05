@@ -11,7 +11,7 @@ import {Subscription} from "rxjs";
 export class MobilePotatoComponent implements OnInit {
   @Input() shouldISpinAPotato: boolean;
   appName = APP_NAME;
-  potatoPath: string;
+  potatoPath = 'assets/mobile-potato.webp';
   private potatoPathSubscription: Subscription;
 
   constructor(

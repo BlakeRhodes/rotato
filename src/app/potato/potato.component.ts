@@ -36,12 +36,17 @@ export class PotatoComponent implements OnInit {
     false,
     false,
   ];
-  potatoPath: string;
+  potatoPath = 'assets/potato.webp';
   private potatoPathSubscription: Subscription;
 
   constructor(
       private themeService: ThemeService,
   ) {
+    if (this.themeService.getTheme() === 'tan') {
+      this.toys.push('hair');
+      this.toys.push('blue_eye');
+      console.log('It\'s raw!');
+    }
   }
 
   ngOnInit(): void {
