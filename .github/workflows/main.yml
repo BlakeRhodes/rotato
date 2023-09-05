@@ -1,9 +1,10 @@
-name: Blob storage website CI
+name: Bake and Serve
 
 on:
-    push:
-        branches: [ main ]
-
+  push:
+    branches:
+      - main
+      
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -12,20 +13,39 @@ jobs:
     - uses: azure/login@v1
       with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-    - name: Upload to blob storage
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '14'
+      
+    # Install and build your Angular App
+    - name: Install Packages
+      run: npm install
+
+    - name: Show me
+      run: git stash
+
+    - name: Build Angular
+      run: npm run build
+
+    # Deploy to Azure Blob Storage
+    - name: Upload to Azure Blob Storage
       uses: azure/CLI@v1
       with:
         inlineScript: |
-            az storage blob upload-batch --account-name rotatoproduction --auth-mode key -d '$web' -s .
+          az storage blob upload-batch --account-name rotatoproduction --auth-mode key --overwrite -d '$web' -s /dist/rotato-ui
+      
     - name: Purge CDN endpoint
       uses: azure/CLI@v1
       with:
-        inlineScript: |
-           az cdn endpoint purge --content-paths  "/*" --profile-name "rotatoCDN" --name "rotato" --resource-group "rotato-prod"
+          inlineScript: |
+             az cdn endpoint purge --content-paths  "/*" --profile-name "rotatoCDN" --name "rotato" --resource-group "rotato-prod"
 
   # Azure logout
     - name: logout
       run: |
-            az logout
+          az logout
       if: always()

@@ -18,7 +18,6 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class LocalStorageService {
-  private enableSound: boolean;
   private devKey = DEV_KEY;
   private pairsKey = 'pairs';
   private carriersKey = 'carriers';
@@ -37,27 +36,29 @@ export class LocalStorageService {
     const version = localStorage.getItem(this.versionKey);
     const theme = localStorage.getItem(THEME_KEY);
     const volume = localStorage.getItem(this.volumeKey);
+    const enableSound = localStorage.getItem(this.enableSoundKey);
+    const allowSolo = localStorage.getItem(this.allowSoloKey);
 
     if (!theme) {
       localStorage.setItem(THEME_KEY, 'classic');
     }
 
-    if (!volume){
+    if (!volume) {
       localStorage.setItem(this.volumeKey, '.75');
     }
 
     if (version !== CURRENT_DATA_VERSION) {
-      this.handleAllowSoloFeature(version);
       localStorage.setItem(this.versionKey, CURRENT_DATA_VERSION);
     }
     console.log(version);
 
-    const enableSound = localStorage.getItem(this.enableSoundKey);
-    if (enableSound) {
-      this.enableSound = JSON.parse(enableSound);
-    } else {
-      this.enableSound = true;
+    if (!enableSound) {
       localStorage.setItem(this.enableSoundKey, 'true');
+    }
+
+    if (!allowSolo) {
+      const previousVersionAllowsSoloByDefault = version === '1.0.0.0';
+      this.setAllowSolo(previousVersionAllowsSoloByDefault);
     }
   }
 
@@ -226,11 +227,5 @@ export class LocalStorageService {
 
   set(field: string, update: any): void {
     localStorage.setItem(field, JSON.stringify(update));
-  }
-
-  private handleAllowSoloFeature(version: string): void {
-    if (version === '1.0.0.0') {
-      this.setAllowSolo(true);
-    }
   }
 }

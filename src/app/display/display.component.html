@@ -12,6 +12,16 @@
       </div>
       <div>
         <button
+          mat-mini-fab
+          (click)="selectPerson()"
+          matTooltip="Reveal the Chosen One"
+          aria-label="Select Person"
+        >
+          <mat-icon>
+            person
+          </mat-icon>
+        </button>
+        <button
         mat-mini-fab
         (click)="addEmptyPair()"
         matTooltip="Add an Empty Pairing Slot"
@@ -107,7 +117,7 @@
         </ng-template>
       </div>
     </mat-card>
-    <mat-card 
+    <mat-card
       cdkDropList
       *ngIf="availableDevs?.length > 0"
       class="pair-card"

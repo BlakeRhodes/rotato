@@ -38,6 +38,7 @@ import {ScreenshotComponent} from './screenshot/screenshot.component';
 import {ListComponent} from './list/list.component';
 import {MatSliderModule} from '@angular/material/slider';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
+import { SelectPersonComponent } from './select-person/select-person.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
     ScreenshotComponent,
     ListComponent,
     EditDialogComponent,
+    SelectPersonComponent,
   ],
   imports: [
     BrowserModule,
