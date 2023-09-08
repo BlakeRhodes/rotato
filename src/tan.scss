@@ -1,0 +1,60 @@
+@use 'colors';
+
+$bg: #e5d1a9;
+$fontColor: #956e4b;
+$border: #d3b469 1px solid;
+
+.tan-background{
+  background: $bg;
+  .mat-tab-label-content{
+    color: $fontColor;
+  }
+}
+
+.tan-dev-card{
+  background: $bg !important;
+  color: $fontColor;
+  border: $border;
+}
+
+.tan-pair-card{
+  color: $fontColor;
+}
+
+.tan-spuddies{
+  color: $fontColor;
+  background: $bg;
+  border: $border;
+}
+
+.tan-header{
+  background: $bg;
+  color: $fontColor;
+  border: $border;
+}
+
+.tan-selected{
+  color: $fontColor;
+  background: $bg !important;
+  border: $border;
+}
+
+.tan-list-item{
+  background: $bg !important;
+  color: $fontColor;
+  border: $border;
+}
+
+.tan-input{
+  background-color: $bg !important;
+  color: $fontColor !important;
+
+  .mat-form-field-underline{
+    background: $bg !important;
+  }
+
+  mat-label{
+    color: $fontColor;
+    background: $bg;
+  }
+}

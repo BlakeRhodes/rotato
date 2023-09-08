@@ -9,7 +9,7 @@
   </div>
   <div>
     <img
-      src="assets/potato.webp"
+      [srcset]="potatoPath"
       (dblclick)="showToys=!showToys"
       [class.rotate]="shouldISpinAPotato"
       class="potato"

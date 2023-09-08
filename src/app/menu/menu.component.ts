@@ -3,7 +3,6 @@ import {Theme} from '../utillity/theme';
 import {ThemeService} from '../services/theme.service';
 import {LocalStorageService} from '../services/local-storage.service';
 import {SoundService} from '../services/sound.service';
-import {THEME_KEY} from '../utillity/constants';
 import {MatCheckboxChange} from '@angular/material/checkbox';
 import {SaveDialogComponent} from '../save-dialog/save-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
@@ -26,7 +25,9 @@ export class MenuComponent implements OnInit {
     {sheet: 'classic', name: 'Fried'},
     {sheet: 'dark', name: 'Baked'},
     {sheet: 'black', name: 'Burnt'},
-    {sheet: 'purple', name: 'Vitelotte'}
+    {sheet: 'purple', name: 'Vitelotte'},
+    {sheet: 'tan', name: 'Raw'},
+    {sheet: 'orange', name: 'Sweet'},
   ];
   enableSound: boolean;
   enableSoundText = 'Enable Sound';
@@ -57,7 +58,8 @@ export class MenuComponent implements OnInit {
   }
 
   setTheme(theme: string): void {
-    localStorage.setItem(THEME_KEY, theme);
+    this.themeService.setPotatoPath(theme);
+    this.themeService.setTheme(theme);
   }
 
   handleEnableSound(event: MatCheckboxChange): void {

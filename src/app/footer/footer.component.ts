@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {ThemeService} from '../services/theme.service';
 import {THEME_KEY} from '../utillity/constants';
 import {Theme} from '../utillity/theme';
@@ -15,6 +15,8 @@ export class FooterComponent {
     { sheet: 'dark', name: 'Baked'},
     { sheet: 'black', name: 'Burnt'},
     { sheet: 'purple', name: 'Vitelotte'},
+    { sheet: 'tan', name: 'Raw'},
+    { sheet: 'orange', name: 'Sweet'},
   ];
   constructor(
     private themeService: ThemeService,

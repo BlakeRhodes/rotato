@@ -1,12 +1,34 @@
 import {Injectable} from '@angular/core';
 import {THEME_KEY} from '../utillity/constants';
+import {Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeService {
+  private potatoPathSubject = new Subject<string>();
+  potatoPath$ = this.potatoPathSubject.asObservable();
+
+  private mobilePotatoPathSubject = new Subject<string>();
+  mobilePotatoPath$ = this.mobilePotatoPathSubject.asObservable();
 
   constructor() {
+    this.setPotatoPath(this.getTheme());
+  }
+
+  setPotatoPath(theme: string): void {
+    if (theme === 'orange') {
+      this.potatoPathSubject.next('assets/sweet-potato.webp');
+      this.mobilePotatoPathSubject.next('assets/sweet-potato.webp');
+    }
+    else {
+      this.potatoPathSubject.next('assets/potato.webp');
+      this.mobilePotatoPathSubject.next('assets/potato.webp');
+    }
+  }
+
+  setTheme(theme: string): void {
+    localStorage.setItem(THEME_KEY, theme);
   }
 
   getTheme(): string {
